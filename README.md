@@ -39,7 +39,7 @@
 **a. #include:** Chỉ thị bao hàm tệp.<br>
 &nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;**#include <...>:** Thư viện trữ của C. Tìm kiếm file trong thư mục cài đặt.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;**#include  "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;**#include "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
 &nbsp;&nbsp;- &nbsp;**Ví dụ:**`gcc -E main.c -o main.i`.<br>
 
 &nbsp;**b. #define:** Chỉ thị định nghĩa.<br>
