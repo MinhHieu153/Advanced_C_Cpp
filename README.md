@@ -1,13 +1,12 @@
-# Advanced_C
+# 📓Advanced_C📓
 ----
 
 <details>
-<summary><b>BÀI 1: COMPILER - MACRO</b></summary>
+<summary><b>📖BÀI 1: COMPILER - MACRO</b></summary>
  
 ## 1. Compiler - Trình biên dịch
 - **Compiler (Trình biên dịch )**: là chương trình biên dịch các code của ngôn ngữ lập trình tương ứng thành các mã nhị phân mà máy có thể hiểu được.
 - Quá trình biên dịch gồm 4 giai đoạn:
-
 ![image](https://github.com/user-attachments/assets/a0dfa386-3802-4682-a506-cd6534989b3d)
 <br>&nbsp;**a. Preprocess (Tiền xử lý):**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển các _file.c_, _file.h_ sang _file.i_.<br>
@@ -32,7 +31,6 @@
 &nbsp;&nbsp;+ &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
 ## 2. Marco
 - **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý bao gồm:
-
 <br>&nbsp;**a. #include**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển các _file.c_, _file.h_ sang _file.i_.<br>
 &nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
