@@ -37,19 +37,19 @@
 - **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý 
 - Các loại chỉ thị tiền xử lý bao gồm:
 
-**a. #include:** Chỉ thị bao hàm tệp.<br>
-&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;**#include <...>:** Thư viện trữ của C. Tìm kiếm file trong thư mục cài đặt.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;**#include "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
-&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
+&nbsp;**a. #include:** Chỉ thị bao hàm tệp.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**#include <...>:** Thư viện trữ của C. Tìm kiếm file trong thư mục cài đặt.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**#include "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
 ```c
 #include <stdio.h>
 #include "test.h"                          
 ```
 &nbsp;**b. #define:** Chỉ thị định nghĩa.<br>
-&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để định nghĩa marco, tránh lặp lại những mã nguồn.<br>
-&nbsp;&nbsp;- &nbsp;***Note:**  Khi viết define cho 1 hàm có nhiều dòng thì phải có giấu `\` dể liên kết các dòng.<br>
-&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để định nghĩa marco, tránh lặp lại những mã nguồn.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;***Note:**  Khi viết define cho 1 hàm có nhiều dòng thì phải có giấu `\` dể liên kết các dòng.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
 ```c
 #define Creat_func(name, cmd)        \
 int main()                           \
@@ -58,8 +58,8 @@ int main()                           \
 }                                    \
 ```
 &nbsp;**c. #undef:** Chỉ thị hủy định nghĩa.<br>
-&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để hủy định nghĩa marco.<br>
-&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để hủy định nghĩa marco.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
 ```c
 #define SIZE 50    
 #undef SIZE                          
@@ -67,8 +67,8 @@ int main()                           \
 ```
 
 &nbsp;**d. #if, #elif, #else, #endif:** Chỉ thị biên dịch có điều kiện.<br>
-&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để kiểm tra điều kiện của marco.<br>
-&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để kiểm tra điều kiện của marco.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
 ```c
 #define ESP32 1   
 #define STM32 2
@@ -92,12 +92,11 @@ int main()                           \
         PORTA |= (1 << pin);
      }
 #endif
-
 ```
 
 &nbsp;**e. #ifdef, #ifndef:** Chỉ thị biên dịch có điều kiện.<br>
-&nbsp;&nbsp;- &nbsp;**Chức năng:**  Kiểm tra xem marco đã được định nghĩ hay chưa để thực hiện thao tác phía dưới nó.<br>
-&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Kiểm tra xem marco đã được định nghĩ hay chưa để thực hiện thao tác phía dưới nó.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
 ```c
 #ifndef TEST_H    
 #define TEST_H                        
@@ -107,5 +106,14 @@ void display();
 #endif
 ```
 - Các loại toán tử trong marco bao gồm:
+
+&nbsp;**- ##:** nối chuỗi.<br>
+&nbsp;**- #:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
+
+
+
+
+
 
   </details>
