@@ -68,7 +68,7 @@ int main()                           \
 
 &nbsp;**d. #if, #elif, #else, #endif:** Chỉ thị biên dịch có điều kiện.<br>
 &nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để kiểm tra điều kiện của marco.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
 ```c
 #define ESP32 1   
 #define STM32 2
@@ -96,7 +96,7 @@ int main()                           \
 
 &nbsp;**e. #ifdef, #ifndef:** Chỉ thị biên dịch có điều kiện.<br>
 &nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Kiểm tra xem marco đã được định nghĩ hay chưa để thực hiện thao tác phía dưới nó.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
 ```c
 #ifndef TEST_H    
 #define TEST_H                        
@@ -107,13 +107,16 @@ void display();
 ```
 - Các loại toán tử trong marco bao gồm:
 
-&nbsp;**- ##:** nối chuỗi.<br>
-&nbsp;**- #:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
-
-
-
-
-
-
+&nbsp;- &nbsp;**##:** nối chuỗi.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+&nbsp;- &nbsp;**#:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define CREATE_FUNC(name, cmd)
+   void name()
+   {
+     printf(#cmd);
+   }
+CREATE_FUNC(test1, This is function\n);   
+```
   </details>
