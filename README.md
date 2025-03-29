@@ -109,6 +109,15 @@ void display();
 
 &nbsp;- &nbsp;**##:** nối chuỗi.<br>
 &nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define CREATE_VAR(name)    \
+int int_##name;             \
+char char_##name;           \
+CREATE_VAR(test1);   
+```
+```c
+Kq:  int int_test1; char char_test1;   
+```
 &nbsp;- &nbsp;**#:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
 &nbsp;- &nbsp;**Ví dụ:**<br>
 ```c
@@ -118,5 +127,8 @@ void display();
      printf(#cmd);
    }
 CREATE_FUNC(test1, This is function\n);   
+```
+```c
+Kq:  void test1(){ printf("This is function\n"); }    
 ```
   </details>
