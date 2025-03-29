@@ -131,4 +131,11 @@ CREATE_FUNC(test1, This is function\n);
 ```c
 Kq:  void test1(){ printf("This is function\n"); }    
 ```
+&nbsp;- &nbsp;**Variadic:** dùng cho những hàm không xác định được tham số truyền vào và gồm 2 thành phần.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**... :** biểu thị danh sách đối số.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**__VA_ARG__ :** Thay thế bằng danh sách các đối số.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define print(...) __VA_ARG__   
+```
   </details>
