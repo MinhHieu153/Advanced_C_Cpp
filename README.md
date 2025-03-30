@@ -20,19 +20,19 @@
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.i_ sang _file.s_.<br>
 &nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;_file.s_: là file assembly code thao tác được trực tiếp với CPU.<br>
-&nbsp;&nbsp;+ &nbsp;**Cú pháp:** `gcc -S main.i -o main.s`.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -S main.i -o main.s`.<br>
 
 &nbsp;**c. Assembler (Hợp ngữ):**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.s_ sang _file.o_.<br>
 &nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
-&nbsp;&nbsp;+ &nbsp;**Cú pháp:** `gcc -c main.s -o main.o`.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -c main.s -o main.o`.<br>
 
 &nbsp;**d. Linker (Liên kết):**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.o_ sang _file.exe_.<br>
 &nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
-&nbsp;&nbsp;+ &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
 ## 2. Marco
 - **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý 
 - Các loại chỉ thị tiền xử lý bao gồm:
@@ -132,8 +132,8 @@ CREATE_FUNC(test1, This is function\n);
 Kq:  void test1(){ printf("This is function\n"); }    
 ```
 &nbsp;- &nbsp;**Variadic:** dùng cho những hàm không xác định được tham số truyền vào và gồm 2 thành phần.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**... :** biểu thị danh sách đối số.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**__VA_ARG__ :** Thay thế bằng danh sách các đối số.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**... :** biểu thị danh sách đối số.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**__VA_ARG__ :** Thay thế bằng danh sách các đối số.<br>
 &nbsp;- &nbsp;**Ví dụ:**<br>
 ```c
 #define print(...) __VA_ARG__   
