@@ -139,8 +139,10 @@ Kq:  void test1(){ printf("This is function\n"); }
 #define print(...) __VA_ARG__   
 ```
   </details>
+
   
-----
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 
 <details>
 <summary><b>📖BÀI 2: STDARG - ASSERT</b></summary>
@@ -180,7 +182,7 @@ int main()
     return 0;
 }
 ```
-&nbsp;+ Ví dụ 2: Viết hàm tính tổng với tham số không xác định (Kết hợp **STDARG** với **__VA_ARGS__**).<br> 
+&nbsp;+ Ví dụ 2: Viết hàm tính tổng với tham số không xác định (Kết hợp **`STDARG`** với **`__VA_ARGS__`**).<br> 
 ```c
 #include <stdio.h>
 #include <stdarg.h>
@@ -209,6 +211,19 @@ int main()
     return 0;
 }
 ```
+## 2. Thư viện ASSERT
+- Cung cấp marco `assert` dùng để kiểm tra một điều kiện trong quá trình debug.<br>
+&nbsp;+ Nếu điều kiện đúng (true), không có gì xảy ra và chương trình tiếp tục thực thi.<br>
+&nbsp;+ Nếu điều kiện sai (false), chương trình dừng lại và thông báo 1 thông điệp lỗi.<br>
+- Nếu định nghĩa macro NDEBUG trước khi include `assert.h`, thì toàn bộ các `assert()` sẽ bị vô hiệu hóa khi biên dịch.
+- Ví dụ:<br>
+  ```c
+  #include <assert.h>
 
-
+  int main()
+  {
+    int x = 6;
+    assert( x = 5); \\ Nếu x không bằng 5 dừng chương trình báo lỗi, nếu x = 5 thực thi tiếp
+  }
+  ```
   </details>
