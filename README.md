@@ -139,3 +139,143 @@ Kq:  void test1(){ printf("This is function\n"); }
 #define print(...) __VA_ARG__   
 ```
   </details>
+  
+----
+
+<details>
+<summary><b>📖BÀI 2: STDARG - ASSERT</b></summary>
+ 
+## 1. Thư viện STDARG
+- Cung cấp cá phương thức để làm việc với các hàm số có danh sách đối số không xác định.
+- Các marco trong thư viện STDARG:
+
+|Các marco|Cú pháp|Đặc điểm|
+|:------------------------:|:------------------------:|:------------------------|
+|**`va_list`**|**`va_list ap`**|- Là 1 kiểu dữ liệu đẫ được định nghĩa lại để đại diện cho danh sách các đối số biến đổi.<br>            - Có thể viết lại: `typedef char* va_list`.<br>                                                                                               - Ví dụ: **`va_list arg`**|
+|**`va_start`**|**`va_start(va_list ap, last_fixed_param)`**|- Khởi tạo `va_list` để bắt đầu truy xuất các tham số biến đổi. Nó cần tham số cuối cùng cố định trong danh sách tham số của hàm.<br>                                                                                        -- `last_fixed_param` là tên của tham số cố định cuối cùng trước danh sách tham số biến đổi.<br>                                                - Ví dụ:<br>`void ham(int count, ...){ `<br> &nbsp;&nbsp;&nbsp;`va_list args;`<br> &nbsp;&nbsp;&nbsp;`va_start(args, count);}`|
+|**`va_arg(va_list ap, type)`**|Dọn dẹp va_list|`va_end(args);`<br>`return result;`<br>`}`|
+<br>
+
+&nbsp;**b. Compiler (Biên dịch):**<br>
+&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.i_ sang _file.s_.<br>
+&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;_file.s_: là file assembly code thao tác được trực tiếp với CPU.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -S main.i -o main.s`.<br>
+
+&nbsp;**c. Assembler (Hợp ngữ):**<br>
+&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.s_ sang _file.o_.<br>
+&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -c main.s -o main.o`.<br>
+
+&nbsp;**d. Linker (Liên kết):**<br>
+&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.o_ sang _file.exe_.<br>
+&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
+&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
+## 2. Marco
+- **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý 
+- Các loại chỉ thị tiền xử lý bao gồm:
+
+&nbsp;**a. #include:** Chỉ thị bao hàm tệp.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**#include <...>:** Thư viện trữ của C. Tìm kiếm file trong thư mục cài đặt.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**#include "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
+```c
+#include <stdio.h>
+#include "test.h"                          
+```
+&nbsp;**b. #define:** Chỉ thị định nghĩa.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để định nghĩa marco, tránh lặp lại những mã nguồn.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;***Note:**  Khi viết define cho 1 hàm có nhiều dòng thì phải có giấu `\` dể liên kết các dòng.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
+```c
+#define Creat_func(name, cmd)        \
+int main()                           \
+{                                    \
+     printf(#cmd);                   \
+}                                    \
+```
+&nbsp;**c. #undef:** Chỉ thị hủy định nghĩa.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để hủy định nghĩa marco.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
+```c
+#define SIZE 50    
+#undef SIZE                          
+#define SIZE 40
+```
+
+&nbsp;**d. #if, #elif, #else, #endif:** Chỉ thị biên dịch có điều kiện.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để kiểm tra điều kiện của marco.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define ESP32 1   
+#define STM32 2
+#define ATmega324 3
+
+#define MCU STM32
+
+#if MCU == STM32
+   void digitalWrite(Pin pin, Status state){
+     if(state == HIGH){
+        GPIOA->BSRR = (1 << pin);
+     }
+#elif MCU == ESP32
+   void digitalWrite(Pin pin, Status state){
+     if(state == HIGH){
+        GPIO.out_w1ts = (1 << pin);
+     }
+#else MCU == ATmega324
+   void digitalWrite(Pin pin, Status state){
+     if(state == HIGH){
+        PORTA |= (1 << pin);
+     }
+#endif
+```
+
+&nbsp;**e. #ifdef, #ifndef:** Chỉ thị biên dịch có điều kiện.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Kiểm tra xem marco đã được định nghĩ hay chưa để thực hiện thao tác phía dưới nó.<br>
+&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#ifndef TEST_H    
+#define TEST_H                        
+
+void display();
+
+#endif
+```
+- Các loại toán tử trong marco bao gồm:
+
+&nbsp;- &nbsp;**##:** nối chuỗi.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define CREATE_VAR(name)    \
+int int_##name;             \
+char char_##name;           \
+CREATE_VAR(test1);   
+```
+```c
+Kq:  int int_test1; char char_test1;   
+```
+&nbsp;- &nbsp;**#:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define CREATE_FUNC(name, cmd)
+   void name()
+   {
+     printf(#cmd);
+   }
+CREATE_FUNC(test1, This is function\n);   
+```
+```c
+Kq:  void test1(){ printf("This is function\n"); }    
+```
+&nbsp;- &nbsp;**Variadic:** dùng cho những hàm không xác định được tham số truyền vào và gồm 2 thành phần.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**... :** biểu thị danh sách đối số.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**__VA_ARG__ :** Thay thế bằng danh sách các đối số.<br>
+&nbsp;- &nbsp;**Ví dụ:**<br>
+```c
+#define print(...) __VA_ARG__   
+```
+  </details>
