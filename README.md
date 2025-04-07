@@ -151,10 +151,36 @@ Kq:  void test1(){ printf("This is function\n"); }
 
 |Các marco|Cú pháp|Đặc điểm|
 |:------------------------:|:------------------------:|:------------------------|
-|**`va_list`**|**`va_list ap`**|- Là 1 kiểu dữ liệu đẫ được định nghĩa lại để đại diện cho danh sách các đối số biến đổi.<br>            - Có thể viết lại: `typedef char* va_list`.<br>                                                                                               - Ví dụ: **`va_list arg`**|
-|**`va_start`**|**`va_start(va_list ap, last_fixed_param)`**|- Khởi tạo `va_list` để bắt đầu truy xuất các tham số biến đổi. Nó cần tham số cuối cùng cố định trong danh sách tham số của hàm.<br>                                                                                        -- `last_fixed_param` là tên của tham số cố định cuối cùng trước danh sách tham số biến đổi.<br>                                                - Ví dụ:<br>`void ham(int count, ...){ `<br> &nbsp;&nbsp;&nbsp;`va_list args;`<br> &nbsp;&nbsp;&nbsp;`va_start(args, count);}`|
-|**`va_arg(va_list ap, type)`**|Dọn dẹp va_list|`va_end(args);`<br>`return result;`<br>`}`|
+|**`va_list`**|**`va_list ap`**|- Là 1 kiểu dữ liệu đẫ được định nghĩa lại để đại diện cho danh sách các đối số biến đổi.<br> - Có thể viết lại: `typedef char* va_list`.<br> - Ví dụ: **`va_list args`**|
+|**`va_start`**|**`va_start(va_list ap, last_fixed_param)`**|- Khởi tạo `va_list` để bắt đầu truy xuất các tham số biến đổi. Nó cần tham số cuối cùng cố định trong danh sách tham số của hàm.<br> - `last_fixed_param` là tên của tham số cố định cuối cùng trước danh sách tham số biến đổi.<br> - Ví dụ:<br>`void ham(int count, ...){ `<br> &nbsp;&nbsp;&nbsp;`va_list args;`<br> &nbsp;&nbsp;&nbsp;`va_start(args, count);}`|
+|**`va_arg`**|**`va_arg(va_list ap, type)`**| - Truy cập 1 đối số trong danh sách và chuyển về kiểu `type`.<br> - Mỗi lần gọi sẽ lấy 1 phần tử. <br> - Ví dụ: `va_arg(args, int)`|
+|**`va_copy`**|**`va_copy(va_list dest, va_list src);`**| - `dest`: Biến đích kiểu va_list sẽ nhận bản sao.<br> - `src`: Biến nguồn kiểu va_list đã được khởi tạo bằng va_start.<br> - Sao chép dữ liệu từ biến nguồn vào biến đích.<br> - Sao chép dữ liệu giữa các biến có cùng kiểu `va_list`.<br> - Ví dụ: `va_copy(check, args)`|
+|**`va_end`**|**`va_end(va_list ap);`**| - Thu hồi địa chỉ con trỏ,<br> - Giải phóng tài nguyên được cấp phát bởi `va_start`<br> - Ví dụ: `va_end(args)`|
 <br>
+
+- Ví dụ:<br>
+&nbsp;+ Ví dụ 1: Viết hàm in ra dãy số bất kì được điền vào.<br> 
+```c
+#include <stdio.h>
+#include <stdarg.h>
+
+void display(int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    for (int i = 0; i < count; i++) {
+        printf("Value at %d: %d\n", i, va_arg(args,int)); 
+    }
+    va_end(args);
+}
+int main()
+{
+    display(5, 5, 8, 15, 10, 13);
+    return 0;
+}
+```
+
+
 
 &nbsp;**b. Compiler (Biên dịch):**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.i_ sang _file.s_.<br>
