@@ -1,4 +1,4 @@
- # 📓Advanced_C📓
+# 📓Advanced_C📓
 ----
 
 <details>
@@ -237,143 +237,160 @@ int main()
 - **Bitmask**: Là một kỹ thuật trong lập trình, dùng để truy xuất hoặc thao tác trực tiếp trên các bit trong một giá trị nhị phân. Có thể sử dụng bitmask để đặt, xóa và kiểm tra trạng thái của các bit cụ thể trong một từ (word).
 - **Bitmask** thường được sử dụng để tối ưu hóa bộ nhớ, thực hiện các phép toán logic trên một cụm bit, và quản lý các trạng thái, quyền truy cập, hoặc các thuộc tính khác của một đối tượng.
 ## 2. Các toán tử bitwise
-### 2.1 Toán tử NOT - NOT bitwise
-- Dùng để thực hiện phép NOT bitwise trên từng bit của một số. Kết quả là bit đảo ngược của số đó.
+### 2.1. Toán tử NOT - NOT bitwise
+- Dùng để thực hiện phép NOT bitwise trên từng bit của một số. Kết quả là bit đảo ngược của số đó.<br>
 ![image](https://github.com/user-attachments/assets/40656c9e-3be8-4e7c-ac22-b7a035ec1d10)
-
-
-
-
-
-- **Bitmask** thường được sử dụng để tối ưu hóa bộ nhớ, thực hiện các phép toán logic trên một cụm bit, và quản lý các trạng thái, quyền truy cập, hoặc các thuộc tính khác của một đối tượng.
-![image](https://github.com/user-attachments/assets/a0dfa386-3802-4682-a506-cd6534989b3d)
-<br>&nbsp;**a. Preprocess (Tiền xử lý):**<br>
-&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển các _file.c_, _file.h_ sang _file.i_.<br>
-&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Xử lý các loại chỉ thị tiền xử lý.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Xóa bỏ các chú thích.<br>
-&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -E main.c -o main.i`.<br>
-
-&nbsp;**b. Compiler (Biên dịch):**<br>
-&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.i_ sang _file.s_.<br>
-&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;_file.s_: là file assembly code thao tác được trực tiếp với CPU.<br>
-&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -S main.i -o main.s`.<br>
-
-&nbsp;**c. Assembler (Hợp ngữ):**<br>
-&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.s_ sang _file.o_.<br>
-&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
-&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc -c main.s -o main.o`.<br>
-
-&nbsp;**d. Linker (Liên kết):**<br>
-&nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.o_ sang _file.exe_.<br>
-&nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
-&nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
-## 2. Marco
-- **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý 
-- Các loại chỉ thị tiền xử lý bao gồm:
-
-&nbsp;**a. #include:** Chỉ thị bao hàm tệp.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Chèn nội dung file khác vào mã nguồn chính.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**#include <...>:** Thư viện trữ của C. Tìm kiếm file trong thư mục cài đặt.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**#include "...":**  File thư viện do người dùng tự tạo. Tìm kiếm file trong thư mục hiện tại.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
+    |a|y = ~a|
+    |:--:|:--:|
+    |0|1|
+    |1|0|
+- Ví dụ:
+  ```c
+  int main()
+  {
+     uint8_t a = 0b00001110;
+     a = ~a; 
+  ```
+  ```c
+  Kq: a = 0b11110001
+  ```
+### 2.2. Toán tử AND - AND bitwise
+- Dùng để thực hiện phép AND bitwise giữa từng cặp bit của hai số. Kết quả là 1 nếu cả hai bit tương ứng đều là 1, ngược lại là 0.<br>
+ ![image](https://github.com/user-attachments/assets/2ae95c18-e924-4da4-89fb-8cd7791fb963)
+    |a|b|y = a & b|
+    |:--:|:--:|:--:|
+    |0|0|0|
+    |0|1|0|
+    |1|0|0|
+    |1|1|1|
+ - Ví dụ:
+  ```c
+  int main()
+  {
+     uint8_t a = 0b00001110;
+     uint8_t b = 0b11110001;
+     uint8_t result;
+     result = a & b;
+  ```
+  ```c
+  Kq: result = 0b00000000
+  ```
+### 2.3. Toán tử OR - OR bitwise
+- Dùng để thực hiện phép OR bitwise giữa từng cặp bit của hai số. Kết quả là 1 nếu có hơn một bit.<br>
+ ![image](https://github.com/user-attachments/assets/34b7b8f0-6dd2-4a73-9712-56fde6a8246e)
+    |a|b|y|
+    |:--:|:--:|:--:|
+    |0|0|0|
+    |0|1|1|
+    |1|0|1|
+    |1|1|1|
+- Ví dụ:
+  ```c
+  int main()
+  {
+     uint8_t a = 0b00001110;
+     uint8_t b = 0b11110001;
+     uint8_t result;
+     result = a | b;
+  ```
+  ```c
+  Kq: result = 0b11111111
+  ```
+### 2.4. Toán tử XOR - XOR bitwise
+- Dùng để thực hiện phép XOR bitwise giữa từng cặp bit của hai số. Kết quả là 1 nếu chỉ có một bit tương ứng là 1.<br> 
+ ![image](https://github.com/user-attachments/assets/7b000a23-1941-4702-b8f9-6e374947a4ca)
+    |a|b|y = a ^ b|
+    |:--:|:--:|:--:|
+    |0|0|0|
+    |0|1|1|
+    |1|0|1|
+    |1|1|0|
+- Ví dụ:
+  ```c
+  int main()
+  {
+     uint8_t a = 0b00001111;
+     uint8_t b = 0b11110001;
+     uint8_t result;
+     result = a ^ b;
+  ```
+  ```c
+  Kq: result = 0b11111110
+  ```
+### 2.5. Các phép dịch trái (Shift left) và phép dịch phải (Shift right)
+- Dùng để di chuyển bit sang trái hoặc sang phải.
+- **Phép dịch trái (Shift left):** Các bit ở bên phải sẽ được dịch sang trái, và các bit trái cùng sẽ được đặt giá trị 0.
+- **Phép dịch phải (Shift right):** Các bit ở bên trái sẽ được dịch sang phải, và các bit phải cùng sẽ được đặt giá trị 0 hoặc 1 tùy thuộc vào giá trị của bit cao nhất.
+- Ví dụ:
+  ```c
+  int main()
+  {
+     uint8_t a = 0b00001111;
+     uint8_t b = 0b11110001;
+     a = a << 5; //dịch trái
+     b = b >> 4; //dịch phải
+  ```
+  ```c
+  Kq: a = 0b11100000
+      b = 0b00001111
+  ```
+## 3. Ví dụ tổng quát
 ```c
 #include <stdio.h>
-#include "test.h"                          
-```
-&nbsp;**b. #define:** Chỉ thị định nghĩa.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để định nghĩa marco, tránh lặp lại những mã nguồn.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;***Note:**  Khi viết define cho 1 hàm có nhiều dòng thì phải có giấu `\` dể liên kết các dòng.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
-```c
-#define Creat_func(name, cmd)        \
-int main()                           \
-{                                    \
-     printf(#cmd);                   \
-}                                    \
-```
-&nbsp;**c. #undef:** Chỉ thị hủy định nghĩa.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để hủy định nghĩa marco.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**
-```c
-#define SIZE 50    
-#undef SIZE                          
-#define SIZE 40
+#include <stdint.h>
+
+#define GENDER        1 << 0  // Bit 0: Giới tính (0 = Nữ, 1 = Nam)
+#define TSHIRT        1 << 1  // Bit 1: Áo thun (0 = Không, 1 = Có)
+#define HAT           1 << 2  // Bit 2: Nón (0 = Không, 1 = Có)
+
+// Bật tính năng
+void enableFeature(uint8_t *options, uint8_t feature)
+{
+    *options = *options | feature;
+}
+
+//Tắt tính năng
+void disableFeature(uint8_t *options, uint8_t feature) {
+    *options = *options & (~feature);
+}
+
+//Kiểm tra tính năng
+int isFeatureEnabled(uint8_t options, uint8_t feature) {
+    return ((options & feature) != 0);
+}
+
+//Liệt kê các tính năng đã bật
+void listSelectedFeatures(uint8_t options) {
+    printf("Selected Features:\n");
+
+    const char* featureName[] =
+    {
+        "Gender",
+        "Shirt",
+        "Hat",
+
+    };
+    for (int i = 0; i < 8; i++)
+    {
+      if ((options >> i) & 1)
+      {
+        printf("%s\n", featureName[i]);   
+      }
+    }
+}
+
+int main(int argc, char const *argv[]) {
+{
+  uint8_t options = 0;
+  uint8_t *ptr = &options;
+
+  enableFeature(&options, GENDER | TSHIRT | HAT);   // Bật tính năng
+
+  disableFeature(&options, HAT | TSHIRT);    // Loại bỏ tính năng
+}
+  listSelectedFeatures(options);    // Liệt kê tính năng
+  return 0;
+}
 ```
 
-&nbsp;**d. #if, #elif, #else, #endif:** Chỉ thị biên dịch có điều kiện.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Dùng để kiểm tra điều kiện của marco.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
-```c
-#define ESP32 1   
-#define STM32 2
-#define ATmega324 3
-
-#define MCU STM32
-
-#if MCU == STM32
-   void digitalWrite(Pin pin, Status state){
-     if(state == HIGH){
-        GPIOA->BSRR = (1 << pin);
-     }
-#elif MCU == ESP32
-   void digitalWrite(Pin pin, Status state){
-     if(state == HIGH){
-        GPIO.out_w1ts = (1 << pin);
-     }
-#else MCU == ATmega324
-   void digitalWrite(Pin pin, Status state){
-     if(state == HIGH){
-        PORTA |= (1 << pin);
-     }
-#endif
-```
-
-&nbsp;**e. #ifdef, #ifndef:** Chỉ thị biên dịch có điều kiện.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Chức năng:**  Kiểm tra xem marco đã được định nghĩ hay chưa để thực hiện thao tác phía dưới nó.<br>
-&nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**<br>
-```c
-#ifndef TEST_H    
-#define TEST_H                        
-
-void display();
-
-#endif
-```
-- Các loại toán tử trong marco bao gồm:
-
-&nbsp;- &nbsp;**##:** nối chuỗi.<br>
-&nbsp;- &nbsp;**Ví dụ:**<br>
-```c
-#define CREATE_VAR(name)    \
-int int_##name;             \
-char char_##name;           \
-CREATE_VAR(test1);   
-```
-```c
-Kq:  int int_test1; char char_test1;   
-```
-&nbsp;- &nbsp;**#:** chuẩn hóa đoạn văn bản thành chuỗi.<br>
-&nbsp;- &nbsp;**Ví dụ:**<br>
-```c
-#define CREATE_FUNC(name, cmd)
-   void name()
-   {
-     printf(#cmd);
-   }
-CREATE_FUNC(test1, This is function\n);   
-```
-```c
-Kq:  void test1(){ printf("This is function\n"); }    
-```
-&nbsp;- &nbsp;**Variadic:** dùng cho những hàm không xác định được tham số truyền vào và gồm 2 thành phần.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**... :** biểu thị danh sách đối số.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;**__VA_ARG__ :** Thay thế bằng danh sách các đối số.<br>
-&nbsp;- &nbsp;**Ví dụ:**<br>
-```c
-#define print(...) __VA_ARG__   
-```
   </details>
