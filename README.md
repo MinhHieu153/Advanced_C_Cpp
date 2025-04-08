@@ -264,17 +264,17 @@ int main()
     |1|0|0|
     |1|1|1|
  - Ví dụ:
-  ```c
-  int main()
-  {
-     uint8_t a = 0b00001110;
-     uint8_t b = 0b11110001;
-     uint8_t result;
-     result = a & b;
-  ```
-  ```c
-  Kq: result = 0b00000000
-  ```
+   ```c
+   int main()
+   {
+      uint8_t a = 0b00001110;
+      uint8_t b = 0b11110001;
+      uint8_t result;
+      result = a & b;
+   ```
+   ```c
+   Kq: result = 0b00000000
+   ```
 ### 2.3. Toán tử OR - OR bitwise
 - Dùng để thực hiện phép OR bitwise giữa từng cặp bit của hai số. Kết quả là 1 nếu có hơn một bit.<br>
  ![image](https://github.com/user-attachments/assets/34b7b8f0-6dd2-4a73-9712-56fde6a8246e)
