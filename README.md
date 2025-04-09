@@ -459,6 +459,10 @@ int main() {
   
   for (int i; i < n; i++)
   {
+     // ptr là địa chỉ phần tử thứ 1
+     // ptr + 1 là địa chỉ phần tử thứ 2
+     // .....
+     // *ptr +i 'là giá trị phần tử thứ i
      printf("Dia chi: %p - Gia tri: %d\n",ptr + i, (*ptr +i));
   }
 }
