@@ -394,3 +394,73 @@ int main(int argc, char const *argv[]) {
 ```
 
   </details>
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<details>
+<summary><b>📖BÀI 4: POINTER</b></summary>
+ 
+## 1. Khái niệm
+- **Con trỏ (pointer):** Là một biến chứa địa chỉ bộ nhớ của một đối tượng khác (biến, mảng, hàm)
+- Việc sử dụng con trỏ giúp chúng ta thực hiện các thao tác trên bộ nhớ một cách linh hoạt hơn.
+## 2. Đặc điểm con trỏ
+### 2.1. Khai báo con trỏ
+- Cú pháp: `<Kiểu dữ liệu> *<tên biến>`
+- Trong đó:<br>
+&nbsp;+ Kiểu dữ liệu là: void, char, int, ...<br>
+&nbsp;+ Dấu * trước tên biến là ký hiệu báo cho trình biên dịch biết ra.
+- Ví dụ: <br>
+```c
+int *ptr_int;       // con trỏ đến kiểu int
+char *ptr_char;     // con trỏ đến kiểu char
+float *ptr_float;   // con trỏ đến kiểu float
+```
+### 2.2. Lấy địa chỉ của biến
+- Con trỏ khi trỏ đến biến sẽ lưu địa chỉ ô nhớ đầu tiên được cấp phát cho biến đó.
+- Cú pháp: `<Kiểu dữ liệu> *<tên biến 1> = &<tên biến 2>`
+- Trong đó:<br>
+&nbsp;+ Kiểu dữ liệu là: void, char, int, ...<br>
+&nbsp;+ Dấu * trước tên biến là ký hiệu báo cho trình biên dịch biết ra.<br>
+&nbsp;+ &<tên biến 2>: là phép lấy địa chỉ của biến 2.
+- Ví dụ: <br>
+```c
+int x = 10;       //Address: 0x01 0x02 0x03 0x04
+                  //Value:	0b00..00
+int *ptr_x = &x;  // ptr_x chứa địa chỉ của x
+                  // &ptr_x = 0xc1
+                  // ptr_x = 0x01
+```
+ Truy cập giá trị (giải tham chiếu - dereference)
+- Để lấy giá trị từ con trỏ ta sử dụng phép giải tham chiếu.
+- Cú pháp: `*<tên biến 1> = <tên biến 2>`
+- Trong đó:<br>
+&nbsp;+ *<tên biến 1>: là phép lấy giá trị từ con trỏ.
+- Ví dụ: <br>
+```c
+int x = 10;
+int *ptr_x = &x;
+*ptr_x = *(0x01) = 10
+```
+### 2.4. Kích thước con trỏ
+- Kích thước của con trỏ phụ thuộc vào kiến trúc máy tính và trình biên dịch hoặc kiến trúc vi xử lý.
+- Phải đồng bộ kiểu dữ liệu với biến để tránh đọc sai giá trị
+- Ví dụ: Với máy tính có hệ điều hành 64 bit thì con trỏ sẽ có kích thước 8 bytes (64 bit).
+## 3. Mối quan hệ giữa con trỏ và mảng
+- Kích thước mảng = số lượng phần tử của mảng x kích thước kiểu dữ liệu
+  ```c
+int main() {
+  int arr[] = {1, 2, 3, 4, 5};
+  
+  int *ptr = arr;
+  
+  int n = sizeof(arr)/sizeof(arr[0]);  // số lượng phần tử trong mảng
+  
+  for (int i; i < n; i++)
+  {
+     printf("Dia chi: %p - Gia tri: %d\n",ptr + i, (*ptr +i));
+  }
+}
+  ```
+  </details>
