@@ -449,7 +449,7 @@ int *ptr_x = &x;
 - Ví dụ: Với máy tính có hệ điều hành 64 bit thì con trỏ sẽ có kích thước 8 bytes (64 bit).
 ## 3. Mối quan hệ giữa con trỏ và mảng
 - Kích thước mảng = số lượng phần tử của mảng x kích thước kiểu dữ liệu
-  ```c
+```c
 int main() {
   int arr[] = {1, 2, 3, 4, 5};
   
@@ -462,5 +462,5 @@ int main() {
      printf("Dia chi: %p - Gia tri: %d\n",ptr + i, (*ptr +i));
   }
 }
-  ```
+```
   </details>
