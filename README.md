@@ -467,4 +467,45 @@ int main() {
   }
 }
 ```
+## 3. Void pointer
+- **Void pointer** thường dùng để trỏ để tới bất kỳ địa chỉ nào mà không cần biết tới kiểu dữ liệu của giá trị tại địa chỉ đó.
+- Cú pháp: ` void *ptr_void;`
+- Ưu điểm: Thay vì phải khai báo nhiều con trỏ với các kiểu dữ liệu khác nhau thì ta có thể tối ưu bằng cách khai báo 1 con trỏ void và dùng nó để trỏ tới nhiều biến với các kiểu dữ liệu khác nhau giúp tối ưu bộ nhớ hơn
+- Nhược điểm: cú pháp phức tạp vì phải ép kiểu lại
+- Ví dụ:
+```c
+#include <stdio.h>
+
+int main()
+{
+   void *ptr
+
+    int value = 5;
+    double test = 15.7;
+    char arr[] = "Hello World"; //ký tự NULL (\'0')
+    
+    ptr = &value;
+    printf("Address: %p - Value: %d\n", ptr, *(int*)(ptr));
+
+    ptr = &test;
+    printf("Address: %p - Value: %f\n", ptr, *(double*)(ptr));
+
+    ptr = arr;
+    for (int i = 0; i < (sizeof(arr)/sizeof(arr[0])); i++)
+    {
+       printf("Address: %p - Value: %c\n", ptr+i, *(char*)(ptr+i));
+    }
+
+    void *ptr1[] = { &value, &test, arr };
+    printf("Address: %p - Value: %d\n", ptr1[0], *(int*)ptr1[0]);
+    printf("Address: %p - Value: %f\n", ptr1[1], *(double*)ptr1[1]);
+    printf("Address: %p - Value: %c\n", ptr1[1], *(char*)ptr1[1]);
+    return 0;
+}
+```
+## 4. Con trỏ hàm - Function Pointer
+- **Con trỏ hàm (Function Pointer)** là một biến mà giữ địa chỉ của một hàm. Có nghĩa là, nó trỏ đến vùng nhớ trong bộ nhớ chứa mã máy của hàm được định nghĩa trong chương trình.
+- Trong ngôn ngữ lập trình C, con trỏ hàm cho phép bạn truyền một hàm như là một đối số cho một hàm khác, lưu trữ địa chỉ của hàm trong một cấu trúc dữ liệu, hoặc thậm chí truyền hàm như một giá trị trả về từ một hàm khác.
+- Cú pháp: `<return_type> (*func_pointer)(<data_type_1>, <data_type_2>);`
+
   </details>
