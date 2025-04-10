@@ -507,5 +507,10 @@ int main()
 - **Con trỏ hàm (Function Pointer)** là một biến mà giữ địa chỉ của một hàm. Có nghĩa là, nó trỏ đến vùng nhớ trong bộ nhớ chứa mã máy của hàm được định nghĩa trong chương trình.
 - Trong ngôn ngữ lập trình C, con trỏ hàm cho phép bạn truyền một hàm như là một đối số cho một hàm khác, lưu trữ địa chỉ của hàm trong một cấu trúc dữ liệu, hoặc thậm chí truyền hàm như một giá trị trả về từ một hàm khác.
 - Cú pháp: `<return_type> (*func_pointer)(<data_type_1>, <data_type_2>);`
-
+- Ví dụ:
+```c
+int sum ( int a, int b);
+int (*ptr)(int, int);
+ptr = sum; 
+```
   </details>
