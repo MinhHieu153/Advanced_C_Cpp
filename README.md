@@ -524,8 +524,202 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 - Gọi thông qua con trỏ hàm:<br> 
   &nbsp;+ Gọi trực tiếp như gọi hàm: ptr();<br>
   &nbsp;+ Sử dụng dấu * giải tham chiếu: (*ptr)();
-### 4.3. Ví dụ
-```c
+### 4.3. Ưu điểm - nhược điểm
+- Ưu điểm: Có độ linh hoạt cao
+- Nhược điểm: Tốc độ châm hơn so với gọi hàm thông qua tên
+### 4.4. Ví dụ
+- Ví dụ 1: Khai báp như 1 biến
+  ```c
+  #include <stdio.h>
+  
+  int tong(int a, int b){ return a + b; }
+  
+  int hieu(int a, int b){ return a - b; }
+  
+  int tich(int a, int b){ return a * b; }
+  
+  int thuong(int a, int b){ return (double)a / b; }
+  
+  int main()
+  {
+      int (*ptr)(int,int);  //Khai báo con trỏ hàm
+  
+       ptr = tong;
+       printf("Tong: %d\n, ptr(2,3));
+  
+       ptr = hieu;
+       printf("Hieu: %d\n, ptr(2,3));
+  
+       ptr = tich;
+       printf("Tich: %d\n, ptr(2,3));
+  
+       ptr = thuong;
+       printf("Thuong: %d\n, ptr(5,3));
+  
+       return 0;
+  }
+  ```
+  ```c
+  Kq: Tong: 5
+       Hieu: -1
+       Tich: 6
+       Thuong: 1,666666
+  ```
+ - Ví dụ 2: Khai báo con trỏ hàm dưới dạng mảng con trỏ
+   ```c
+   void tong(int a, int b) {printf("Tong là: %d", a+b);}
+   
+   void hieu(int a, int b) {printf("Hieu là: %d", a-b);}
+   
+   void tich(int a, int b) {printf("Tich là: %d", a*b);}
+   
+   void thuong(int a, int b) {printf("Thuong là: %d", (double)a/b);}
+   
+   int main ()
+   {
+     void (*ptr)(int, int);  // Khai báo con trỏ hàm
+   
+     void (*ptr_arr[])(int, int) = {tong, hieu, tich, thuong};  
+     ptr_arr[0](2,3);  // Gọi hàm tổng
+     ptr_arr[1](2,3);  // Gọi hàm hiệu
+     ptr_arr[2](2,3);  // Gọi hàm tích
+     ptr_arr[3](5,3);  // Gọi hàm thuong
+   
+    return 0;
+   }
+   ```
+   ```c
+   Kq: Tong: 5
+        Hieu: -1
+        Tich: 6
+        Thuong: 1,666666
+   ```
+   - Ví dụ 3: Khai báo con trỏ hàm dưới dạng tham số truyền vào
+   ```c
+   void tong(int a, int b) {printf("Tong là: %d", a+b);}
+   
+   void hieu(int a, int b) {printf("Hieu là: %d", a-b);}
+   
+   void tich(int a, int b) {printf("Tich là: %d", a*b);}
+   
+   void thuong(int a, int b) {printf("Thuong là: %d", (double)a/b);}
+   
+   void tinhtoan(void (*pheptoan)(int, int), int a, int b)
+   {
+      pheptoan(a,b);
+   }
+   
+   int main ()
+   {
+     void (*ptr)(int, int);  // Khai báo con trỏ hàm
+   
+     tinhtoan(tong, 2, 3);  // Truyền tham số là hàm tong để tính tổng.
+     tinhtoan(hieu, 2, 3);  // Truyền tham số là hàm tong để tính hiệu.
+     tinhtoan(tich, 2, 3);  // Truyền tham số là hàm tong để tính tích.
+     tinhtoan(thuong, 5, 3);  // Truyền tham số là hàm tong để tính thương.
+     return 0;
+   }
+   ```
+   ```c
+   Kq: Tong: 5
+        Hieu: -1
+        Tich: 6
+        Thuong: 1,666666
+   ```
+## 5. Con trỏ trỏ tới hằng số - Pointer to Constant
+- Khái niệm: Là cách định nghĩa một con trỏ không thể thay đổi giá trị tại địa chỉ mà nó trỏ đến thông qua dereference nhưng giá trị địa chỉ đó có thể thay đổi.
+- Cú pháp:<br>
+  ```c
+  <data type> const *ptr_const;
+  const <data type> *ptr_const;
+  ```
+- Ứng dụng: Giứ lại dữ liệu trước đó 
+- Ví dụ:<br> 
+  ```c
+  int main()
+  {
+     int value = 5;
+     int test = 8;
+     const int *ptr_const = &value;
 
-```
+     printf("value: %d\n", *ptr_const);  //read - only
+
+     //*ptr_const = 7; Sai
+     ptr_const = &test //đúng
+
+     printf("value: %d\n", *ptr_const);
+     return 0;
+  }
+  ```
+## 6. Hằng con trỏ -  Constant Pointer
+- Khái niệm: Định nghĩa một con trỏ khi được khởi tạo thì nó sẽ không thể trỏ tới địa chỉ khác.
+- Cú pháp:<br>
+  ```c
+  <data type> *const ptr_const;
+  const <data type> *const ptr_const;  // kết hợp hằng con trỏ và con trỏ hằng
+  ```
+- Ví dụ:<br> 
+  ```c
+  #include <stdio.h>
+ 
+  int main()
+  {
+      int value = 5;
+      int test = 15;
+      int *const const_ptr = &value;
+  
+      printf("value: %d\n", *const_ptr);
+  
+      *const_ptr = 7;
+      printf("value: %d\n", *const_ptr);
+  
+      //const_ptr = &test; // wrong
+      return 0;
+  }
+  ```
+## 7. Con trỏ NULL -  NULL Pointer
+- Khái niệm: là một con trỏ không trỏ đến bất kỳ đối tượng hoặc vùng nhớ cụ thể nào.
+- Ứng dụng: Dùng để kiểm tra xem một con trỏ đã được khởi tạo và có trỏ đến một vùng nhớ hợp lệ chưa tránh thay đổi dữ liệu mà nó trỏ tới => Khi dùng xong hoặc không dùng nên gắn con trỏ NULL
+- Ví dụ:<br> 
+  ```c
+  #include <stdio.h>
+
+  int main()
+  {
+      int *ptr = NULL;  // Gán giá trị NULL cho con trỏ    0x0000000
+  
+      if (ptr == NULL)
+      {
+          printf("Pointer is NULL\n");
+      }
+      else
+      {
+          printf("Pointer is not NULL\n");
+      }
+  
+      int score_game = 5;
+      if (ptr == NULL)
+      {
+          ptr = &score_game;
+          *ptr = 30;
+          ptr = NULL; // khi không dùng nữa gắn NULL
+      }
+      return 0;
+  }
+  ```
+  ## 8. Con trỏ đến con trỏ -  Pointer to Pointer (Con trỏ cấp 2
+- Khái niệm: cho phép lưu trữ địa chỉ của một con trỏ khác
+- Ứng dụng:<br>
+&nbsp;+ Kiểu dữ liệu JSON.<br>
+&nbsp;+ Cấu trúc dữ liệu danh sách liên kết. <br>
+- Ví dụ:<br> 
+  ```c
+  int test = 5; //Address: 0x01, Value:	5
+  
+  int *ptr = &test; // Address: 	0xf1, Value:	0x01
+  
+  int **ptp = &ptr; //Address: 	0xef, Value:	0xf1
+
+  **ptp = 5 // Giải tham chiếu con trỏ cấp 2
+  ```
   </details>
