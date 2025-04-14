@@ -723,3 +723,46 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
   **ptp = 5 // Giải tham chiếu con trỏ cấp 2
   ```
   </details>
+
+  
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<details>
+<summary><b>📖BÀI 5: Goto - setjmp.h </b></summary>
+ 
+## 1. Goto
+- **Goto:**: à một từ khóa trong ngôn ngữ lập trình C, cho phép chương trình nhảy đến một nhãn (label) đã được đặt trước đó trong cùng một hàm. 
+- Ưu điểm: Kiểm soát luồng chạy chương trình
+- Nhược điểm: Làm cho mã nguồn trở nên khó đọc và khó bảo trì
+- Ví dụ:
+```c
+ #include <stdio.h>
+ 
+ int main()
+ {
+    int i = 0;
+ 
+    // Đặt nhãn
+    start:
+       if (i >= 5)
+       {
+          goto end;  // Chuyển control đến nhãn "end"
+       }
+ 
+       printf("%d ", i);
+       i++;
+ 
+       goto start;  // Chuyển control đến nhãn "start"
+ 
+    // Nhãn "end"
+    end:
+       printf("\n");
+    return 0;
+ }
+
+```
+
+</details>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
