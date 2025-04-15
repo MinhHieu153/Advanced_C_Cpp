@@ -734,7 +734,9 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 ## 1. Goto
 - **Goto:**: à một từ khóa trong ngôn ngữ lập trình C, cho phép chương trình nhảy đến một nhãn (label) đã được đặt trước đó trong cùng một hàm. 
 - Ưu điểm: Kiểm soát luồng chạy chương trình
-- Nhược điểm: Làm cho mã nguồn trở nên khó đọc và khó bảo trì
+- Nhược điểm:
+  &nbsp;+ Làm cho mã nguồn trở nên khó đọc và khó bảo trì.<br>
+  &nbsp;+ Chỉ sử dụng trong cùng 1 hàm.<br>
 - Ví dụ:
 ```c
  #include <stdio.h>
@@ -762,6 +764,60 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
  }
 
 ```
+## 1. Thư viện setjmp
+- **setjmp.h**là một thư viện trong ngôn ngữ lập trình C, cung cấp hai hàm chính là setjmp và longjmp.
+- Ứng dụng: Dùng để xử lý ngoại lệ trong C
+- **setjmp(jmp_bufenv)**: Lưu trữ vị trí mà cái hàm được gọi ra ( vị trí setjmp đang đứng) để có thể quay lại bằng **longjmp**.
+&nbsp;+ Trả về 0 khi được gọi lần đầu.<br>
+&nbsp;+ Trả về một giá trị khác 0 khi quay lại từ **longjmp**.<br>
+- **longjmp(jmp_buf env, int value):** Nhảy về vị trí hiện tại của setjmp và tiếp tục thực thi từ đó.
+- Ví dụ:<br>
+ ```c
+ #include <stdio.h>
+ #include <setjmp.h>
+ 
+ jmp_buf buf;
+ 
+ int exception = 0;
+ 
+ void func2()
+ {
+     printf("This is function 2\n");
+     longjmp(buf, 2);  // Nhảy trở lại vị trí setjmp và trả lại giá trị 2
+ }
+ 
+ void func3()
+ {
+     printf("This is function 3\n");
+     longjmp(buf, 3);   // Nhảy trở lại vị trí setjmp và trả lại giá trị 3
+ }
+ 
+ void func1()
+ {
+     exception = setjmp(buf);   //đánh dấu lưu trữ vị trí hàm setjmp đang thực thi
+     if (exception == 0)
+     {
+         printf("This is function 1\n");
+         printf("exception = %d\n", exception);
+         func2();
+     }
+     else if (exception == 2)
+     {
+         printf("exception = %d\n", exception);
+         func3();
+     }
+     else if (exception == 3)
+     {
+         printf("exception = %d\n", exception);
+     }
+ }
+ 
+ int main(int argc, char const *argv[])
+ {
+     func1();
+     return 0;
+ }
+ ```
 
 </details>
 
