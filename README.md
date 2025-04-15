@@ -765,7 +765,7 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 
 ```
 ## 1. Thư viện setjmp
-- **setjmp.h**là một thư viện trong ngôn ngữ lập trình C, cung cấp hai hàm chính là setjmp và longjmp.
+- **setjmp.h:** là một thư viện trong ngôn ngữ lập trình C, cung cấp hai hàm chính là setjmp và longjmp.
 - Ứng dụng: Dùng để xử lý ngoại lệ trong C
 - **setjmp(jmp_bufenv)**: Lưu trữ vị trí mà cái hàm được gọi ra ( vị trí setjmp đang đứng) để có thể quay lại bằng **longjmp**.<br>
 &nbsp;+ Trả về 0 khi được gọi lần đầu.<br>
