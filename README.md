@@ -820,8 +820,95 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
  ```
 ## 3. Xử lý ngoại lệ - Exception Handling
 - **Xử lý ngoại lệ (Exception Handling):** là một cơ chế trong lập trình giúp phát hiện và xử lý các lỗi thường liên quan lỗi hệ thống hoặc tình huống bất thường xảy ra trong quá trình thực thi chương trình, giúp chương trình hoạt động ổn định và không bị dừng đột ngột.
+### 3.1. **Ngoại lệ (Exception):** là những lỗi hoặc sự kiện không mong muốn xảy ra trong quá trình thực thi chương trình, chẳng hạn như:<br>
+&nbsp;+ Chia một số cho 0 (division by zero).<br>
+&nbsp;+ Truy cập mảng ngoài phạm vi (out of bounds array access).<br>
+&nbsp;+ Truy xuất con trỏ null (null pointer dereference).<br>
+&nbsp;+ Lỗi khi mở hoặc đọc tập tin (file not found).<br>
+&nbsp;+ Lỗi cấp phát bộ nhớ (bad allocation).<br>
+### 3.2. **Cơ chế xử lý ngoại lệ:** giúp chương trình phản ứng kịp thời với các lỗi mà không làm gián đoạn toàn bộ chương trình.
+- Hầu hết các ngôn ngữ lập trình hiện đại như C++, Java, Python, C# đều hỗ trợ xử lý ngoại lệ thông qua các từ khóa chính như:
+&nbsp;+ **try:** Định nghĩa một khối lệnh có thể phát sinh lỗi.<br>
+&nbsp;+ **catch:** Xử lý ngoại lệ nếu có lỗi xảy ra.<br>
+&nbsp;+ **throw:** Ném ra một ngoại lệ khi xảy ra lỗi.<br>
+=> Muốn sử dụng những lệnh trên trong C phải định nghĩa trong setjump.
 
-
+- Cú pháp:<br>
+  ```c
+   try
+   {
+      // Khối lệnh có thể phát sinh lỗi
+   }
+   catch (loại_ngoại_lệ_1)
+   {
+      // Xử lý ngoại lệ loại 1
+   }
+   catch (loại_ngoại_lệ_2)
+   {
+      // Xử lý ngoại lệ loại 2
+   }
+   catch (...)
+   {
+      // Xử lý tất cả các ngoại lệ khác
+   }
+  ```
+- Ví dụ: <br>
+  ```c
+    #include <stdio.h>
+  #include <setjmp.h>
+  
+  jmp_buf buf;
+  
+  int exception_code;
+  
+  typedef enum
+  {
+      NO_ERROR,
+      NO_EXIT,
+      DIVIDE_BY_0
+  } ErrorCodes;  
+  
+  #define TRY if ((exception_code = setjmp(buf)) == 0)
+  #define CATCH(x) else if (exception_code == x)
+  #define THROW(x) longjmp(buf, x)
+  
+  double divide(int a, int b)
+  {
+      if (a == 0 && b == 0)
+      {
+          THROW(NO_EXIT);
+      }
+      else if (b == 0)
+      {
+          THROW(DIVIDE_BY_0);
+      }
+  
+      return (double)a/b;
+  }
+  
+  int main(int argc, char const *argv[])
+  {
+      exception_code = NO_ERROR;
+  
+      TRY
+      {
+          printf("Ket qua: %0.3f\n", divide(0,0));
+      }
+      CATCH(NO_EXIT)
+      {
+          printf("ERROR! Không tồn tại\n");
+      }
+      CATCH(DIVIDE_BY_0)
+      {
+          printf("ERROR! Chia cho 0\n");
+      }
+  
+      // thêm code ở đây
+      printf("Hello world\n");
+      return 0;
+  }
+  ```
+- **Note:** Sự khác nhau giữa **TRY - CATCH - THROW** và **ASSERT**:<br>
+&nbsp;+ **ASSERT:** Khi có lỗi đưa ra thông báo lỗi chi tiết và dừng ngay chương trình khi có lỗi.<br>
+&nbsp;+ **TRY - CATCH - THROW:** Khi có lỗi đưa ra thông báo lỗi nhưng không dừng ngay chương trình khi có lỗi.<br>
 </details>
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
