@@ -764,9 +764,9 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
  }
 
 ```
-## 1. Thư viện setjmp
+## 2. Thư viện setjmp
 - **setjmp.h:** là một thư viện trong ngôn ngữ lập trình C, cung cấp hai hàm chính là setjmp và longjmp.
-- Ứng dụng: Dùng để xử lý ngoại lệ trong C
+- Ứng dụng: Dùng để xử lý ngoại lệ trong C (debug chương trình ).
 - **setjmp(jmp_bufenv)**: Lưu trữ vị trí mà cái hàm được gọi ra ( vị trí setjmp đang đứng) để có thể quay lại bằng **longjmp**.<br>
 &nbsp;+ Trả về 0 khi được gọi lần đầu.<br>
 &nbsp;+ Trả về một giá trị khác 0 khi quay lại từ **longjmp**.<br>
@@ -818,6 +818,9 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
      return 0;
  }
  ```
+## 3. Xử lý ngoại lệ - Exception Handling
+- **Xử lý ngoại lệ (Exception Handling):** là một cơ chế trong lập trình giúp phát hiện và xử lý các lỗi thường liên quan lỗi hệ thống hoặc tình huống bất thường xảy ra trong quá trình thực thi chương trình, giúp chương trình hoạt động ổn định và không bị dừng đột ngột.
+
 
 </details>
 
