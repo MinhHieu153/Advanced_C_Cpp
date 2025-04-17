@@ -912,3 +912,46 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 &nbsp;+ **ASSERT:** Khi có lỗi đưa ra thông báo lỗi chi tiết và dừng ngay chương trình khi có lỗi.<br>
 &nbsp;+ **TRY - CATCH - THROW:** Khi có lỗi đưa ra thông báo lỗi nhưng không dừng ngay chương trình khi có lỗi.<br>
 </details>
+
+  
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<details>
+<summary><b>📖BÀI 6: Goto - setjmp.h </b></summary>
+ 
+## 1. Từ khóa Extern
+- **Goto:**: à một từ khóa trong ngôn ngữ lập trình C, cho phép chương trình nhảy đến một nhãn (label) đã được đặt trước đó trong cùng một hàm. 
+- Ưu điểm: Kiểm soát luồng chạy chương trình
+- Nhược điểm:
+  &nbsp;+ Làm cho mã nguồn trở nên khó đọc và khó bảo trì.<br>
+  &nbsp;+ Chỉ sử dụng trong cùng 1 hàm.<br>
+- Ví dụ:
+```c
+ #include <stdio.h>
+ 
+ int main()
+ {
+    int i = 0;
+ 
+    // Đặt nhãn
+    start:
+       if (i >= 5)
+       {
+          goto end;  // Chuyển control đến nhãn "end"
+       }
+ 
+       printf("%d ", i);
+       i++;
+ 
+       goto start;  // Chuyển control đến nhãn "start"
+ 
+    // Nhãn "end"
+    end:
+       printf("\n");
+    return 0;
+ }
+
+```
+
+</details>
