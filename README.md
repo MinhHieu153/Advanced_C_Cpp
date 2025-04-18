@@ -921,9 +921,8 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 <summary><b>📖BÀI 6: Goto - setjmp.h </b></summary>
  
 ## 1. Từ khóa Extern
-- **Goto:**: à một từ khóa trong ngôn ngữ lập trình C, cho phép chương trình nhảy đến một nhãn (label) đã được đặt trước đó trong cùng một hàm. 
-- Ưu điểm: Kiểm soát luồng chạy chương trình
-- Nhược điểm:
+- **Extern:** là từ khóa được sử dụng để thông báo rằng một biến hoặc hàm đã được khai báo ở một nơi khác trong chương trình hoặc trong một file nguồn khác. Giúp chương trình hiểu rằng biến hoặc hàm đã được định nghĩa và sẽ được sử dụng từ một vị trí khác.
+
   &nbsp;+ Làm cho mã nguồn trở nên khó đọc và khó bảo trì.<br>
   &nbsp;+ Chỉ sử dụng trong cùng 1 hàm.<br>
 - Ví dụ:
