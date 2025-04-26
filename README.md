@@ -918,39 +918,92 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 
 
 <details>
-<summary><b>📖BÀI 6: Goto - setjmp.h </b></summary>
+<summary><b>📖BÀI 6: Storage Classes </b></summary>
  
 ## 1. Từ khóa Extern
 - **Extern:** là từ khóa được sử dụng để thông báo rằng một biến hoặc hàm đã được khai báo ở một nơi khác trong chương trình hoặc trong một file nguồn khác. Giúp chương trình hiểu rằng biến hoặc hàm đã được định nghĩa và sẽ được sử dụng từ một vị trí khác.
+- Ví dụ:<br>
 
-  &nbsp;+ Làm cho mã nguồn trở nên khó đọc và khó bảo trì.<br>
-  &nbsp;+ Chỉ sử dụng trong cùng 1 hàm.<br>
-- Ví dụ:
+&nbsp;+ File test.c.<br>
 ```c
  #include <stdio.h>
- 
- int main()
- {
-    int i = 0;
- 
-    // Đặt nhãn
-    start:
-       if (i >= 5)
-       {
-          goto end;  // Chuyển control đến nhãn "end"
-       }
- 
-       printf("%d ", i);
-       i++;
- 
-       goto start;  // Chuyển control đến nhãn "start"
- 
-    // Nhãn "end"
-    end:
-       printf("\n");
-    return 0;
- }
 
+int var_global = 50; // 0x01
+
+void display()
+{
+    printf("%d\n",var_global);
+}
+```
+&nbsp;+ File test.h.<br>
+```c
+#ifndef TEST_H
+#define TEST_H
+
+extern int var_global;
+
+extern void display();
+
+endif
+```
+&nbsp;+ File main.c.<br>
+```c
+#include <stdio.h>
+#include "test.h"
+
+int main(int argc, char const *argv[])
+{
+    display();
+    return 0;
+}
+```
+## 2. Từ khóa Static local
+- Khi **Static** Khi static được sử dụng với biến cục bộ (khai báo biến trong một hàm):<br>
+&nbsp;+ Giữ phạm vi của biến chỉ trong hàm đó.<br>
+&nbsp;+ Giữ giá trị của biến qua các lần gọi hàm.
+<br>
+- Ví dụ:<br>
+
+```c
+#include <stdio.h>
+int *ptr =NULL;
+void counnt()
+{
+    static int count = 0;  // Biến static giữ giá trị qua các lần gọi hàm
+    ptr = &a; //dùng con trỏ thay đổi biến stactic a từ bên ngoài
+    int count1 = 0 // giá trị tự reset sau mỗi lần gọi hàm
+    printf("Count: %d\n", ++count);
+    printf("Count1: %d\n", ++count);
+}
+
+int main()
+{
+    count();  // In ra "Count: 1"
+    count();  // In ra "Count: 2"
+    count();  // In ra "Count: 3"
+
+    *ptr =99;
+    count();  // In ra "Count: 3"
+    return 0;
+}
 ```
 
-</details>
+```c
+Kq:
+Count: 1
+Count1: 0
+Count: 2
+Count1: 0
+Count: 3
+Count1: 0
+Count: 100
+Count1: 0
+}
+```
+## 2. Từ khóa Static global
+- Khi static được sử dụng với biến, hàm toàn cục, nó hạn chế phạm vi của biến, hàm đó chỉ trong file nguồn hiện tại.
+- Ứng dụng: dùng để thiết kế các file thư viện.
+- Ví dụ:<br>
+```c
+```
+</details> 
