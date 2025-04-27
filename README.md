@@ -1236,9 +1236,9 @@ Data data1, data2, *data3;
 ```c
 union Data 
 {
-  uint8_t arr1[5]; // 5 byte
-  uint8_t arr2[3]; // 3 byte
-  uint8_t arr3[6]; // 6 byte
+  uint8_t a1[5]; // 5 byte
+  uint8_t a2[3]; // 3 byte
+  uint8_t a3[6]; // 6 byte
 };
 ```
 => Cấp phát bộ nhớ:<br>
