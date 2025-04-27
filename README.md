@@ -990,7 +990,7 @@ int main()
 
 ```c
 Kq:
-Count: 1
+Count: 1 
 Count1: 0
 Count: 2
 Count1: 0
@@ -1000,10 +1000,72 @@ Count: 100
 Count1: 0
 }
 ```
-## 2. Từ khóa Static global
+## 3. Từ khóa Static global
 - Khi static được sử dụng với biến, hàm toàn cục, nó hạn chế phạm vi của biến, hàm đó chỉ trong file nguồn hiện tại.
 - Ứng dụng: dùng để thiết kế các file thư viện.
 - Ví dụ:<br>
 ```c
+#inc;ude <stdio.h>
+#include "test.h>
+
+static int a = 10 // gắn biến static chỉ sử dụng trong hàm này
+
+static void display(){
+  printf(this is test1.c\n");
+int *ptr = &a;
+}
+void test(){  
+  printf("Hello Word\n);
+}
 ```
+## 4 . Từ khóa Volatile
+- Dùng để báo hiệu cho trình biên dịch rằng một biến có thể thay đổi ngẫu nhiên, ngoài sự kiểm soát của chương trình.
+- Giúp ngăn chặn trình biên dịch tối ưu hóa hoặc xóa bỏ các thao tác trên biến đó, giữ cho các thao tác trên biến được thực hiện như đã được định nghĩa.<br>
+```c
+#include "stm32f10x.h"
+
+uint8_t *addr = (uint8_t*)0x20000000;
+volatile uint8_t var = 0;  //giúp a cập nhật khi bị thay đổi ngẫu nhiên
+
+int main()
+{
+   while(1)
+   {
+     var = *addr;
+     if (var != 0) break;
+   }
+}
+```
+## 5 . Register - thanh ghi
+- Giúp cho biến lưu trực tiếp vào thanh ghi không qua Ramm làm tăng tốc độ xử lý
+- Tuy nhiên, lưu ý rằng việc sử dụng register chỉ là một đề xuất cho trình biên dịch và không đảm bảo rằng biến sẽ được lưu trữ trong thanh ghi. Trong thực tế, trình biên dịch có thể quyết định không tuân thủ lời đề xuất này.
+- Không dùng cho biến toàn cục vì:<br>
+&nbsp;+ Thanh ghi không có địa chỉ nên việc truy cập khó.
+&nbsp;+ Số lượng thanh ghi hạn chế.<br>
+- Ví dụ: <br>
+```c
+#include <stdio.h>
+#include <time.h>
+
+int main()
+{
+   // Lưu thời điểm bắt đầu
+   clock_t start_time = clock();
+   register int i;
+
+   // Đoạn mã của chương trình
+   for (i = 0; i < 2000000; ++i){}
+
+   // Lưu thời điểm kết thúc
+   clock_t end_time = clock();
+
+   // Tính thời gian chạy bằng miligiây
+   double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+
+   printf("Thoi gian chay cua chuong trinh: %f    giay\n", time_taken);
+   return 0;
+}
+
+```
+
 </details> 
