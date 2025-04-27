@@ -1018,7 +1018,7 @@ void test(){
   printf("Hello Word\n);
 }
 ```
-## 4 . Từ khóa Volatile
+## 4. Từ khóa Volatile
 - Dùng để báo hiệu cho trình biên dịch rằng một biến có thể thay đổi ngẫu nhiên, ngoài sự kiểm soát của chương trình.
 - Giúp ngăn chặn trình biên dịch tối ưu hóa hoặc xóa bỏ các thao tác trên biến đó, giữ cho các thao tác trên biến được thực hiện như đã được định nghĩa.<br>
 ```c
@@ -1036,7 +1036,7 @@ int main()
    }
 }
 ```
-## 5 . Register - thanh ghi
+## 5. Register - thanh ghi
 - Giúp cho biến lưu trực tiếp vào thanh ghi không qua Ramm làm tăng tốc độ xử lý
 - Tuy nhiên, lưu ý rằng việc sử dụng register chỉ là một đề xuất cho trình biên dịch và không đảm bảo rằng biến sẽ được lưu trữ trong thanh ghi. Trong thực tế, trình biên dịch có thể quyết định không tuân thủ lời đề xuất này.
 - Không dùng cho biến toàn cục vì:<br>
@@ -1067,5 +1067,195 @@ int main()
 }
 
 ```
+</details>
 
-</details> 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+<details>
+<summary><b>📖BÀI 7: Struct - Union </b></summary>
+
+## 1. Struct
+### 1.1. Khái niệm
+- **Struct:** là một cấu trúc dữ liệu cho phép lập trình viên tự định nghĩa một kiểu dữ liệu mới bằng cách nhóm các biến có các kiểu dữ liệu khác nhau lại với nhau
+### 1.2. Cú pháp
+- **Khai báo tường mình**.<br>
+```c
+struct name_struct
+{
+   <data type 1> <member 1>;
+   <data type 2> <member 2>;
+    // ...
+};
+```
+- **Khai báo không tường mình**.<br>
+
+```c
+typdef struct 
+{
+   <data type 1> <member 1>;
+   <data type 2> <member 2>;
+    // ...
+}name_struct;
+```
+- **Ví dụ:** <br>
+
+&nbsp;+ Khai báo tường mình.<br>
+```c
+struct User
+{
+   char *name;
+   int age;
+   char *addr;
+};
+struct User user1, user2, *user3;
+```
+&nbsp;+ Khai báo không tường mình.<br>
+```c
+typdef struct 
+{
+   char *name;
+   int age;
+   char *addr;
+} User;
+User user1, user2, *user3;
+```
+### 1.3. Truy xuất dữ liệu
+- Sử dụng ".": Toán tử truy xuất tới thành viên khi khai báo biến bình thường.<br>
+- Sử dụng "->": Toán tử truy xuất tới thành viên khi khai báo biến là con trỏ.<br>
+&nbsp;+ Ví dụ:<br>
+```c
+user1,name = "Hieu";
+user3->name = "Hieu";
+```
+### 1.4. Kích thước của struct
+- **Data Alignment:** là quá trình sắp xếp biến thành viên của struct sao cho các biến nằm ở địa chỉ phù hợp với yêu cầu căn chỉnh của CPU. Nó sẽ sắp xếp sao cho địa chỉ các biến là số chẵn và phù hợp với hệ thống
+- **Data padding:** Là byte dữ liệu trống 
+- **Kích thước Struct:** là bội kích thước của phần tử có kích thước lớn nhất
+- Ví dụ:<br>
+```c
+typdef struct 
+{               // cấp phát theo thành viên lớn nhất là char* addr ( kích thước con trỏ phụ thuộc vào kiến trúc của hệ thống: 32bit, 64bit)=> cấp phát 8byte
+   char *name; // 0xa0, 0xa1, 0xa2, 0xa3 ( padding: 0xa1, 0xa2, 0xa3 )
+   int age;    // 0xa4, 0xa5, 0xa6, 0xa7
+   char *addr; // 0xa8, 0xa9, 0xaa, 0xab. 0xac, 0xad, 0xae, 0xaf
+} User;
+// cấp phát địa chỉ dựa trên kích thước member lớn nhất
+// 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7 (lần 1)
+// 0xa8, 0xa9, 0xaa, 0xab . 0xac, 0xad, 0xae, 0xaf (lần 2)
+//Tổng 16 byte
+// dùng: 13 byte
+// dư: 3 byte -> 3 padding
+```
+&nbsp;+ kích thước mảng struct:<br>
+```c
+struct Example
+{
+   uint8_t arr1[5];            
+   uint8_t arr1[1];
+   uint8_t arr1[2];
+   uint8_t arr1[3];
+```
+![image](https://github.com/user-attachments/assets/2864a73a-aa37-441e-9ca1-8e9d8f357079)
+### 1.5. Bit Field
+- **Bit Field:** là một thành phần đặc biệt của cấu trúc (struct) cho phép bạn chỉ định số lượng bit cụ thể dùng để lưu trữ một biến số nguyên. Thay vì sử dụng toàn bộ kích thước của một kiểu dữ liệu, bạn có thể “cắt nhỏ” bộ nhớ theo số bit cần thiết, giúp tiết kiệm không gian bộ nhớ và mô tả chính xác hơn ý nghĩa của dữ liệu (ví dụ: lưu trạng thái bật/tắt chỉ cần 1 bit)
+- Cú pháp:<br>
+
+```c
+struct name_struct 
+{
+  <data type 1> <member 1> : <number of bits>;
+  <data type 2> <member 2> : <number of bits>;
+  //...
+};
+```
+- Ví dụ: <br>
+
+```c
+struct Example
+{
+   int32_t flag :1;  // sử dụng 1 trong 32 bit
+   int64_t count :4; // sử dụng 4 trong 64 bit
+};
+```
+- Số bit chỉ định trực tiếp giới hạn phạm vi giá trị có thể lưu. Ví dụ: một bit field khai báo với : 3 có thể lưu các giá trị từ 0 đến 7 (đối với unsigned).
+- Không thể sử dụng toán tử lấy địa chỉ (&) trên  các thành viên bit field.
+- **Chú ý:**
+
+&nbsp;+ Không dùng cho kiểu float.<br>
+&nbsp;+ Không thể truy cập địa chỉ.<br>
+## 2. Union
+### 2.1. Khái niệm
+- **Union:** là một cấu trúc dữ liệu giúp lập trình viên kết hợp nhiều kiểu dữ liệu khác nhau vào cùng một vùng nhớ.
+- **Union** giúp tiết kiệm bộ nhớ bằng cách chia sẻ cùng một vùng nhớ cho các thành viên của nó. Điều này có nghĩa là, trong một thời điểm, chỉ một thành viên của union có thể được sử dụng.
+### 2.2. Cú pháp
+- **Khai báo tường mình**.<br>
+```c
+union name_union
+{
+   <data type 1> <member 1>;
+   <data type 2> <member 2>;
+    // ...
+};
+```
+- **Khai báo không tường mình**.<br>
+```c
+typdef union 
+{
+   <data type 1> <member 1>;
+   <data type 2> <member 2>;
+    // ...
+}name_union;
+```
+- **Ví dụ:** <br>
+
+&nbsp;+ Khai báo tường mình.<br>
+```c
+union Data 
+{
+   uint8_t  arr1[5];
+   uint16_t arr2[9];
+   uint32_t arr3[3];
+};
+union Data data1, data2, *data3;
+```
+&nbsp;+ Khai báo không tường mình.<br>
+```c
+typdef union 
+{
+   uint8_t  arr1[5];
+   uint16_t arr2[9];
+   uint32_t arr3[3];
+} Data;
+Data data1, data2, *data3;
+```
+### 2.3. Kích thước Union
+- Trong union, tất cả các thành viên cùng chia sẻ một vùng nhớ.
+- Kích thước của union sẽ bằng với kích thước của thành viên lớn nhất + padding.
+- Chỉ một thành viên lưu trữ giá trị tại một thời điểm nếu không dữ liệu sẽ bị ghi đè.
+- Ví dụ: <br>
+```c
+union Data 
+{
+  uint8_t arr1[5]; // 5 byte
+  uint8_t arr2[3]; // 3 byte
+  uint8_t arr3[6]; // 6 byte
+};
+```
+=> Cấp phát bộ nhớ:<br>
+![image](https://github.com/user-attachments/assets/7f4ea88c-cbfb-4cae-beea-407f459280bd)
+
+### 2.5. So sánh Union - Struct
+- Giống:
+&nbsp;+ là kiểu dữ liệu tự định nghĩa.<br>
+&nbsp;+ cách truy xuất dữ liệu. <br>
+- Khác:
+  ||Struct|Union|
+  |:------------------------:|:------------------------:|:------------------------:|
+  |Kích thước|Tổng kích thước thành viên + Padding|Tổng của thành viên lớn nhất + padding|
+  |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
+  |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
+  |Truy xuất vùng nhớ|Không ảnh hưởng khi biến thành viên thay đổi|Ảnh hưởng khi biến thành viên không thay đổi|
+</details>
+
+
+  
