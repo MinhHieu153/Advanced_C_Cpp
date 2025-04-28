@@ -1245,7 +1245,7 @@ union Data
 ![image](https://github.com/user-attachments/assets/7f4ea88c-cbfb-4cae-beea-407f459280bd)
 
 ### 2.5. So sánh Union - Struct
-- Giống:
+- Giống:<br>
 &nbsp;+ là kiểu dữ liệu tự định nghĩa.<br>
 &nbsp;+ cách truy xuất dữ liệu. <br>
 - Khác:
