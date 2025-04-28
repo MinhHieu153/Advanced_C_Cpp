@@ -1148,12 +1148,15 @@ typdef struct
 ```
 &nbsp;+ kích thước mảng struct:<br>
 ```c
-struct Example
+struct Example1 
 {
-   uint8_t arr1[5];            
-   uint8_t arr1[1];
-   uint8_t arr1[2];
-   uint8_t arr1[3];
+    	uint8_t  arr1[5];
+    	uint16_t arr2[0];  
+uint16_t arr2[1]; 
+uint16_t arr2[2]; 
+uint16_t arr2[3];   
+uint32_t arr3[2];
+};
 ```
 ![image](https://github.com/user-attachments/assets/2864a73a-aa37-441e-9ca1-8e9d8f357079)
 ### 1.5. Bit Field
