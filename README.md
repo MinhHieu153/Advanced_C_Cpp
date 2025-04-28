@@ -1005,7 +1005,7 @@ Count1: 0
 - Ứng dụng: dùng để thiết kế các file thư viện.
 - Ví dụ:<br>
 ```c
-#inc;ude <stdio.h>
+#include <stdio.h>
 #include "test.h>
 
 static int a = 10 // gắn biến static chỉ sử dụng trong hàm này
@@ -1258,7 +1258,87 @@ union Data
   |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
   |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
   |Truy xuất vùng nhớ|Không ảnh hưởng khi biến thành viên thay đổi|Ảnh hưởng khi biến thành viên không thay đổi|
+  
 </details>
 
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
+<details>
+<summary><b>📖BÀI 8: Memory Layout</b></summary>
+ 
+- **RAM** có 5 vùng nhớ:<br>
+&nbsp;&nbsp;+ Text segment (Code segment). <br>
+&nbsp;&nbsp;+ Data segment (Initialized Data). <br>
+&nbsp;&nbsp;+ Bss segment (Uninitialized Data). <br>
+&nbsp;&nbsp;+ Stack. <br>
+&nbsp;&nbsp;+ Heap .
+- Ban đầu khai báo biến sẽ được lưu như nào thì sau nó vẫn đc lưu như thế không thay đổi
   
+## 1. Text segment (Code segment)
+ - **Lưu trữ:** <br>
+&nbsp;+ Các mã máy (mã máy: các câu lệnh thực thi trong chương trình).<br>
+&nbsp;+ Compiler Clang (macOS) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** nhưng quyền truy cập là chỉ đọc.<br>
+ - **Quyền truy cấp:** Chỉ có quyền đọc và thực thi, nhưng không có quyền ghi. 
+## 2. Data segment (Initialized Data- Dữ liệu khởi tạo)
+- **Lưu trữ:** <br>
+&nbsp;+ Các biến toàn cục được khởi tạo với giá trị khác 0. <br>
+&nbsp;+ Lưu trữ cá biến static (global + local) được khởi tạo với giá trị khác 0.<br>
+&nbsp;+ Với Compiler GCC/G++ (Windows) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** nhưng quyền truy cập là chỉ đọc.<br>
+- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
+- Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.
+- Ví dụ:
+```c
+int a = 1; // lưu trong Data segment
+static int var = 5 // lưu trong Data segment
+int *ptr = &a; // lưu trong Data segment
+const int b = 10; // lưu trong Data segment - read only
+char *ptr1 = "hello"; // lưu trong Data segment - read only
+int main()
+{
+  ...
+}
+```
+## 3. Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)
+- **Lưu trữ:** <br>
+&nbsp;+ Các biến toàn cục khởi tạo với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>
+&nbsp;+ Lưu trữ cá biến static với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>
+- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
+- Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.
+- Ví dụ:
+```c
+int a; // lưu trong bss segment
+static int var = 0 // lưu trong bss segment
+int *ptr = NULL; // lưu trong bss segment
+const int b = 0; // lưu trong data segment ( hằng số toàn cục không quan tâm giá trị khởi tạo lưu hết vào data hoặc text tùy trình biên dịch) - read only
+char *ptr1 = "hello"; // lưu trong Data segment - read only
+int main() 
+{
+  ...
+}
+```
+## 4. Stack 
+- **Lưu trữ:** <br>
+&nbsp;+ Các biến cục bộ (trừ static cục bộ), tham số truyền vào. <br>
+&nbsp;+ Hằng số cục bộ, có thể thay đổi thông qua con trỏ. <br>
+- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
+- Sau khi ra khỏi hàm sẽ tự động thu hồi vùng nhớ.
+- Ví dụ:
+```c
+char ptr1[] = "hello"; // lưu trong Stack
+void swap(int *a, int *b) // các biến a,b lưu trong Stack
+{
+ //&a = 0x01 nó sẽ bị thu hồi địa chỉ khi ra khỏi hàm
+  //&b = 0x0a nó sẽ bị thu hồi địa chỉ khi ra khỏi hàm
+  const int c = 10; //const local
+  ptr = &c;
+*ptr = 100;
+printf("%d\n", c);
+}
+
+int main() 
+{
+ swap(10,20);
+ return 0;
+}
+```
+ 
