@@ -1278,9 +1278,9 @@ union Data
   |**Các vùng nhớ**|**Lưu trữ**|**Quyền truy cập**|
   |:------------------------:|------------------------|------------------------|
   |**Text segment (Code segment)**|&nbsp;+ Các mã máy (mã máy: các câu lệnh thực thi trong chương trình).<br>&nbsp;+ Compiler Clang (macOS) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)**.<br>|&nbsp;+ Chỉ có quyền đọc và thực thi, nhưng không có quyền ghi.<br>&nbsp;+ Biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** chỉ đọc.|
-  |**Data segment (Initialized Data- Dữ liệu khởi tạo)**|&nbsp;+ Các biến toàn cục được khởi tạo với giá trị khác 0.<br>&nbsp;+ Lưu trữ cá biến static (global + local) được khởi tạo với giá trị khác 0.<br>&nbsp;+ Với Compiler GCC/G++ (Windows) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)**.|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.<br>&nbsp;+ Biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** chỉ đọc.|
-  |**Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)**|&nbsp;+ Các biến toàn cục khởi tạo với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>&nbsp;+ Lưu trữ cá biến static với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
-  |**Stack**|&nbsp;+ Các biến cục bộ (trừ static cục bộ), tham số truyền vào. <br>&nbsp;+ Hằng số cục bộ, có thể thay đổi thông qua con trỏ. <br>|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
+  |**Data segment (Initialized Data- Dữ liệu khởi tạo)**|&nbsp;+ Các biến toàn cục được khởi tạo với giá trị khác 0.<br>&nbsp;+ Lưu trữ cá biến static (global + local) được khởi tạo với giá trị khác 0.<br>&nbsp;+ Với Compiler GCC/G++ (Windows) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)**.|&nbsp;+ Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.<br>&nbsp;+ Biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** chỉ đọc.|
+  |**Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)**|&nbsp;+ Các biến toàn cục khởi tạo với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>&nbsp;+ Lưu trữ cá biến static với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>|&nbsp;+ Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
+  |**Stack**|&nbsp;+ Các biến cục bộ (trừ static cục bộ), tham số truyền vào. <br>&nbsp;+ Hằng số cục bộ, có thể thay đổi thông qua con trỏ. <br>|&nbsp;+ Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
 
 - Ví dụ:<br>
 
@@ -1334,16 +1334,16 @@ int main()
 - Cho phép chương trình tạo ra và giải phóng bộ nhớ theo nhu cầu của dữ liệu trong quá trình chạy.
 - Các hàm như malloc(), calloc(), realloc() được sử dụng để cấp phát và và free() để giải phóng bộ nhớ trên heap và được lưu trong thư viện **stdlib**
 - Đệ nguyên: Gọi lai chính bản thân nó và không kết thúc được hàm
-### 4.2. Các hàm cáp phát và giải phóng
+### 4.2. Các hàm cấp phát và giải phóng vùng nhớ
 
  |**Các kiểu cấp phát**|**Đặc điểm**|**cú pháp**|
- |:------------------------:|------------------------|------------------------|
- |**malloc**|&nbsp; +Cấp phát bộ nhớ với kích thước được chỉ định trước.<br>&nbsp;+ Kích thước:<br>&nbsp;&nbsp;* Phụ thuộc vào số lượng * kích thước từng phần tử.<br>&nbsp;&nbsp;* Phụ thuộc vào ép kiểu<br>&nbsp;+ Sau khi cấp phát cần kiểm tra xem cấp phát thành công chưa|void *malloc(size_t size)|
-  |**realloc**|Thay đổi kích thước vùng nhớ đã được cấp phát|void *realloc(void *_Memory. size_t _NewSize)|
-  |**free**|Thu hồi vùng nhớ cấp phát khi không dùng nữa nếu không sẽ không còn vùng nhớ cấp phát và báo lỗi memoryleak|free(ptr)|
+ |:------------------------:|-------------------|------------------------|
+ |**malloc**<br>**calloc**|&nbsp;+ Cấp phát bộ nhớ với kích thước được chỉ định trước.<br>&nbsp;+ Kích thước:<br>&nbsp;&nbsp;* Phụ thuộc vào số lượng x kích thước từng phần tử.<br>&nbsp;&nbsp;* Phụ thuộc vào ép kiểu<br>&nbsp;+ Sau khi cấp phát cần kiểm tra xem cấp phát thành công chưa|&nbsp;+ void *malloc(size_t size)<br>&nbsp;+ void *calloc(size_t num, size_t size)|
+ |**realloc**|Thay đổi kích thước vùng nhớ đã được cấp phát|void *realloc(void *_Memory. size_t _NewSize)|
+ |**free**|Thu hồi vùng nhớ cấp phát khi không dùng nữa nếu không sẽ không còn vùng nhớ cấp phát và báo lỗi memoryleak|free(ptr)|
+
 - Ví dụ:<br>
 
-&nbsp; + **malloc**
 ```c
 #include <stdlib.h>
 
@@ -1352,7 +1352,9 @@ int main()
    // Sử dụng malloc 
    scanf("%d", &size);
    int *ptr = (int*)malloc(size * sizeof(int)); //để truy suất con trỏ kiểu void ta ép kiểu đúng kiểu của từng phần tử để nó đọc đúng giữ liệu
-   if(ptr == NULL)  // kiểm tra có cấp phát thành công không
+
+   // kiểm tra có cấp phát thành công không
+   if(ptr == NULL)  
    {
       printf("Cấp phát bộ nhớ thất bại\n");
       return 1;  
@@ -1362,7 +1364,7 @@ int main()
    arr_calloc = (int*)calloc(size, sizeof(int));
 
    // Sử dụng realloc
-   (int*)realloc(ptr, 10*sizeof(int)); // cấp phát thêm 10 phần tử kiểu int nữa cho con trỏ ptr
+   ptr = (int*)realloc(ptr, 10*sizeof(int)); // cấp phát thêm 10 phần tử kiểu int nữa cho con trỏ ptr
 
    // Giải phóng bộ nhớ
    free(ptr);
@@ -1371,16 +1373,31 @@ int main()
    return 0;
 }
 ```
-## 5. Memoryleak
+## 5. Memoryleak - Overflow
 - **Các lỗi:** <br>
-&nbsp;+ overflow: Ghi dữ liệu vượt quá vùng nhớ (không đủ bộ nhớ).<br>
-&nbsp;+ memory leak: Vùng nhớ lúc trước mình không thu hồi nên đủ vùng nhớ cấp phát.
+&nbsp;+ **overflow:** Ghi dữ liệu vượt quá vùng nhớ (không đủ bộ nhớ).<br>
+&nbsp;+ **memory leak:** Xảy ra khi mình cấp phát vùng nhớ mới nhưng không đủ vùng nhớ cấp phát do vùng nhớ lúc trước mình chưa thu hồi nên .
 - **Stack:** <br>
-&nbsp;+ Nếu chương trình bạn sử dụng quá nhiều bộ nhớ vượt quá khả năng lưu trữ của Stack chắc chắn sẽ xảy ra tình trạng tràn bộ nhớ Stack (Stack overflow).<br>
+&nbsp;+ Nếu chương trình sử dụng quá nhiều bộ nhớ vượt quá khả năng lưu trữ của Stack chắc chắn sẽ xảy ra tình trạng tràn bộ nhớ Stack (Stack overflow).<br>
 &nbsp;+ Các trường hợp xảy ra như bạn khởi tạo quá nhiều biến cục bộ, hàm đệ quy vô hạn,...
 - **Heap:** <br>
 &nbsp;+ Nếu bạn liên tục cấp phát vùng nhớ mà không giải phóng thì sẽ bị lỗi tràn vùng nhớ Heap (Heap overflow).<br>
 &nbsp;+ Nếu khởi tạo một vùng nhớ quá lớn mà vùng nhớ Heap không thể lưu trữ một lần được sẽ bị lỗi khởi tạo vùng nhớ Heap thất bại.
+## 6. So sánh malloc - calloc
+|                          |**malloc**|**calloc**|**realloc**|
+|:------------------------:|------------------------|------------------------|------------------------|
+|Cú pháp|void* malloc(size_t size)<br>|void *calloc(size_t num, size_t size)|void* realloc(void *_Memory. size_t _NewSize)|
+|Chức năng|&nbsp;Memory allocation: Cấp phát một khối bộ nhớ động có kích thước size byte.|&nbsp;Contiguous allocation: Cấp phát vùng nhớ động gồm num phần tử, mỗi phần tử có kích thước size byte.|&nbsp;Reallocation: Thay đổi kích thước của vùng nhớ đã được cấp phát trước đó bởi malloc() hoặc calloc().|
+|Giá trị trả về|&nbsp;+ Hàm trả về con trỏ tới vùng nhớ nếu cấp phát thành công với giá trị rác.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|&nbsp;+ Hàm trả về con trỏ trỏ tới vùng nhớ được cấp phát và vùng nhớ được khởi tạo giá trị = 0 nếu cấp phát thành công.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|&nbsp;+ Hàm trả về con trỏ trỏ tới vùng nhớ đã thay đổi kích thước nếu cấp phát thành công với giá trị rác và giữ lại giá trị cũ.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|
+## 7. So sánh Stack - Heap
+|                          |**Stack**|**Heap**|
+|:------------------------:|----------------------|------------------------|
+|Chức năng|Lưu trữ các biến cục bộ trong hàm (trừ static cục bộ), tham số truyền vào.|Lưu trữ vùng nhớ cho những biến được cấp phát động bởi các hàm malloc - calloc - realloc|
+|Vị trí trong RAM|Do hệ điều hành quản lý tự động.|Quản lý bởi lập trình viên|
+|Cách cấp phát|&nbsp;+ Cấp phát trước khi chạy chương trình.<br>&nbsp;+ Không thể cấp phát hay phân bổ lại bộ nhớ khi chạy chương trình.<br>&nbsp;+ Tự động cấp phát.<br>|&nbsp;+ Cấp phát trong quá trình chạy chương trình.<br>&nbsp;+ Có thể điều chỉnh hay giải phóng bộ nhớ khi chạy chương trình.<br>&nbsp;+ Quản lý bộ nhớ thông quá các hàm ```malloc```,```calloc```,```realloc```,```free```|
+|Cách thu hồi vùng nhớ|Tự động giải phóng khi hàm thực hiện xong công việc của mình.|Tự tay giải phóng vùng nhớ thông qua hàm **free()**|
+|Lỗi thường gặp|Stack overflow|Memory leak|
+|Ứng dụng|Biến đơn giản, mảng nhỏ, cố định kích thước |Dữ liệu lớn, mảng có nhiều phần tử, không biết trước kích thước tại thời điểm biên dịch.|
 
  </details>
 
