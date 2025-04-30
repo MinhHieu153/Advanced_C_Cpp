@@ -1158,6 +1158,7 @@ uint16_t arr2[3];
 uint32_t arr3[2];
 };
 ```
+=> Cấp phát bộ nhớ:<br>
 ![image](https://github.com/user-attachments/assets/2864a73a-aa37-441e-9ca1-8e9d8f357079)
 ### 1.5. Bit Field
 - **Bit Field:** là một thành phần đặc biệt của cấu trúc (struct) cho phép bạn chỉ định số lượng bit cụ thể dùng để lưu trữ một biến số nguyên. Thay vì sử dụng toàn bộ kích thước của một kiểu dữ liệu, bạn có thể “cắt nhỏ” bộ nhớ theo số bit cần thiết, giúp tiết kiệm không gian bộ nhớ và mô tả chính xác hơn ý nghĩa của dữ liệu (ví dụ: lưu trạng thái bật/tắt chỉ cần 1 bit)
@@ -1272,25 +1273,23 @@ union Data
 &nbsp;&nbsp;+ Bss segment (Uninitialized Data). <br>
 &nbsp;&nbsp;+ Stack. <br>
 &nbsp;&nbsp;+ Heap .
-- Ban đầu khai báo biến sẽ được lưu như nào thì sau nó vẫn đc lưu như thế không thay đổi
-  
-## 1. Text segment (Code segment)
- - **Lưu trữ:** <br>
-&nbsp;+ Các mã máy (mã máy: các câu lệnh thực thi trong chương trình).<br>
-&nbsp;+ Compiler Clang (macOS) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** nhưng quyền truy cập là chỉ đọc.<br>
- - **Quyền truy cấp:** Chỉ có quyền đọc và thực thi, nhưng không có quyền ghi. 
-## 2. Data segment (Initialized Data- Dữ liệu khởi tạo)
-- **Lưu trữ:** <br>
-&nbsp;+ Các biến toàn cục được khởi tạo với giá trị khác 0. <br>
-&nbsp;+ Lưu trữ cá biến static (global + local) được khởi tạo với giá trị khác 0.<br>
-&nbsp;+ Với Compiler GCC/G++ (Windows) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** nhưng quyền truy cập là chỉ đọc.<br>
-- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
-- Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.
-- Ví dụ:
+- Ban đầu khai báo biến sẽ được lưu như nào thì sau nó vẫn đc lưu như thế không thay đổi.<br>
+
+  |**Các vùng nhớ**|**Lưu trữ**|**Quyền truy cập**|
+  |:------------------------:|------------------------|------------------------|
+  |**Text segment (Code segment)**|&nbsp;+ Các mã máy (mã máy: các câu lệnh thực thi trong chương trình).<br>&nbsp;+ Compiler Clang (macOS) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)**.<br>|&nbsp;+ Chỉ có quyền đọc và thực thi, nhưng không có quyền ghi.<br>&nbsp;+ Biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** chỉ đọc.|
+  |**Data segment (Initialized Data- Dữ liệu khởi tạo)**|&nbsp;+ Các biến toàn cục được khởi tạo với giá trị khác 0.<br>&nbsp;+ Lưu trữ cá biến static (global + local) được khởi tạo với giá trị khác 0.<br>&nbsp;+ Với Compiler GCC/G++ (Windows) lưu trữ biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)**.|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.<br>&nbsp;+ Biến hằng số toàn cục **(const)** và chuỗi hằng **(string literal)** chỉ đọc.|
+  |**Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)**|&nbsp;+ Các biến toàn cục khởi tạo với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>&nbsp;+ Lưu trữ cá biến static với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
+  |**Stack**|&nbsp;+ Các biến cục bộ (trừ static cục bộ), tham số truyền vào. <br>&nbsp;+ Hằng số cục bộ, có thể thay đổi thông qua con trỏ. <br>|&nbsp; + Có thể đọc, ghi và thay đổi giá trị biến.<br>&nbsp;+ Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.|
+
+- Ví dụ:<br>
+
+&nbsp; + **Data segment (Initialized Data- Dữ liệu khởi tạo)**
 ```c
 int a = 1; // lưu trong Data segment
 static int var = 5 // lưu trong Data segment
 int *ptr = &a; // lưu trong Data segment
+
 const int b = 10; // lưu trong Data segment - read only
 char *ptr1 = "hello"; // lưu trong Data segment - read only
 int main()
@@ -1298,13 +1297,7 @@ int main()
   ...
 }
 ```
-## 3. Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)
-- **Lưu trữ:** <br>
-&nbsp;+ Các biến toàn cục khởi tạo với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>
-&nbsp;+ Lưu trữ cá biến static với **giá trị bằng 0** hoặc **không gắn giá trị**. <br>
-- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
-- Tất cả các biến được cấp phát sẽ bị thu hồi khi chương trình kết thúc.
-- Ví dụ:
+&nbsp; + **Bss segment (Uninitialized Data- Dữ liệu không khởi tạo)**
 ```c
 int a; // lưu trong bss segment
 static int var = 0 // lưu trong bss segment
@@ -1316,13 +1309,7 @@ int main()
   ...
 }
 ```
-## 4. Stack 
-- **Lưu trữ:** <br>
-&nbsp;+ Các biến cục bộ (trừ static cục bộ), tham số truyền vào. <br>
-&nbsp;+ Hằng số cục bộ, có thể thay đổi thông qua con trỏ. <br>
-- **Quyền truy cập:** Có thể đọc, ghi và thay đổi giá trị biến.
-- Sau khi ra khỏi hàm sẽ tự động thu hồi vùng nhớ.
-- Ví dụ:
+&nbsp; + **Stack**
 ```c
 char ptr1[] = "hello"; // lưu trong Stack
 void swap(int *a, int *b) // các biến a,b lưu trong Stack
@@ -1341,4 +1328,61 @@ int main()
  return 0;
 }
 ```
- 
+## 4. Vùng nhớ Heap
+### 4.1. Đặc điểm
+- Dùng để cấp phát bộ nhớ động trong quá trình thực thi chương trình giúp vùng nhớ cấp phát ra được linh động thay đổi theo đầu vào
+- Cho phép chương trình tạo ra và giải phóng bộ nhớ theo nhu cầu của dữ liệu trong quá trình chạy.
+- Các hàm như malloc(), calloc(), realloc() được sử dụng để cấp phát và và free() để giải phóng bộ nhớ trên heap và được lưu trong thư viện **stdlib**
+- Đệ nguyên: Gọi lai chính bản thân nó và không kết thúc được hàm
+### 4.2. Các hàm cáp phát và giải phóng
+
+ |**Các kiểu cấp phát**|**Đặc điểm**|**cú pháp**|
+ |:------------------------:|------------------------|------------------------|
+ |**malloc**|&nbsp; +Cấp phát bộ nhớ với kích thước được chỉ định trước.<br>&nbsp;+ Kích thước:<br>&nbsp;&nbsp;* Phụ thuộc vào số lượng * kích thước từng phần tử.<br>&nbsp;&nbsp;* Phụ thuộc vào ép kiểu<br>&nbsp;+ Sau khi cấp phát cần kiểm tra xem cấp phát thành công chưa|void *malloc(size_t size)|
+  |**realloc**|Thay đổi kích thước vùng nhớ đã được cấp phát|free(ptr)|
+  |**free**|Thu hồi vùng nhớ cấp phát khi không dùng nữa nếu không sẽ không còn vùng nhớ cấp phát và báo lỗi memoryleak|void *realloc(void *_Memory. size_t _NewSize)|
+- Ví dụ:<br>
+
+&nbsp; + **malloc**
+```c
+#include <stdlib.h>
+
+int main()
+{
+   // Sử dụng malloc 
+   scanf("%d", &size);
+   int *ptr = (int*)malloc(size * sizeof(int)); //để truy suất con trỏ kiểu void ta ép kiểu đúng kiểu của từng phần tử để nó đọc đúng giữ liệu
+   if(ptr == NULL)  // kiểm tra có cấp phát thành công không
+   {
+      printf("Cấp phát bộ nhớ thất bại\n");
+      return 1;  
+   }
+
+   // Sử dụng calloc
+   arr_calloc = (int*)calloc(size, sizeof(int));
+
+   // Sử dụng realloc
+   (int*)realloc(ptr, 10*sizeof(int)); // cấp phát thêm 10 phần tử kiểu int nữa cho con trỏ ptr
+
+   // Giải phóng bộ nhớ
+   free(ptr);
+   free(arr_calloc);
+   // Sau khi giải phóng xong phải gắn con trỏ = NULL
+   return 0;
+}
+```
+## 5. Memoryleak
+- **Các lỗi:** <br>
+&nbsp;+ overflow: Ghi dữ liệu vượt quá vùng nhớ (không đủ bộ nhớ).<br>
+&nbsp;+ memory leak: Vùng nhớ lúc trước mình không thu hồi nên đủ vùng nhớ cấp phát.
+- **Stack:** <br>
+&nbsp;+ Nếu chương trình bạn sử dụng quá nhiều bộ nhớ vượt quá khả năng lưu trữ của Stack chắc chắn sẽ xảy ra tình trạng tràn bộ nhớ Stack (Stack overflow).<br>
+&nbsp;+ Các trường hợp xảy ra như bạn khởi tạo quá nhiều biến cục bộ, hàm đệ quy vô hạn,...
+- **Heap:** <br>
+&nbsp;+ Nếu bạn liên tục cấp phát vùng nhớ mà không giải phóng thì sẽ bị lỗi tràn vùng nhớ Heap (Heap overflow).<br>
+&nbsp;+ Nếu khởi tạo một vùng nhớ quá lớn mà vùng nhớ Heap không thể lưu trữ một lần được sẽ bị lỗi khởi tạo vùng nhớ Heap thất bại.
+
+ </details>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
