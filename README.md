@@ -1339,8 +1339,8 @@ int main()
  |**Các kiểu cấp phát**|**Đặc điểm**|**cú pháp**|
  |:------------------------:|------------------------|------------------------|
  |**malloc**|&nbsp; +Cấp phát bộ nhớ với kích thước được chỉ định trước.<br>&nbsp;+ Kích thước:<br>&nbsp;&nbsp;* Phụ thuộc vào số lượng * kích thước từng phần tử.<br>&nbsp;&nbsp;* Phụ thuộc vào ép kiểu<br>&nbsp;+ Sau khi cấp phát cần kiểm tra xem cấp phát thành công chưa|void *malloc(size_t size)|
-  |**realloc**|Thay đổi kích thước vùng nhớ đã được cấp phát|free(ptr)|
-  |**free**|Thu hồi vùng nhớ cấp phát khi không dùng nữa nếu không sẽ không còn vùng nhớ cấp phát và báo lỗi memoryleak|void *realloc(void *_Memory. size_t _NewSize)|
+  |**realloc**|Thay đổi kích thước vùng nhớ đã được cấp phát|void *realloc(void *_Memory. size_t _NewSize)|
+  |**free**|Thu hồi vùng nhớ cấp phát khi không dùng nữa nếu không sẽ không còn vùng nhớ cấp phát và báo lỗi memoryleak|free(ptr)|
 - Ví dụ:<br>
 
 &nbsp; + **malloc**
