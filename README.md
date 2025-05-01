@@ -1,4 +1,4 @@
-# 📓Advanced_C📓
+📓Advanced_C📓
 ----
 
 <details>
@@ -1403,3 +1403,175 @@ int main()
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
+<details>
+<summary><b>📖BÀI 9: Stack - Queue</b></summary>
+ 
+## 1. Cấu trúc dữ liệu
+- **Cấu trúc dữ liệu** là cách **tổ chức**, và **lưu trữ** dữ liệu trong 1 vùng nhớ và từng phần tử có địa chỉ liền kề nhau để chúng có thể được truy cập và sử dụng một cách hiệu quả, đóng vai trò quan trọng trong việc giải quyết các bài toán và tối ưu hóa thuật toán, vì nó ảnh hưởng trực tiếp đến tốc độ thực thi và tính phức tạp của chương trình.
+- Cấu trúc dữ liệu chia làm 2 loại chính:<br>
+&nbsp;+ **Cấu trúc dữ liệu tuyến tính (Linear Data Structure):** mảng (Array), ngăn xếp (Stack), hàng đợi (Queue), danh sách liên kết (Linked List).<br>
+&nbsp;+ **Cấu trúc dữ liệu phi tuyến tính (Non-linear Data Structure):** đồ thị (Graphs), cây (Trees).
+## 2. Ngăn xếp - Stack
+- **Stack (ngăn xếp)** là một cấu trúc dữ liệu tuân theo nguyên tắc **"Last In, First Out" (LIFO)**, nghĩa là phần tử cuối cùng được thêm vào stack sẽ là phần tử đầu tiên được lấy ra.
+- Các thao tác cơ bản trên stack bao gồm:<br>
+&nbsp;+ **push:** Thêm một phần tử vào đỉnh của stack và mỗi lần thêm **top+1**.<br>
+&nbsp;+ **pop:** Xóa một phần tử ở đỉnh của stack và mỗi lần xóa **top-1**.<br>
+&nbsp;+ **peek/top:** Lấy giá trị phần tử ở đỉnh của stack và giá trị khởi tạo ban đầu **top=-1**.<br>
+&nbsp;+ Kiểm tra stack đầy: **top = size-1**.<br>
+&nbsp;+ Kiểm tra stack rỗng: **top = -1**.<br>
+- Ví dụ khỏi tạo thư viện stack - ngăn xếp.<br>
+
+&nbsp;+ **Thư viện stack.h**
+
+      #ifndef STACK_H
+      #define STACK_H
+      
+      #include <stdio.h>
+      #include <stdlib.h>
+      #include <stdbool.h>
+      
+      //Khai báo cáu trúc dữ liệu để khởi tạo ngăn xếp
+      typedef struct 
+      {
+          int *items;      //Mảng lưu trữ giá trị các phần tử
+          int size;        //Số lượng phần tử tối đa lưu trữ được
+          int top;         //Chỉ số đọc giá trị ở đỉnh ngăn xếp
+      } Stack;
+      
+      //Khởi tạo các thông số ban đầu
+      void stack_init(Stack *stack, int newSize);
+      
+      //Kiểm tra stack rỗng
+      bool isEmpty(Stack stack);
+      
+      //Kiểm tra stack đầy
+      bool isFull(Stack stack);
+      
+      //Thêm phần tử
+      void push(Stack *stack, int data);
+      
+      //Xóa phần tử
+      int pop(Stack *stack);
+      
+      //đọc giá trị phần tử ở đỉnh
+      int top(Stack stack);
+      
+      //giải phóng bộ nhớ
+      void stack_free(Stack *stack);
+      
+      #endif
+  
+&nbsp;+ **stack.c**
+
+      #include "stack.h"
+
+      void stack_init(Stack *stack, int newSize)
+      {
+          stack->items = (int*)malloc(newSize * sizeof(int));
+          stack->size = newSize;
+          stack->top = -1;  // Khởi tạo giá trị ban đầu = -1
+      }
+      
+      bool isEmpty(Stack stack)
+      {
+          return (stack.top == -1 ? true : false);
+      }
+      
+      bool isFull(Stack stack)
+      {
+          return (stack.top == stack.size-1) ? true : false;
+      }
+      
+      void push(Stack *stack, int data)
+      {
+          if (isFull(*stack))
+          {
+              printf("Stack đầy!\n");
+          }
+          else
+          {
+              //stack->top++;
+              //stack->items[stack->top] = data;
+              printf("Added element: %d\n",data);
+              stack->items[++stack->top] = data;       
+          }
+      }
+      
+      int pop(Stack *stack)
+      {
+          if (isEmpty(*stack))
+          {
+              printf("Stack rỗng!\n");
+              return -1;
+          }
+          else
+          {   
+              int value = stack->items[stack->top];
+              //stack->items[stack->top] = 0;
+              //stack->top--;
+              stack->items[stack->top--] = 0;
+              printf("Removed element: %d\n", value);
+              return value;
+          }
+      
+      }
+      
+      int top(Stack stack)
+      {
+          if (isEmpty(stack))
+          {
+              printf("Stack rỗng!\n");
+              return -1;
+          }
+          else
+          {   
+              return stack.items[stack.top];
+          }
+      
+      }
+      
+      void stack_free(Stack *stack)
+      {
+          free(stack->items);
+          stack->items = NULL;
+      }
+      
+&nbsp;+ **main.c**
+
+     #include "stack.h"
+
+     int main()
+     {
+         Stack stack1;
+     
+         //Khởi tạo ngân xếp
+         stack_init(&stack1, 5);
+     
+         //thêm phần tử vào đỉnh
+         push(&stack1, 1);
+         push(&stack1, 2);
+         push(&stack1, 3);
+         push(&stack1, 4);
+         push(&stack1, 5);
+         push(&stack1, 6);
+     
+     
+         for(int i=0; i<stack1.size; i++)
+         {
+             printf("Element: %d - Addr: %p\n", stack1.items[i], &(stack1.items[i]));
+         }
+     
+         //Xóa phần tử
+         //pop(&stack1);
+         //pop(&stack1);
+         //pop(&stack1);
+         
+     
+         for(int i=0; i<stack1.size; i++)
+         {
+             printf("Top Element: %d - Addr: %p\n", top(stack1), &(stack1.items[stack1.top]));
+             pop(&stack1);
+         }
+         return 0;
+     } 
+## 3. Queue - Hàng đợi
