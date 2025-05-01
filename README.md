@@ -1576,7 +1576,7 @@ int main()
      } 
 ## 3. Queue - Hàng đợi
 ## 3.1. Khái niệm
-- **Queue**là một cấu trúc dữ liệu tuân theo nguyên tắc **"First In, First Out" (FIFO)**, nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra. 
+- **Queue** là một cấu trúc dữ liệu tuân theo nguyên tắc **"First In, First Out" (FIFO)**, nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra. 
 - Các thao tác cơ bản trên hàng đợi bao gồm:<br>
 &nbsp;+ **enqueue:** Thêm phần tử vào **cuối** hàng đợi.<br>
 &nbsp;+ **dequeue:** Xóa phần tử từ **đầu** hàng đợi.<br>
@@ -1589,19 +1589,28 @@ int main()
 &nbsp;+ **Circular Queue:** Hàng đợi vòng tròn.<br>
 &nbsp;+ **Priority Queue:** Hàng đợi ưu tiên.<br>
 ## 3.2. Linear Queue - Hàng đợi tuyến tính  
-- Khởi tạo giá trị ban đầu:<br>
+- **Khởi tạo giá trị ban đầu:** <br>
   &nbsp;+ rear = -1.<br>
   &nbsp;+ front = -1
-- Khi thêm phần tử - **enqueue:** <br>
+- **Khi thêm phần tử - enqueue:** <br>
 &nbsp;+ Khi thêm phần tử đầu tiên.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;* front = 0.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;* rear = 0.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**enqueue = 3**.<br>
-![image](https://github.com/user-attachments/assets/b91eef48-090c-45bd-8611-5dd1fba6cef0)
+![image](https://github.com/user-attachments/assets/b91eef48-090c-45bd-8611-5dd1fba6cef0)<br>
 &nbsp;+ Khi thêm phần tử tiếp theo.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;* front = 0.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;* rear = rear + 1.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;* rear = size - 1 => Hàng đợi đầy(Queue Full).<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**enqueue = 7**.<br>
-![image](https://github.com/user-attachments/assets/6ae3c0f1-08bc-4b00-8321-6c7ac048b6c2)
-- Khi xóa phần tử - **dequeue:** <br>
+![image](https://github.com/user-attachments/assets/6ae3c0f1-08bc-4b00-8321-6c7ac048b6c2)<br>
+- **Khi xóa phần tử - dequeue:** <br>
+&nbsp;+ front = front + 1.<br>
+&nbsp;+ front > rear => Hàng đợi rỗng(Queue Empty) => reset front = rear = -1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 3**.<br>
+![image](https://github.com/user-attachments/assets/fa99dc54-6516-42c5-8e3b-5439267339a7)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 5**.<br>
+![image](https://github.com/user-attachments/assets/52ea84e1-acb4-408a-baf4-97aaed60315d)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 7** => khi lấy hết phần tử front và rear sẽ reset về -1.<br>
+![image](https://github.com/user-attachments/assets/b0d10796-73d8-4cd7-91d3-4229a113da57)<br>
+
