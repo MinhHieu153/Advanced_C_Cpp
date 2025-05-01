@@ -1419,7 +1419,7 @@ int main()
 &nbsp;+ **peek/top:** Lấy giá trị phần tử ở đỉnh của stack và giá trị khởi tạo ban đầu **top=-1**.<br>
 &nbsp;+ Kiểm tra stack đầy: **top = size-1**.<br>
 &nbsp;+ Kiểm tra stack rỗng: **top = -1**.<br>
-- Ví dụ khỏi tạo thư viện stack - ngăn xếp.<br>
+- Khỏi tạo thư viện stack - ngăn xếp.<br>
 
 &nbsp;+ **Thư viện stack.h**
 
@@ -1592,7 +1592,6 @@ int main()
 ## 3.2.1. Đặc điểm
 - Trong Linear Queue, nếu ‘rear’ đã đạt tới max (số lượng phần tử tối đa - 1), thì queue sẽ được coi là đầy và không thể thêm phần tử mới, ngay cả khi phía trước còn khoảng trống do các phần tử đã bị xóa.
 - Chỉ có thể thêm phần tử mới khi đã dequeue toàn bộ các phần tử hiện có (tức là queue rỗng hoàn toàn và front được reset về vị trí ban đầu).
-
 ## 3.2.2. Các thao tác trên hàng đợi
 - **Khởi tạo giá trị ban đầu:** <br>
   &nbsp;+ rear = -1.<br>
@@ -1618,4 +1617,212 @@ int main()
 ![image](https://github.com/user-attachments/assets/52ea84e1-acb4-408a-baf4-97aaed60315d)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 7** => khi lấy hết phần tử front > rear => Hàng đợi rỗng và sẽ reset về -1.<br>
 ![image](https://github.com/user-attachments/assets/b0d10796-73d8-4cd7-91d3-4229a113da57)<br>
-
+## 3.2.3. Khởi tạo thư viện Linear Queue
+- Thư viện linear_queue.h
+  ```c
+  #ifndef LINEAR_QUEUE_H
+  #define LINEAR_QUEUE_H
+  
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <stdbool.h>
+  
+  typedef struct 
+  {
+      int *items;
+      int size;
+      int front;
+      int rear;
+  } Queue;
+  
+   //Khởi tạo những thông số ban đầu
+   void queue_init(Queue *queue, int newSize);
+  
+   //Kiểm tra hàng đợi rỗng
+  bool queue_isEmpty(Queue queue);
+  
+   //Kiểm tra hàng đợi đầy
+   bool queue_isFull(Queue queue);
+  
+   //Thêm phần tử vào cuối hàng đợi
+   void enqueue(Queue *queue, int value);
+  
+  //Xóa phần tử ở đầu hàng đợi
+  int dequeue(Queue *queue);
+  
+  //Đọc giá trị phần tử ở đầu hàng đợi
+  int front(Queue queue);
+  
+  //Đọc giá trị phần tử ở cuối hàng đợi
+  int rear(Queue queue);
+  
+  //Giải phóng bộ nhớ
+  void queue_free(Queue *queue);
+  
+  // Hiển thị toàn bộ hàng
+  void display(Queue queue);
+  
+  #endif
+  ```
+- File linear_queue.c
+  ```c
+  #include "linear_queue.h"
+  
+  //Khởi tạo những thông số ban đầu
+  void queue_init(Queue *queue, int newSize)
+  {
+     queue->items = (int*)malloc(newSize*sizeof(int));
+     queue->size = newSize;
+     queue->front = queue->rear = -1;
+  
+  }
+  
+  //Kiểm tra hàng đợi rỗng
+  bool queue_isEmpty(Queue queue)
+  {
+     return (queue.front == -1 || queue.front > queue.rear) ? true : false;
+  }
+  
+  //Kiểm tra hàng đợi đầy
+  bool queue_isFull(Queue queue)
+  {
+     return (queue.front == queue.size - 1 ) ? true : false;
+  }
+  
+  //Thêm phần tử vào cuối hàng đợi
+  void enqueue(Queue *queue, int value)
+  {
+     if(queue->rear == queue->size -1)
+     {
+         printf("Hang doi day!\n");
+     }
+     else
+     {
+         if(queue->front == -1)
+         {
+             queue->front = queue->rear = 0;
+         }
+         else
+         {
+             queue->rear++;
+         }
+  
+         queue->items[queue->rear] = value;
+         printf("Enqueue: %d\n", value);
+     }
+  }
+  
+  //Xóa phần tử ở đầu hàng đợi
+  int dequeue(Queue *queue)
+  {
+     if(queue_isEmpty(*queue))
+     {
+         printf("Hang doi rong\n");
+         return -1;
+     }
+     else
+     {
+         int dequeue_value = queue->items[queue->front];
+         queue ->items[queue->front] = 0;
+         if (queue->front == queue->rear && queue->rear == queue->size - 1)    //kiểm tra đang ở hàng đợi cuối
+         {
+             queue->front = queue->rear = -1;    // reset về -1
+         }
+         else
+         {
+             queue->front++;    // nếu không thì cộng 1
+         }
+  
+         printf("Dequeue: %d\n", dequeue_value);
+         return dequeue_value;
+     }
+  }
+  
+  //Đọc giá trị phần tử ở đầu hàng đợi
+  int front(Queue queue)
+  {
+     if(queue_isEmpty(queue))
+     {
+         printf("Hang doi rong\n");
+         return -1;
+     }
+     
+     return queue.items[queue.front];
+  }
+  
+  //Đọc giá trị phần tử ở cuối hàng đợi
+  int rear(Queue queue)
+  {
+     if(queue_isEmpty(queue))
+     {
+         printf("Hang doi rong\n");
+         return -1;
+     }
+     
+     return queue.items[queue.rear];
+  }
+  //Giải phóng bộ nhớ
+  void queue_free(Queue *queue)
+  {   
+     if( queue->items != NULL)
+     {
+         free(queue->items);
+         queue->items =NULL;
+     }
+  }
+  
+  // Hiển thị toàn bộ hàng
+  void display(Queue queue)
+  {
+     if(queue_isEmpty(queue))
+     {
+         printf("Hang doi rong\n");
+     }
+     else
+     {
+         printf("Queue: ");
+  
+         for (int i = queue.front; i <= queue.rear; i++)
+         {
+             printf("%d ", queue.items[i]);
+         }
+         printf("\n");
+     }
+  }
+  ```
+- File main.c
+  ```c
+  #include "linear_queue.h"
+  
+  int main()
+  {
+      Queue liqueuel;
+  
+      //Khởi tạo hàng đợi
+      queue_init(&liqueuel, 5);
+  
+      //Thêm phần tử hàng đợi
+      enqueue(&liqueuel, 1);
+      enqueue(&liqueuel, 2);
+      enqueue(&liqueuel, 3);
+      enqueue(&liqueuel, 4);
+      enqueue(&liqueuel, 5);
+      enqueue(&liqueuel, 6);
+      
+      // In phần tử đàu (front) và cuối (rear)
+      printf("Front: %d\n", front(liqueuel));
+      printf("Rear: %d\n", rear(liqueuel));
+      
+      //Xóa phần tử đầu
+      dequeue(&liqueuel);
+      dequeue(&liqueuel);
+      dequeue(&liqueuel);
+  
+      //phải xóa hết phần tử trong hàng đợi mới thêm được phần tử mới không nó cứ báo đầy
+      
+      //Hiện thi phần tử trong hàng đợi
+      display(liqueuel);
+      return 0;
+  }
+  ```
+ </details>
