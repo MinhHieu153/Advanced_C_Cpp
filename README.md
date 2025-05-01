@@ -1588,7 +1588,12 @@ int main()
 &nbsp;+ **Linear Queue:** Hàng đợi tuyến tính.<br>
 &nbsp;+ **Circular Queue:** Hàng đợi vòng tròn.<br>
 &nbsp;+ **Priority Queue:** Hàng đợi ưu tiên.<br>
-## 3.2. Linear Queue - Hàng đợi tuyến tính  
+## 3.2. Linear Queue - Hàng đợi tuyến tính 
+## 3.2.1. Đặc điểm
+- Trong Linear Queue, nếu ‘rear’ đã đạt tới max (số lượng phần tử tối đa - 1), thì queue sẽ được coi là đầy và không thể thêm phần tử mới, ngay cả khi phía trước còn khoảng trống do các phần tử đã bị xóa.
+- Chỉ có thể thêm phần tử mới khi đã dequeue toàn bộ các phần tử hiện có (tức là queue rỗng hoàn toàn và front được reset về vị trí ban đầu).
+
+## 3.2.2. Các thao tác trên hàng đợi
 - **Khởi tạo giá trị ban đầu:** <br>
   &nbsp;+ rear = -1.<br>
   &nbsp;+ front = -1
