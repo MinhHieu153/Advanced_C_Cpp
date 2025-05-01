@@ -1611,6 +1611,6 @@ int main()
 ![image](https://github.com/user-attachments/assets/fa99dc54-6516-42c5-8e3b-5439267339a7)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 5**.<br>
 ![image](https://github.com/user-attachments/assets/52ea84e1-acb4-408a-baf4-97aaed60315d)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 7** => khi lấy hết phần tử front và rear sẽ reset về -1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 7** => khi lấy hết phần tử front > rear => Hàng đợi rỗng và sẽ reset về -1.<br>
 ![image](https://github.com/user-attachments/assets/b0d10796-73d8-4cd7-91d3-4229a113da57)<br>
 
