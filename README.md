@@ -1589,10 +1589,10 @@ int main()
 &nbsp;+ **Circular Queue:** Hàng đợi vòng tròn.<br>
 &nbsp;+ **Priority Queue:** Hàng đợi ưu tiên.<br>
 ## 3.2. Linear Queue - Hàng đợi tuyến tính 
-## 3.2.1. Đặc điểm
+### 3.2.1. Đặc điểm
 - Trong Linear Queue, nếu ‘rear’ đã đạt tới max (số lượng phần tử tối đa - 1), thì queue sẽ được coi là đầy và không thể thêm phần tử mới, ngay cả khi phía trước còn khoảng trống do các phần tử đã bị xóa.
 - Chỉ có thể thêm phần tử mới khi đã dequeue toàn bộ các phần tử hiện có (tức là queue rỗng hoàn toàn và front được reset về vị trí ban đầu).
-## 3.2.2. Các thao tác trên hàng đợi
+### 3.2.2. Các thao tác trên hàng đợi
 - **Khởi tạo giá trị ban đầu:** <br>
   &nbsp;+ rear = -1.<br>
   &nbsp;+ front = -1
@@ -1617,7 +1617,7 @@ int main()
 ![image](https://github.com/user-attachments/assets/52ea84e1-acb4-408a-baf4-97aaed60315d)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**dequeue = 7** => khi lấy hết phần tử front > rear => Hàng đợi rỗng và sẽ reset về -1.<br>
 ![image](https://github.com/user-attachments/assets/b0d10796-73d8-4cd7-91d3-4229a113da57)<br>
-## 3.2.3. Khởi tạo thư viện Linear Queue
+### 3.2.3. Khởi tạo thư viện Linear Queue
 - Thư viện linear_queue.h
   ```c
   #ifndef LINEAR_QUEUE_H
@@ -1825,4 +1825,13 @@ int main()
       return 0;
   }
   ```
+  ## 3.3. Circular Queue - Hàng đợi vòng tròn
+  ### 3.3.1. Đặc điểm
+- Khi rear đạt tới size - 1 và không còn chỗ trống từ phía cuối, nếu front đã di chuyển (nghĩa là đã có các phần tử được dequeue), rear có thể "quay vòng" về vị trí 0 để tận dụng khoảng trống <br>
+=> Hàng đợi vòng tròn sẽ tự động xoay vòng tròn để tận dụng byte địa chỉ trống tránh gây lãng phí bộ nhớ
+### 3.2.2. Các thao tác trên hàng đợi
+- Công thức kiểm tra hàng đợi đầy (queue full): **front == (rear + 1) % SIZE**
+![image](https://github.com/user-attachments/assets/6b953c3f-9f96-42df-86cb-dd1f5b4f9df6)
+
+
  </details>
