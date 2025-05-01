@@ -1,4 +1,4 @@
-📓Advanced_C📓
+![image](https://github.com/user-attachments/assets/ee26d376-9e42-4748-89d1-3b1818cecf06)📓Advanced_C📓
 ----
 
 <details>
@@ -1575,3 +1575,18 @@ int main()
          return 0;
      } 
 ## 3. Queue - Hàng đợi
+## 3.1. Khái niệm
+- **Queue**là một cấu trúc dữ liệu tuân theo nguyên tắc **"First In, First Out" (FIFO)**, nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra. 
+- Các thao tác cơ bản trên hàng đợi bao gồm:<br>
+&nbsp;+ **enqueue:** Thêm phần tử vào **cuối** hàng đợi.<br>
+&nbsp;+ **dequeue:** Xóa phần tử từ **đầu** hàng đợi.<br>
+&nbsp;+ **front** Đọc giá trị phần tử đứng **đầu** hàng đợi.<br>
+&nbsp;+ **rear** Đọc giá trị phần tử đứng **cuối** hàng đợi.<br>
+&nbsp;+ Kiểm tra hàng đợi đầy/rỗng.<br>
+ ![image](https://github.com/user-attachments/assets/7b624f3e-dbb9-4961-aa2c-304a1c029aa5)
+-  Có 3 loại hàng đợi:
+&nbsp;+ **Linear Queue:** Hàng đợi tuyến tính.<br>
+&nbsp;+ **Circular Queue:** Hàng đợi vòng tròn.<br>
+&nbsp;+ **Priority Queue:** Hàng đợi ưu tiên.<br>
+## 3.2. Linear Queue - Hàng đợi tuyến tính  
+- Khởi tạo giá trị ban đầu
