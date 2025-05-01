@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ee26d376-9e42-4748-89d1-3b1818cecf06)📓Advanced_C📓
+📓Advanced_C📓
 ----
 
 <details>
@@ -1584,9 +1584,24 @@ int main()
 &nbsp;+ **rear** Đọc giá trị phần tử đứng **cuối** hàng đợi.<br>
 &nbsp;+ Kiểm tra hàng đợi đầy/rỗng.<br>
  ![image](https://github.com/user-attachments/assets/7b624f3e-dbb9-4961-aa2c-304a1c029aa5)
--  Có 3 loại hàng đợi:
+-  Có 3 loại hàng đợi:<br>
 &nbsp;+ **Linear Queue:** Hàng đợi tuyến tính.<br>
 &nbsp;+ **Circular Queue:** Hàng đợi vòng tròn.<br>
 &nbsp;+ **Priority Queue:** Hàng đợi ưu tiên.<br>
 ## 3.2. Linear Queue - Hàng đợi tuyến tính  
-- Khởi tạo giá trị ban đầu
+- Khởi tạo giá trị ban đầu:<br>
+  &nbsp;+ rear = -1.<br>
+  &nbsp;+ front = -1
+- Khi thêm phần tử - **enqueue:** <br>
+&nbsp;+ Khi thêm phần tử đầu tiên.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;* front = 0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;* rear = 0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**enqueue = 3**.<br>
+![image](https://github.com/user-attachments/assets/b91eef48-090c-45bd-8611-5dd1fba6cef0)
+&nbsp;+ Khi thêm phần tử tiếp theo.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;* front = 0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;* rear = rear + 1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;* rear = size - 1 => Hàng đợi đầy(Queue Full).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**enqueue = 7**.<br>
+![image](https://github.com/user-attachments/assets/6ae3c0f1-08bc-4b00-8321-6c7ac048b6c2)
+- Khi xóa phần tử - **dequeue:** <br>
