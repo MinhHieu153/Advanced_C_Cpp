@@ -1833,7 +1833,24 @@ int main()
 - Công thức kiểm tra hàng đợi đầy (queue full): **front == (rear + 1) % SIZE**
 ![image](https://github.com/user-attachments/assets/6b953c3f-9f96-42df-86cb-dd1f5b4f9df6)
  </details>
+ 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 <details>
 <summary><b>📖BÀI 10: Linked List</b></summary>
+ 
+ ## 1. Khái  niệm
+- **Linked list** là một cấu trúc dữ liệu trong lập trình máy tính, được sử dụng để tổ chức và lưu trữ dữ liệu. 
+- Một linked list bao gồm một chuỗi các "nút" (nodes), mỗi nút chứa 2 thành phần:<br>
+&nbsp;+ Giá trị dữ liệu.<br>
+&nbsp;+ Con trỏ đến nút tiếp theo trong chuỗi.
+
+
+
+                                           
+
+
+ 
+ </details>
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------------
