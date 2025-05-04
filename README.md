@@ -1857,3 +1857,17 @@ int main()
  </details>
  
 -----------------------------------------------------------------------------------------------------------------------------------------------
+
+<details>
+<summary><b>📖BÀI 11:JSON</b></summary>
+ 
+## 1. Khái niệm
+- **JSON ("JavaScript Object Notation" - Ghi chú về Đối tượng JavaScript)**. Đây là một **định dạng truyền tải dữ liệu (định dạng là cách lưu trữ dữ liệu)** phổ biến trong lập trình và giao tiếp giữa các máy chủ và trình duyệt web, cũng như giữa các hệ thống khác nhau.
+- JSON được thiết kế để dễ đọc và dễ viết cho con người, cũng như dễ dàng để phân tích và tạo ra cho máy tính. Nó sử dụng một cú pháp nhẹ dựa trên cặp **key - value**, tương tự như các đối tượng và mảng trong JavaScript. 
+- Có 2 định dạng JSON:<br>
+
+&nbsp;+ **Định dạng theo kiểu đối tượng** là **tập hợp các cặp "key" và "value"**.<br>
+&nbsp;+ **Định dạng theo mảng** là ngoài **tập hợp các cặp "key" và "value"** nó còn tập hợp các giá trị khác như con số, chuỗi, struct,... => Nó là **một tập hợp các giá trị**.
+
+Mỗi đối tượng JSON bao gồm một **tập hợp các cặp "key" và "value"**, trong khi mỗi mảng JSON là **một tập hợp các giá trị**.
+
