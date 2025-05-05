@@ -1848,12 +1848,436 @@ int main()
 
 ![image](https://github.com/user-attachments/assets/b598c8d2-4358-4885-b3cf-2c4800ff217a)
 
+## 2.Xây dựng thư viện linker list
+- **linker_list.h**
+  ```c
+  #ifndef LIST_H
+  #define LIST_H
+  
+  #include <stdio.h>
+  #include <stdbool.h>
+  #include <stdlib.h>
+  #include <stdint.h>
+  
+  typedef struct Node
+  {
+      int data;   // 4 bytes + 4 padding
+      struct Node *next; // 8 bytes
+  } Node;
+  
+  //1. Khai báo kiểu dữ liệu
+  //2. Thành phần đầu tiên
+  //3. Thành phần thứ 2
+  //4. Xác định được hoàn toàn Node là gì
+  
+  
+  void create_node(Node *mode, int newData);      // Cách khởi tạo 1
+  Node* create_node1(int newData);                // Cách khỏi tạo 2
+  
+  void push_back(Node *head, int value);         // thêm 1 node vào cuối list
+  void push_front(Node **head, int value);       // thêm 1 node vào đầu list
+  void insert(Node **head, int value, int pos);  // thêm 1 node vào vị trí bất kỳ
+  
+  void pop_back(Node **array);                    // xóa 1 node cuối list
+  void pop_front(Node **array);                   // xóa 1 node đầu list
+  void erase(Node **array, int pos);              // xóa 1 node vị trí bất kỳ
+  void clear(Node **head);                        // xóa toàn bộ node
+  
+  int front(Node *array);                         // đọc giá trị node đầu tiên
+  int back(Node *array);                          // đọc giá trị node cuối cùng
+  int get(Node *array, int pos);                  // đọc giá trị node bất kỳ
+  
+  int size(Node *head);                          // đếm số lượng node hiện tại
+  bool empty(Node *array);                        // kiểm tra list rỗng 
+  
+  //vì không giới hạn node lên không kiểm tra đầy
+  
+  void display(Node *head);                       // Hiển thị node
+  
+  #endif
+  ```
+- **linker_list.c**
+  ```c
+  #include "linker_list.h"
 
-
-                                           
-
-
- 
+  //Cách 1
+  //Khởi tạo thông tin và thông tin vào biến cục bộ
+  void create_node(Node *node, int newData) // Cách khỏi tạo 1
+  {
+      node->next = NULL;
+      node->data = newData;
+  }
+  
+  //Cách 2
+  //Cấp phát động 1 vùng nhớ và đẩy thông tin vào vùng nhớ
+  //khi sử dụng sẽ khai báo con trỏ để trỏ đến vùng nhớ được cấp phát
+  Node* create_node1(int newData)   // Cách khỏi tạo 2
+  {
+      Node *node = (Node*)malloc(sizeof(Node));
+      node->next = NULL;
+      node->data = newData;
+      return node;
+  }
+  
+  
+  //Thêm node vào đầu list:
+  //B1: Tạo con trỏ trỏ tới node đầu tiền
+  //B2: Duyệt qua từng node
+  //B3: Tự khởi tạo chỉ số
+  
+  void push_front(Node **head, int value)
+  {
+     Node *new_node = create_node1(value);
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          *head = new_node;   //Rỗng thì thêm node mới
+      }
+      else
+      {
+          new_node->next = *head;   //Thay đổi con trỏ node->next trong node mới để trỏ tới địa chị hiện tại node đầu
+          *head = new_node;         //Thay đổi con trỏ node đầu tiên trỏ tới node mới  
+      }
+  }
+  
+  
+  //Thêm node vào cuối list:
+  //B1: Tạo con trỏ trỏ tới node cuối  
+  //B2: Duyệt qua từng node
+  //B3: Tự khởi tạo chỉ số
+  
+  void push_back(Node *head, int value)
+  {
+     Node *new_node = create_node1(value);
+      if(head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          head = new_node;   //Rỗng thì thêm node mới
+      }
+      else
+      {   
+          Node* temp = head;
+          while((temp)->next != NULL)
+          {
+              temp = (temp)->next;       //duyệt con trỏ trỏ đến node cuối
+          }
+          (temp)->next = new_node;        //cho next trỏ đến địa chỉ mới
+      }
+  }
+  
+   // kiểm tra list rỗng
+  bool empty(Node *head)
+  {
+      return (head == NULL)?true:false;
+  }
+  
+  //Tạo biến đếm
+  int size(Node *head)
+  {
+      unsigned int count = 0;
+  
+      if(head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          return 0;
+      }
+      else
+      {
+          while(head != NULL)
+          {
+              count ++;
+              head = head->next;
+          } 
+      }
+      return count;
+  }
+  
+  //Chèn 1 node vào vị trí bất kỳ
+  void insert(Node **head, int value, int pos)
+  {
+      Node *new_node = create_node1(value);
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          *head = new_node;   //Rỗng thì thêm node mới
+      }
+      else
+      {   
+          //vị trí đầu list
+          if(pos == 0)
+          {
+              push_front(head, value);
+          }
+          //Vị trí cuối list
+          else if(pos >= size(*head)-1)
+          {
+              push_back(*head, value);
+          }
+          //Vị trí bất kỳ
+          else
+          {
+              Node *temp = *head;
+              uint8_t index = 0;
+  
+              while(temp != NULL && index != pos - 2) //Tìm vị trí sẽ trừ đi 2 đơn vị
+              {
+                  index++;
+                  temp = temp->next;
+              }
+  
+              if(index == pos -2)
+              {
+                  new_node->next = temp->next;
+                  temp->next = new_node;
+              }
+          }
+      }
+  }
+  
+  // xóa 1 node cuối list
+  void pop_back(Node **head)
+  {
+      Node *new_node = *head;
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          return ;   
+      }
+      else
+      {    
+          while(new_node->next->next != NULL)   // Tìm node sau node kế tiếp của new_node
+          {
+              new_node = new_node->next;
+          }
+          free(new_node->next);
+          new_node->next = NULL;
+      }
+  }  
+   
+   // xóa 1 node đầu list
+  void pop_front(Node **head)
+  {   
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          return ;   
+      }
+      else
+      {    
+          Node *new_node = (*head)->next;   //tạo nốt mới trỏ dến node thứ 2
+          free(*head);                      //Xóa node đầu
+          *head = new_node;                 //Gắn con trỏ trỏ đến node thứ 2
+      }
+  }
+  
+  // xóa 1 node vị trí bất kỳ                  
+  void erase(Node **head, int pos)
+  {   
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          return ;   
+      }
+      else
+      {
+          //vị trí đầu list
+          if(pos == 0)
+          {
+              pop_front(head);
+          }
+          //Vị trí cuối list
+          else if(pos >= size(*head)-1)
+          {
+              pop_back(head);
+          }
+          //Vị trí bất kỳ
+          else
+          {
+              Node *temp = *head;
+              uint8_t index = 0;
+  
+              while (temp != NULL && index != pos - 2) //Tìm vị trí sẽ trừ đi 2 đơn vị
+              {
+                  index++;
+                  temp = temp->next;
+              }
+  
+              if(index == pos -2)
+              {  
+                  Node *new_node = temp->next;
+                  temp->next = new_node->next;
+                  free(new_node);
+              }
+          }
+      }      
+  }
+  
+  // xóa toàn bộ node
+  void clear(Node **head)
+  {
+      if(*head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          return ;   
+      }
+      else
+      {   
+          Node *new_node;
+          while (*head != NULL)
+          {
+              new_node = (*head)->next;
+              free(*head);
+              *head = new_node;
+          }
+      }
+  }
+  
+  // đọc giá trị node đầu tiên
+  int front(Node *head)
+  {
+      if(head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          printf("Khong co node!\n"); 
+          return -1; 
+      }
+      else
+      {
+          return head->data;
+      }
+  } 
+  
+  // đọc giá trị node cuối cùng
+  int back(Node *head)
+  {
+      if(head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          printf("Khong co node!\n");
+          return -1;
+      }
+      else
+      {   
+          Node *new_node = head;
+          while(new_node->next != NULL)   // Tìm node sau node kế tiếp của new_node
+          {
+              new_node = new_node->next;
+          }
+          return new_node->data;
+      }
+  }
+  
+   // đọc giá trị node bất kỳ                          
+  int get(Node *head, int pos)                 
+  {   
+      int value;
+      if(head == NULL)   //Kiểm tra trạng thái hiện tại rỗng không
+      {
+          printf("Khong co node!\n");
+          return -1;
+      }
+      else
+      {
+          //vị trí đầu list
+          if(pos == 0)
+          {
+              value = front(head);
+          }
+          //Vị trí cuối list
+          else if(pos >= size(head)-1)
+          {
+              value = back(head);
+          }
+          //Vị trí bất kỳ
+          else
+          {
+              Node *new_node = head;
+              uint8_t index = 0;
+  
+              while (new_node != NULL && index != pos - 1) //Tìm vị trí sẽ trừ đi 2 đơn vị
+              {
+                  index++;
+                  new_node = new_node->next;
+              }
+  
+              if(index == pos -1)
+              {  
+                  value =  new_node->data;
+              }
+          }
+          return value;
+      }      
+  }
+  
+  // Hiển thị các node
+  void display(Node *head)
+  {
+      int index = 0;
+  
+      if (head == NULL)
+      {
+          printf("Khong co node!\n");
+      }
+      else
+      {
+          while(head != NULL)
+          {
+              printf("Node %d: %d\n", index, head->data);
+              head = head->next;
+              index++;
+          }
+      }
+  }
+  ```
+- **main,c**
+  ```c
+  #include "linker_list.h"
+  
+  int main()
+  {
+      //Cách khởi tạo 1
+      //Node node1, node2;
+      //create_node(&node1, 5);
+  
+      //Cách khởi tạo 2
+      Node *node1 = create_node1(5);
+      Node *node2 = create_node1(6);
+      Node *node3 = create_node1(7);
+  
+      node1->next = node2;
+      node2->next = node3;
+  
+      display(node1);
+      
+      printf("\n");
+      push_front(&node1, 10);
+      push_back(node1, 20);
+      display(node1);
+      
+      printf("\n");
+      insert(&node1, 30, 0);
+      insert(&node1, 50, 3);
+  
+      display(node1);
+      
+      printf("\n");
+      pop_back(&node1);
+      display(node1);
+  
+      printf("\n");
+      pop_front(&node1);
+      display(node1);
+  
+      printf("\n");
+      erase(&node1, 2);
+      display(node1);
+  
+      int value;
+      printf("\n");
+      value = front(node1);
+      printf("Node dau: %d\n", value);
+      value = back(node1);
+      printf("Node cuoi: %d\n", value);
+      value = get(node1, 2);
+      printf("Node : %d\n", value);
+  
+      printf("\n");
+      clear(&node1);
+      display(node1);
+      
+      return 0;
+  }
+  ```                                         
  </details>
  
 -----------------------------------------------------------------------------------------------------------------------------------------------
