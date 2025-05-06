@@ -1831,7 +1831,8 @@ int main()
 => Hàng đợi vòng tròn sẽ tự động xoay vòng tròn để tận dụng byte địa chỉ trống tránh gây lãng phí bộ nhớ
 ### 3.2.2. Các thao tác trên hàng đợi
 - Công thức kiểm tra hàng đợi đầy (queue full): **front == (rear + 1) % SIZE**
-![image](https://github.com/user-attachments/assets/6b953c3f-9f96-42df-86cb-dd1f5b4f9df6)
+- Kiểm tra hàng đợi rỗng (queue empty): **front == -1**
+
  </details>
  
 -----------------------------------------------------------------------------------------------------------------------------------------------
