@@ -2377,3 +2377,23 @@ const char *json_str = "{"
                           
 ```
 - Dữ liệu dù tách ra nhiều dòng nhưng không có ngăn cách trình biên dịch vẫn tự hiểu đây là 1 chuỗi và tự gộp cho mình
+ </details>
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+<details>
+ 
+<summary><b>📖BÀI 12: Bubble Sort, Binary Search, Binary Search Tree</b></summary>
+
+## 1. Bubble Sort - Sắp xếp nổi bọt
+- Thuật toán **sắp xếp nổi bọt (Bubble Sort)** hoạt động dựa trên nguyên tắc hoán đổi các phần tử liền kề để đưa phần tử lớn hơn về cuối dãy (hoặc phần tử nhỏ hơn về đầu dãy)
+- Thuật toán gồm các bước sau:<br>
+&nbsp;1. Duyệt qua danh sách từ đầu đến cuối.<br>
+&nbsp;2. So sánh hai phần tử liền kề, nếu phần tử trước lơn hơn phần tử sau, thì hoán đồi vị trí.<br>
+&nbsp;3. Lặp lại quá trình cho đến khi không còn sự hoán đổi nào xảy ra (mảng đã được sắp xếp).<br>
+ 
+
+
+
+ </details>
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------------
