@@ -1829,9 +1829,238 @@ int main()
   ### 3.3.1. Đặc điểm
 - Khi rear đạt tới size - 1 và không còn chỗ trống từ phía cuối, nếu front đã di chuyển (nghĩa là đã có các phần tử được dequeue), rear có thể "quay vòng" về vị trí 0 để tận dụng khoảng trống <br>
 => Hàng đợi vòng tròn sẽ tự động xoay vòng tròn để tận dụng byte địa chỉ trống tránh gây lãng phí bộ nhớ
-### 3.2.2. Các thao tác trên hàng đợi
+### 3.3.2. Các thao tác trên hàng đợi
 - Công thức kiểm tra hàng đợi đầy (queue full): **front == (rear + 1) % SIZE**
 - Kiểm tra hàng đợi rỗng (queue empty): **front == -1**
+### 3.3.3. Khởi tạo thư viện Circular Queue
+- **Circular.h**
+  ```c
+  #ifndef CIRCULAR_QUEUE_H
+  #define CIRCULAR_QUEUE_H
+  
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <stdbool.h>
+  
+  typedef struct 
+  {
+      int *items;
+      int size;
+      int front;
+      int rear;
+  } Queue;
+  
+   //Khởi tạo những thông số ban đầu
+   void queue_init(Queue *queue, int newSize);
+  
+   //Kiểm tra hàng đợi rỗng
+  bool queue_isEmpty(Queue queue);
+  
+   //Kiểm tra hàng đợi đầy
+   bool queue_isFull(Queue queue);
+  
+   //Thêm phần tử 
+   void enqueue(Queue *queue, int value);
+  
+  //Xóa phần tử ở đầu hàng đợi
+  int dequeue(Queue *queue);
+  
+  //Đọc giá trị phần tử ở đầu hàng đợi
+  int front(Queue queue);
+  
+  //Đọc giá trị phần tử ở cuối hàng đợi
+  int rear(Queue queue);
+  
+  //Giải phóng bộ nhớ
+  void queue_free(Queue *queue);
+  
+  // Hiển thị toàn bộ hàng
+  void display(Queue queue);
+  
+  #endif
+  ```
+- **Circular.c**
+  ```c
+  #include "circular_queue.h"
+
+  //Khởi tạo những thông số ban đầu
+  void queue_init(Queue *queue, int newSize)
+  {
+      queue->items = (int*)malloc(newSize*sizeof(int));
+      queue->size = newSize;
+      queue->front = queue->rear = -1;
+  }
+  
+  //Kiểm tra hàng đợi rỗng
+  bool queue_isEmpty(Queue queue)
+  {
+      return (queue.front == -1) ? true : false;
+  }
+  
+  //Kiểm tra hàng đợi đầy
+  bool queue_isFull(Queue queue)
+  {
+      return (queue.front == (queue.rear + 1) % queue.size) ? true : false;
+  }
+  
+  //Thêm phần tử 
+  void enqueue(Queue *queue, int value)
+  {
+      if(queue_isFull(*queue))
+      {
+          printf("Hang doi day!\n");
+      }
+      else
+      {
+          if(queue->front == -1)
+          {
+              queue->front = queue->rear = 0;
+          }
+          else
+          {   
+              queue->rear = (queue->rear + 1) % queue->size;  
+          }
+          queue->items[queue->rear] = value;
+          printf("Enqueue: %d\n", value);
+      }
+  }
+  
+  //Xóa phần tử ở đầu hàng đợi
+  int dequeue(Queue *queue)
+  {
+      if(queue_isEmpty(*queue))
+      {
+          printf("Hang doi rong\n");
+          return -1;
+      }
+      else
+      {
+          int dequeue_value = queue->items[queue->front];
+          queue ->items[queue->front] = 0;
+          if (queue->front == queue->size - 1)    //kiểm tra đang ở hàng đợi cuối
+          {
+              queue->front = 0;    // reset về đàu
+          }
+          else
+          {
+              queue->front++;    // nếu không thì cộng 1
+          }
+          printf("Dequeue: %d\n", dequeue_value);
+          return dequeue_value;
+      }
+  }
+  
+  //Đọc giá trị phần tử ở đầu hàng đợi
+  int front(Queue queue)
+  {
+      if(queue_isEmpty(queue))
+      {
+          printf("Hang doi rong\n");
+          return -1;
+      }
+      return queue.items[queue.front];
+  }
+  
+  //Đọc giá trị phần tử ở cuối hàng đợi
+  int rear(Queue queue)
+  {
+      if(queue_isEmpty(queue))
+      {
+          printf("Hang doi rong\n");
+          return -1;
+      }
+      return queue.items[queue.rear];
+  }
+  //Giải phóng bộ nhớ
+  void queue_free(Queue *queue)
+  {   
+      if( queue->items != NULL)
+      {
+          free(queue->items);
+          queue->items =NULL;
+      }
+  }
+  // Hiển thị toàn bộ hàng
+  void display(Queue queue)
+  {
+      if(queue_isEmpty(queue))
+      {
+          printf("Hang doi rong\n");
+      }
+      else
+      {
+          printf("Queue: ");
+          if(queue.front < queue.rear )
+          {
+              for (int i = queue.front; i <= queue.rear; i++)
+              {
+              printf("%d ", queue.items[i]);
+              }
+          }
+          else
+          {
+              for (int i = queue.front; i < queue.size; i++)
+              {
+                  printf("%d ", queue.items[i]);
+              }       
+              for (int i = 0; i <= queue.rear; i++)
+              {
+                  printf("%d ", queue.items[i]);
+              }
+          }
+          printf("\n");
+      }
+  } 
+  ```
+- **main.c**
+  ```c
+  #include "circular_queue.h"
+
+  int main()
+  {
+      Queue queuel;
+  
+      //Khởi tạo hàng đợi
+      queue_init(&queuel, 5);
+  
+      //Thêm phần tử hàng đợi
+      enqueue(&queuel, 1);
+      enqueue(&queuel, 2);
+      enqueue(&queuel, 3);
+      enqueue(&queuel, 4);
+      enqueue(&queuel, 5);
+      printf("\n");
+  
+      // In phần tử đàu (front) và cuối (rear)
+      printf("Front: %d\n", front(queuel));
+      printf("Rear: %d\n", rear(queuel));
+      printf("\n");
+  
+      //Xóa phần tử đầu
+      dequeue(&queuel);
+      dequeue(&queuel);
+      
+      
+      //Hiện thi phần tử trong hàng đợi
+      display(queuel);
+  
+      printf("\n");
+      enqueue(&queuel, 7);
+      enqueue(&queuel, 8);
+      dequeue(&queuel);
+      dequeue(&queuel);
+      enqueue(&queuel, 9);
+      enqueue(&queuel, 10);
+      printf("\n");
+      display(queuel);
+      printf("\n");
+  
+      return 0;
+  }
+  ```
+- **Kết quả:**
+  
+![image](https://github.com/user-attachments/assets/af537df0-18a2-45e0-b479-662bc4f4a1bc)
 
  </details>
  
