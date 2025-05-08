@@ -2579,7 +2579,7 @@ int main()
 - Dấu ```\"``` dùng cho bắt đầu và kết thúc để nhận biết chuỗi con trong chuỗi lớn.<br>
 &nbsp;+ ví dụ:
 ```c
-const chả *str = "\"key1\": \"value\"";  //key1 và value1 là chuỗi con trong chuỗi lớn
+const char *str = "\"key1\": \"value\"";  //key1 và value1 là chuỗi con trong chuỗi lớn
 ```"
 - Kí tự ```"{"``` và ```"}"``` là kí tự bắt đầu và kết thúc chuỗi JSON
 &nbsp;+ ví dụ:
