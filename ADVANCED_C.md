@@ -528,7 +528,7 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 - Ưu điểm: Có độ linh hoạt cao
 - Nhược điểm: Tốc độ châm hơn so với gọi hàm thông qua tên
 ### 4.4. Ví dụ
-- Ví dụ 1: Khai báp như 1 biến
+- Ví dụ 1: Khai báo như 1 biến
   ```c
   #include <stdio.h>
   
