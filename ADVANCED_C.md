@@ -707,7 +707,7 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
       return 0;
   }
   ```
-  ## 8. Con trỏ đến con trỏ -  Pointer to Pointer (Con trỏ cấp 2
+  ## 8. Con trỏ đến con trỏ -  Pointer to Pointer (Con trỏ cấp 2)
 - Khái niệm: cho phép lưu trữ địa chỉ của một con trỏ khác
 - Ứng dụng:<br>
 &nbsp;+ Kiểu dữ liệu JSON.<br>
