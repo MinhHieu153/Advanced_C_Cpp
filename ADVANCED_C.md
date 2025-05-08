@@ -627,13 +627,13 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
         Thuong: 1,666666
    ```
 ## 5. Con trỏ trỏ tới hằng số - Pointer to Constant
-- Khái niệm: Là cách định nghĩa một con trỏ không thể thay đổi giá trị tại địa chỉ mà nó trỏ đến thông qua dereference nhưng giá trị địa chỉ đó có thể thay đổi.
+- Khái niệm: Là cách định nghĩa một con trỏ không thể thay đổi giá trị tại địa chỉ mà nó trỏ đến thông qua dereference nhưng địa chỉ đó có thể thay đổi.
 - Cú pháp:<br>
   ```c
   <data type> const *ptr_const;
   const <data type> *ptr_const;
   ```
-- Ứng dụng: Giứ lại dữ liệu trước đó 
+- Ứng dụng: Giữ lại dữ liệu trước đó 
 - Ví dụ:<br> 
   ```c
   int main()
