@@ -1037,7 +1037,7 @@ int main()
 }
 ```
 ## 5. Register - thanh ghi
-- Giúp cho biến lưu trực tiếp vào thanh ghi không qua Ramm làm tăng tốc độ xử lý
+- Giúp cho biến lưu trực tiếp vào thanh ghi không qua Ram làm tăng tốc độ xử lý
 - Tuy nhiên, lưu ý rằng việc sử dụng register chỉ là một đề xuất cho trình biên dịch và không đảm bảo rằng biến sẽ được lưu trữ trong thanh ghi. Trong thực tế, trình biên dịch có thể quyết định không tuân thủ lời đề xuất này.
 - Không dùng cho biến toàn cục vì:<br>
 &nbsp;+ Thanh ghi không có địa chỉ nên việc truy cập khó.
