@@ -2071,7 +2071,7 @@ int main()
  
  ## 1. Khái  niệm
 - **Linked list** :là một cấu trúc dữ liệu trong lập trình máy tính, được sử dụng để tổ chức và lưu trữ dữ liệu.
-- là danh sách liên kết gồmg tập hợp nhiều node liên kết với nhau
+- là danh sách liên kết gồm tập hợp nhiều node liên kết với nhau
 - Một linked list bao gồm một chuỗi các "nút" (nodes), mỗi nút chứa 2 thành phần:<br>
 &nbsp;+ Giá trị dữ liệu.<br>
 &nbsp;+ Con trỏ chứa địa chỉ của node tiếp theo trong chuỗi.
