@@ -1,8 +1,8 @@
 Bài 1:
-1Mục tiêu:
+- **Mục tiêu:**
 Sửa đổi hàm THROW để nó chấp nhận một thông điệp lỗi dưới dạng chuỗi ký tự, bên cạnh mã lỗi.
 Thông điệp lỗi nên được lưu trữ ở một nơi mà có thể truy cập được sau khi longjmp được gọi.
-
+- **Bài làm:**
 ```c
 #include <stdio.h>
 #include <setjmp.h>
