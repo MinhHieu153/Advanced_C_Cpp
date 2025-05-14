@@ -1,7 +1,7 @@
 Bài 1:
 - **Mục tiêu:**
-Sửa đổi hàm THROW để nó chấp nhận một thông điệp lỗi dưới dạng chuỗi ký tự, bên cạnh mã lỗi.
-Thông điệp lỗi nên được lưu trữ ở một nơi mà có thể truy cập được sau khi longjmp được gọi.
+&nbsp;+ Sửa đổi hàm THROW để nó chấp nhận một thông điệp lỗi dưới dạng chuỗi ký tự, bên cạnh mã lỗi.
+&nbsp;+ Thông điệp lỗi nên được lưu trữ ở một nơi mà có thể truy cập được sau khi longjmp được gọi.
 - **Bài làm:**
 ```c
 #include <stdio.h>
@@ -107,7 +107,15 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-Bài 2:
+Bài 2: Xử Lý Nhiều Loại Lỗi Trong Hệ Thống Phức Tạp Sử Dụng Macro TRY-CATCH
+- **Mục tiêu:**
+&nbsp;+ Viết một chương trình trong ngôn ngữ C sử dụng các macro TRY, CATCH, và THROW để mô phỏng việc xử lý nhiều loại lỗi trong một hệ thống phức tạp.
+&nbsp;+ Định nghĩa các macro TRY, CATCH, và THROW giúp xử lý lỗi trong chương trình.
+&nbsp;+	Tạo các hàm giả lập các hoạt động khác nhau, mỗi hàm có khả năng "ném" ra một loại lỗi cụ thể sử dụng macro THROW.
+&nbsp;+	Trong hàm main, gọi các hàm này trong một khối TRY và xử lý các lỗi tương ứng trong các khối CATCH phù hợp.
+&nbsp;+	Các loại lỗi có thể bao gồm nhưng không giới hạn ở: lỗi đọc file, lỗi xử lý mạng, lỗi tính toán dữ liệu.
+&nbsp;+	In ra thông báo lỗi phù hợp khi một lỗi được bắt và xử lý
+- **Bài làm:**
 ```c
 #include <stdio.h>
 #include <setjmp.h>
