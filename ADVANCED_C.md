@@ -2536,9 +2536,9 @@ int main()
     "grades": [85, 90, 78]
   }
   ```
- &nbsp;+ Các **key:**: "name", "age", "city", "isStudent","grades".<br>
- &nbsp;+ Các **value:**: "John Doe", 30, "New York", false, [85, 90, 78].<br>
-&nbsp;+ Các cặp **"key" và "value"** ngăn cách nhau bởi dấu ",".<br>
+ &nbsp;+ Các **key:** "name", "age", "city", "isStudent","grades".<br>
+ &nbsp;+ Các **value:** "John Doe", 30, "New York", false, [85, 90, 78].<br>
+ &nbsp;+ Các cặp **"key" và "value"** ngăn cách nhau bởi dấu ",".<br>
 ## 2.2. Mảng JSON
 |**Mảng thường**|**Mảng JSON**|
 |----------------------|------------------------|
