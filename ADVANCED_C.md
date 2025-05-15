@@ -2538,7 +2538,7 @@ int main()
   ```
  &nbsp;+ Các **key:**: "name", "age", "city", "isStudent","grades".<br>
  &nbsp;+ Các **value:**: "John Doe", 30, "New York", false, [85, 90, 78].<br>
-  &nbsp;+ Các cặp **"key" và "value"** ngăn cách nhau bởi dấu ",".<br>
+&nbsp;+ Các cặp **"key" và "value"** ngăn cách nhau bởi dấu ",".<br>
 ## 2.2. Mảng JSON
 |**Mảng thường**|**Mảng JSON**|
 |----------------------|------------------------|
@@ -2580,7 +2580,7 @@ int main()
 &nbsp;+ ví dụ:
 ```c
 const char *str = "\"key1\": \"value\"";  //key1 và value1 là chuỗi con trong chuỗi lớn
-```"
+```
 - Kí tự ```"{"``` và ```"}"``` là kí tự bắt đầu và kết thúc chuỗi JSON
 &nbsp;+ ví dụ:
 ```c
