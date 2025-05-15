@@ -2581,13 +2581,13 @@ int main()
 ```c
 const char *str = "\"key1\": \"value\"";  //key1 và value1 là chuỗi con trong chuỗi lớn
 ```
-- Kí tự ```"{"``` và ```"}"``` là kí tự bắt đầu và kết thúc chuỗi JSON
+- Kí tự ```"{"``` và ```"}"``` là kí tự bắt đầu và kết thúc chuỗi JSON.<br>
 &nbsp;+ ví dụ:
 ```c
 const char *json_str = "{"
                           "\"1001\":{"
                           "\"SoPhong\": 3,"
-                          "\""NguoiThue\":{"
+                          "\"NguoiThue\":{"
                                "\"Ten\":\"Nguyen Van A\","
                                "\"CCCD\":\"1920517781\","
                                "\"Tuoi\\\":26,"
