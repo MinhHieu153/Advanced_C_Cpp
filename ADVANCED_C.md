@@ -1386,7 +1386,7 @@ int main()
 ## 6. So sánh malloc - calloc
 |                          |**malloc**|**calloc**|**realloc**|
 |:------------------------:|------------------------|------------------------|------------------------|
-|Cú pháp|void* malloc(size_t size)<br>|void *calloc(size_t num, size_t size)|void* realloc(void *_Memory. size_t _NewSize)|
+|Cú pháp|void* malloc(size_t size)<br>|void *calloc(size_t num, size_t size)|void* realloc(void *_Memory, size_t _NewSize)|
 |Chức năng|&nbsp;Memory allocation: Cấp phát một khối bộ nhớ động có kích thước size byte.|&nbsp;Contiguous allocation: Cấp phát vùng nhớ động gồm num phần tử, mỗi phần tử có kích thước size byte.|&nbsp;Reallocation: Thay đổi kích thước của vùng nhớ đã được cấp phát trước đó bởi malloc() hoặc calloc().|
 |Giá trị trả về|&nbsp;+ Hàm trả về con trỏ tới vùng nhớ nếu cấp phát thành công với giá trị rác.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|&nbsp;+ Hàm trả về con trỏ trỏ tới vùng nhớ được cấp phát và vùng nhớ được khởi tạo giá trị = 0 nếu cấp phát thành công.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|&nbsp;+ Hàm trả về con trỏ trỏ tới vùng nhớ đã thay đổi kích thước nếu cấp phát thành công với giá trị rác và giữ lại giá trị cũ.<br>&nbsp;+ Trả về NUL nếu cấp phát FAIL|
 ## 7. So sánh Stack - Heap
