@@ -1291,7 +1291,7 @@ static int var = 5 // lưu trong Data segment
 int *ptr = &a; // lưu trong Data segment
 
 const int b = 10; // lưu trong Data segment - read only
-char *ptr1 = "hello"; // lưu trong Data segment - read only
+char *ptr1 = "hello"; // ptr1: lưu trong Data segment - "hello" - là chuỗi hằng nên lưu trong vùng read only
 int main()
 {
   ...
@@ -2632,7 +2632,7 @@ const char *json_str = "{"
           {
               if (arr[j] > arr[j+1])
               {
-                  int temp = arr[j];
+                  int temp = arr[j]; 
                   arr[j]   = arr[j+1];
                   arr[j+1] = temp;
               }
@@ -2640,6 +2640,48 @@ const char *json_str = "{"
       }  
   }
   ```
+## 2. Linear Search - Thuật toán tìm kiếm tuyến tính
+- **Thuật toán tìm kiếm tuyến tính (Linear Search)** là phương pháp đơn giản nhất để tìm kiếm một phần tử trong mảng.
+- Nguyên tắc hoạt động:<br>
+&nbsp;1. Duyệt từng phần tử trong mảng từ trái sang phải.<br>
+&nbsp;2. Nếu phần tử đang xét trùng với giá trị cần tìm, trả về vị trí của nó.<br>
+&nbsp;3. Nếu duyệt hết mảng mà không tìm thấy, trả về kết quả không tồn tại.<br>
+- Ưu điểm: Dễ thực hiện.
+- Nhược điểm: Vừa phải duyệt vừa phải so sánh tìm nếu mảng có số lượng phần tử lớn thì tốc độ sẽ chậm vì số lượng phần tử lớn  
+## 2. Binary Search - Thuật toán tìm kiếm nhị phân
+- Thuật toán tìm kiếm nhị phân (Binary Search) hoạt động bằng cách chia đôi mảng để tìm kiếm, thay vì duyệt tuần tự như Linear Search.
+- Nguyên tắc hoạt động:<br>
+&nbsp;1. Sắp xếp mảng (tăng dần hoặc giảm dần).<br>
+&nbsp;2. So sánh phần tử ở giữa mảng với giá trị cần tìm:<br>
+&nbsp;&nbsp;&nbsp;+ Nếu trùng → Trả về vị trí.<br>
+&nbsp;&nbsp;&nbsp;+ Nếu phần tử giữa mảng nhỏ hơn 	→ Tiếp tục tìm trong nửa phải.<br>
+&nbsp;&nbsp;&nbsp;+ Nếu phần tử giữa mảng lớn hơn 	→ Tiếp tục tìm trong nửa trái.<br>
+&nbsp;3. Lặp lại bước 2 cho đến khi tìm thấy phần tử hoặc không còn phần tử nào để tìm.<br>
+- Ví dụ:
+  ```c
+  #define NO_FOUND -1    
+  
+  int binarySearch(int* arr, int l, int r, int x)
+  {
+      if (r >= l)
+      {
+          int mid = (r + l) / 2;
+  
+          if (arr[mid] == x){
+              return mid;
+          }
+          else if (arr[mid] > x){
+              return binarySearch(arr, l, mid - 1, x);
+          }
+          else{
+              return binarySearch(arr, mid + 1, r, x);
+          }
+      }
+      return NO_FOUND;
+  }
+  ```
+## 2. Binary Search - Thuật toán tìm kiếm nhị phân
+
 
 
  </details>
