@@ -1291,7 +1291,7 @@ static int var = 5 // lưu trong Data segment
 int *ptr = &a; // lưu trong Data segment
 
 const int b = 10; // lưu trong Data segment - read only
-char *ptr1 = "hello"; // ptr1: lưu trong Data segment - "hello" - là chuỗi hằng nên lưu trong vùng read only
+char *ptr1 = "hello"; // ptr1: lưu trong Data segment - "hello" - là chuỗi hằng nên lưu trong vùng read only ( chuỗi hằng không quan tâm giá trị khởi tạo lưu hết vào data hoặc text tùy trình biên dịch)
 int main()
 {
   ...
@@ -1304,6 +1304,16 @@ static int var = 0 // lưu trong bss segment
 int *ptr = NULL; // lưu trong bss segment
 const int b = 0; // lưu trong data segment ( hằng số toàn cục không quan tâm giá trị khởi tạo lưu hết vào data hoặc text tùy trình biên dịch) - read only
 char *ptr1 = "hello"; // lưu trong Data segment - read only
+
+typedef struct
+{
+  int x;  // vùng địa chỉ x và y phụ thuộc vào cách mình khai báo biến 
+  int y;
+} Data;
+static Data p1 = {0, 0}; // khai báo biến static và p1 khai báo bằng 0 --> x,y,p1 cùng nằm phân vùng bss
+Data p2; // khai báo ko gắn giá trị --> x,y,p1 cùng nằm phân vùng bss
+Data p3 = {0, 1};  // p3 khơi tạo khác 0 --> x, y, p3 nằm ở phần vùng data mặc dù x = 0 nhưng nó theo phân vùng p3
+
 int main() 
 {
   ...
@@ -1311,7 +1321,8 @@ int main()
 ```
 &nbsp; + **Stack**
 ```c
-char ptr1[] = "hello"; // lưu trong Stack
+char ptr1[] = "hello"; // ptr1 là tên mảng ko phải biến nó khồng nằm trong phân vùng nào còn "hello" lưu trong vùng read only
+char *ptr = "hello";// ptr1 là biến con trỏ nó nằm trong phân vùng data còn "hello" lưu trong vùng read only
 void swap(int *a, int *b) // các biến a,b lưu trong Stack
 {
  //&a = 0x01 nó sẽ bị thu hồi địa chỉ khi ra khỏi hàm
