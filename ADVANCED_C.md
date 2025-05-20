@@ -1321,8 +1321,12 @@ int main()
 ```
 &nbsp; + **Stack**
 ```c
-char ptr1[] = "hello"; // ptr1 là tên mảng ko phải biến nó khồng nằm trong phân vùng nào còn "hello" lưu trong vùng read only
+// Vì khi viết char ptr1[] = "hello"; trình biên dịch sẽ sao chép nội dung chuỗi literal này vào phân vùng có thể đọc và ghi được
+char ptr1[] = "hello"; // ptr1 là tên mảng ko phải biến nó khồng nằm trong phân vùng nào nó phụ thuộc vào phân tử đầu còn "hello" được lưu trong phân vùng có thể đọc và ghi được
+
+// Vì con trỏ này chỉ trỏ thẳng vào biến này
 char *ptr = "hello";// ptr1 là biến con trỏ nó nằm trong phân vùng data còn "hello" lưu trong vùng read only
+
 void swap(int *a, int *b) // các biến a,b lưu trong Stack
 {
  //&a = 0x01 nó sẽ bị thu hồi địa chỉ khi ra khỏi hàm
