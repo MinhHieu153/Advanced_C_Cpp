@@ -2695,8 +2695,48 @@ const char *json_str = "{"
       return NO_FOUND;
   }
   ```
-## 2. Binary Search - Thuật toán tìm kiếm nhị phân
+## 3. Binary Search Tree - Cây tìm kiếm nhị phân
+- **Cấu trúc dữ liệu phân cấp (Tree)** là một **cấu trúc dữ liệu phi tuyến tính**, trong đó các phần tử (được gọi là nút, hay node) được tổ chức theo một thứ bậc phân cấp.
+- Cây là một trong những cấu trúc dữ liệu quan trọng, được sử dụng rộng rãi trong khoa học máy tính để biểu diễn các quan hệ phân cấp, tìm kiếm, sắp xếp, và lưu trữ.
+  
+![image](https://github.com/user-attachments/assets/e4aaca32-2f03-4e0a-b2fd-6797811e1246)
 
+- Nốt gốc: i - Phải là phần tử chính giữa trong mảng
+- chỉ số node nhánh trái: 2i + 1
+- chỉ số node nhánh phải: 2i + =-0
+- **Cây Tìm Kiếm Nhị Phân (BST - Binary Search Tree)** là một cấu trúc dữ liệu dạng cây, trong đó:<br>
+&nbsp;+ Mỗi nút có tối đa 2 con (gọi là cây con trái và cây con phải).<br>
+&nbsp;+ Dữ liệu trong cây tuân theo quy tắc:<br>
+&nbsp;&nbsp;&nbsp;* Nút con trái chứa giá trị nhỏ hơn nút gốc.<br>
+&nbsp;&nbsp;&nbsp;* Nút con phải chứa giá trị lớn hơn nút gốc.<br>
+&nbsp;&nbsp;&nbsp;* Quy tắc này áp dụng đệ quy cho toàn bộ cây.<br>
+- Các bước xây dựng dạng cây:.<br>
+&nbsp;+ Sắp xếp mảng theo thứ tự tăng dần.<br>
+&nbsp;+ Tìm phần tử ở giữa.<br>
+## 4. File operations
+- **File CSV (Comma-Separated Values)** là một loại file văn bản được sử dụng để lưu trữ và truyền tải dữ liệu có cấu trúc dưới dạng bảng, trong đó các dữ liệu của các cột được phân tách bằng dấu phẩy (,) hoặc một ký tự ngăn cách khác.
+- Để mở một file, bạn có thể sử dụng hàm fopen(). Hàm này trả về một con trỏ FILE, và cần được kiểm tra để đảm bảo file đã mở thành công.
+  ```c
+  FILE *file = fopen(const char *file_name, const char *access_mode);
+  + const char *file_name: Địa chỉ và tên file
+  + const char *access_mode: chế độ như đọc, ghi
+  ```
+- Các chế độ
+
+|**Chế độ**|**Mô tả**|
+|:----------------------:|------------------------|
+|r|Mở file với chế độ chỉ đọc file. Nếu mở file thành công thì trả về địa chỉ của phần tử đầu tiên trong file, nếu không thì trả về NULL.|
+|rb|Mở file với chế độ chỉ đọc file theo định dạng binary. Nếu mở file thành công thì trả về địa chỉ của phần tử đầu tiên trong file, nếu không thì trả về NULL.|
+|w|Mở file với chế độ ghi vào file. Nếu file đã tồn tại, thì sẽ ghi đè vào nội dung bên trong file. Nếu file chưa tồn tại thì sẽ tạo một file mới. Nếu không mở được file thì trả về NULL.|
+|wb|Mở file với chế độ ghi vào file theo định dạng binary. Nếu file đã tồn tại, thì sẽ ghi đè vào nội dung bên trong file. Nếu file chưa tồn tại thì sẽ tạo một file mới. Nếu không mở được file thì trả về NULL.|
+|a|Mở file với chế độ nối. Nếu mở file thành công thì trả về địa chỉ của phần tử cuối cùng trong file. Nếu file chưa tồn tại thì sẽ tạo một file mới. Nếu không mở được file thì trả về NULL.|
+|ab|Mở file với chế độ nối dưới định dạng binary. Nếu mở file thành công thì trả về địa chỉ của phần tử cuối cùng trong file. Nếu file chưa tồn tại thì sẽ tạo một file mới. Nếu không mở được file thì trả về NULL.|
+|r+|Mở file với chế độ đọc và ghi file. Nếu mở file thành công thì trả về địa chỉ của phần tử đầu tiên trong file, nếu không thì trả về NULL.|
+|rb+|Mở file với chế độ đọc và ghi file dưới định dạng binary. Nếu mở file thành công thì trả về địa chỉ của phần tử đầu tiên trong file, nếu không thì trả về NULL.Mở file với chế độ đọc và ghi file dưới định dạng binary. Nếu mở file thành công thì trả về địa chỉ của phần tử đầu tiên trong file, nếu không thì trả về NULL.|
+|w+|Mở file với chế độ ghi và đọc file. Nếu file đã tồn tại thì trả về địa chỉ của phần tử đầu tiên của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
+|wb+|Mở file với chế độ ghi và đọc file dưới định dạng binary. Nếu file đã tồn tại thì trả về địa chỉ của phần tử đầu tiên của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
+|a+|Mở file với chế độ nối và đọc file. Nếu file đã tồn tại thì trả về địa chỉ của phần tử cuối cùng của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
+|ab+|Mở file với chế độ nối và đọc file dưới định dạng binary. Nếu file đã tồn tại thì trả về địa chỉ của phần tử cuối cùng của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
 
 
  </details>
