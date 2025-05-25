@@ -2737,7 +2737,11 @@ const char *json_str = "{"
 |wb+|Mở file với chế độ ghi và đọc file dưới định dạng binary. Nếu file đã tồn tại thì trả về địa chỉ của phần tử đầu tiên của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
 |a+|Mở file với chế độ nối và đọc file. Nếu file đã tồn tại thì trả về địa chỉ của phần tử cuối cùng của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
 |ab+|Mở file với chế độ nối và đọc file dưới định dạng binary. Nếu file đã tồn tại thì trả về địa chỉ của phần tử cuối cùng của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
-
+- Các thao tác với file
+  |**Tên hàm**|**Mô tả**|
+  |:----------------------:|Sử dụng chuỗi được định dạng và danh sách đối số biến để lấy đầu vào từ một File|
+  |:----------------------:|------------------------|
+  
 
  </details>
  
