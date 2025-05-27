@@ -1,4 +1,4 @@
-📓Advanced_C📓
+![image](https://github.com/user-attachments/assets/d9c9ddcd-7584-4e5d-b3a6-9b4c37f9d781)![image](https://github.com/user-attachments/assets/07c4f86b-7f8f-4e6e-b719-063b587be85b)📓Advanced_C📓
 ----
 
 <details>
@@ -2715,7 +2715,7 @@ const char *json_str = "{"
 &nbsp;+ Tìm phần tử ở giữa.<br>
 ## 4. File operations
 - **File CSV (Comma-Separated Values)** là một loại file văn bản được sử dụng để lưu trữ và truyền tải dữ liệu có cấu trúc dưới dạng bảng, trong đó các dữ liệu của các cột được phân tách bằng dấu phẩy (,) hoặc một ký tự ngăn cách khác.
-- Để mở một file, bạn có thể sử dụng hàm fopen(). Hàm này trả về một con trỏ FILE, và cần được kiểm tra để đảm bảo file đã mở thành công.
+- Để mở một file, bạn có thể sử dụng hàm fopen(). Hàm này trả về một con trỏ FILEm trỏ đến file đó, và cần được kiểm tra để đảm bảo file đã mở thành công.
   ```c
   FILE *file = fopen(const char *file_name, const char *access_mode);
   + const char *file_name: Địa chỉ và tên file
@@ -2739,10 +2739,17 @@ const char *json_str = "{"
 |ab+|Mở file với chế độ nối và đọc file dưới định dạng binary. Nếu file đã tồn tại thì trả về địa chỉ của phần tử cuối cùng của file. Nếu file chưa tồn tại thì sẽ tạo một file mới.|
 - Các thao tác với file
   |**Tên hàm**|**Mô tả**|
-  |:----------------------:|Sử dụng chuỗi được định dạng và danh sách đối số biến để lấy đầu vào từ một File|
-  |:----------------------:|------------------------|
-  
-
+  |:----------------------:|:----------------------|
+  |fscanf()|Sử dụng chuỗi được định dạng và danh sách đối số biến để lấy đầu vào từ một File|
+  |fgets()|Copy nội dung trong File vào mảng dùng để lưu trữ với tối đa số lượng phần tử của mảng hoặc tới khi gặp ký tự xuống dòng.|
+  |fgetc()|Lấy giá trị tại địa chỉ hiện tại của file, sau đó di chuyển tới địa chỉ tiếp theo. Kiểu trả về là char |
+  |fread()|Đọc một số lượng byte được chỉ định từ File .bin|
+  |fprintf()|Ghi chuỗi vào File, và có thể thêm danh sách các đối số|
+  |fputs()|Ghi chuỗi vào File|
+  |fputc()|Ghi một ký tự vào File|
+  |fwrite()|Ghi một số byte được chỉ định vào File .bin|
+  |fclose()|Đọc một số lượng byte được chỉ định từ File .bin|
+  |feof()|Để kiểm tra địa chỉ hiện tại có phải ký tự cuối cùng của File hay chưa| 
  </details>
  
 -----------------------------------------------------------------------------------------------------------------------------------------------
