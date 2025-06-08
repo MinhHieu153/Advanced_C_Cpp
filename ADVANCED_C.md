@@ -827,7 +827,7 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 &nbsp;+ Lỗi khi mở hoặc đọc tập tin (file not found).<br>
 &nbsp;+ Lỗi cấp phát bộ nhớ (bad allocation).<br>
 ### 3.2. **Cơ chế xử lý ngoại lệ:** giúp chương trình phản ứng kịp thời với các lỗi mà không làm gián đoạn toàn bộ chương trình.
-- Hầu hết các ngôn ngữ lập trình hiện đại như C++, Java, Python, C# đều hỗ trợ xử lý ngoại lệ thông qua các từ khóa chính như:
+- Hầu hết các ngôn ngữ lập trình hiện đại như C++, Java, Python, C# đều hỗ trợ xử lý ngoại lệ thông qua các từ khóa chính như:<br>
 &nbsp;+ **try:** Định nghĩa một khối lệnh có thể phát sinh lỗi.<br>
 &nbsp;+ **catch:** Xử lý ngoại lệ nếu có lỗi xảy ra.<br>
 &nbsp;+ **throw:** Ném ra một ngoại lệ khi xảy ra lỗi.<br>
