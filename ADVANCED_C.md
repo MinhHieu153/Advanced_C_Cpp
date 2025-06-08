@@ -52,7 +52,7 @@
 &nbsp;&nbsp;&nbsp;- &nbsp;**Ví dụ:**.<br>
 ```c
 #define Creat_func(name, cmd)        \
-int main()                           \
+int name()                           \
 {                                    \
      printf(#cmd);                   \
 }                                    \
