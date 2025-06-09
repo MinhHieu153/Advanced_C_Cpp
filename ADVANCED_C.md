@@ -1257,8 +1257,7 @@ union Data
   |:------------------------:|:------------------------:|:------------------------:|
   |Kích thước|Tổng kích thước thành viên + Padding|Tổng của thành viên lớn nhất + padding|
   |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
-  |Vùng nhớ - memory|Mỗi thành viên đều có vùng nhớ riêng|Dùng chung vùng nhớ|
-  |Truy xuất vùng nhớ|Không ảnh hưởng khi biến thành viên thay đổi|Ảnh hưởng khi biến thành viên không thay đổi|
+  |Truy xuất vùng nhớ|Không ảnh hưởng khi biến thành viên thay đổi|Ảnh hưởng khi biến thành viên thay đổi|
   
 </details>
 
