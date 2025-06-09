@@ -1134,7 +1134,7 @@ user3->name = "Hieu";
 - Ví dụ:<br>
 ```c
 typdef struct 
-{               // cấp phát theo thành viên lớn nhất là char* addr ( kích thước con trỏ phụ thuộc vào kiến trúc của hệ thống: 32bit, 64bit)=> cấp phát 8byte
+{  // cấp phát theo thành viên lớn nhất là char* addr ( kích thước con trỏ phụ thuộc vào kiến trúc của hệ thống: 32bit, 64bit)=> cấp phát 8byte
    char *name; // 0xa0, 0xa1, 0xa2, 0xa3 ( padding: 0xa1, 0xa2, 0xa3 )
    int age;    // 0xa4, 0xa5, 0xa6, 0xa7
    char *addr; // 0xa8, 0xa9, 0xaa, 0xab. 0xac, 0xad, 0xae, 0xaf
@@ -1150,12 +1150,12 @@ typdef struct
 ```c
 struct Example1 
 {
-    	uint8_t  arr1[5];
-    	uint16_t arr2[0];  
-uint16_t arr2[1]; 
-uint16_t arr2[2]; 
-uint16_t arr2[3];   
-uint32_t arr3[2];
+    uint8_t  arr1[5];
+    uint16_t arr2[0];  
+    uint16_t arr2[1]; 
+    uint16_t arr2[2]; 
+    uint16_t arr2[3];
+    uint32_t arr3[2];
 };
 ```
 => Cấp phát bộ nhớ:<br>
