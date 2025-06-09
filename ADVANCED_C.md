@@ -734,7 +734,7 @@ ptr = &funcA; // hoặc có thể viết ptr = funcA
 ## 1. Goto
 - **Goto:**: à một từ khóa trong ngôn ngữ lập trình C, cho phép chương trình nhảy đến một nhãn (label) đã được đặt trước đó trong cùng một hàm. 
 - Ưu điểm: Kiểm soát luồng chạy chương trình
-- Nhược điểm:
+- Nhược điểm:<br>
   &nbsp;+ Làm cho mã nguồn trở nên khó đọc và khó bảo trì.<br>
   &nbsp;+ Chỉ sử dụng trong cùng 1 hàm.<br>
 - Ví dụ:
