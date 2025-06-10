@@ -17,6 +17,10 @@
     Member funtions(){}  // hàm thành viên 
   };
   ```
+|Class|Struct|
+|:------------------------:|:------------------------:|
+|- Chứa biến và các hàm thành viên liên quan|- Chỉ chứa kiểu dữ liệu|
+|- Mắc định không truy suất biến thành viên|- Mắc định truy xuất biến thành viên|
 ## 2. Access_specifier - Phạm vi truy cập
 - **Access_specifier - Phạm vi truy cập tronmg class** là cách quy định mức độ truy cập của các thành viên (biến và phương thức) trong một lớp.
 - C++ cung cấp ba phạm vi truy cập chính:<br>
@@ -25,7 +29,7 @@
 &nbsp;+ protected.<br>
 - Mỗi phạm vi truy cập sẽ có đặc điểm riêng biệt và liên quan đến các tính chất hướng đối tượng khác nhau.
 - Ví dụ:
-  ```cpp
+  ```cpp                                      
   #include <iostream>
   using namespace std;
   
@@ -38,13 +42,13 @@
   class User
   {
       public:
-          int a;
+          int a;     // trong C++ a, b, c là thuộc tính ( property)
           double b;
           char c;
   
-          void create()
+          void create()    // trong class, create() gọi là phương thức(method)
           {
-              User user1; //user1 không bị trùng tên vì nó nằm ở phạm vị khác
+              User user1; //user1 không bị trùng tên vì nó nằm ở phạm vị khác (biến cục bộ trong class)
               
               user1.a = 100;
               user1.b = 200.5;
@@ -57,18 +61,24 @@
               cout << a << endl;
               cout << b << endl;
           }
-          void display1();
+          void display1();  // phạm vi bị giới hạn trong class
   };
-  
-  void User::display1()    //khi muốn truy xuất hàm trong class ra ngoài class
+
+    void display1()    //khác hàm display1() trong class do phạm vi là hàm toàn cục
   {
      cout << a << endl;
+     cout << b << endl;
+  }
+  
+  void User::display1()    //khi muốn khai báo 1 hàm ngoài class ta dùng toán tử ::
+  {
+     cout << a << endl;  // Hàm nằm cùng phạm vi class với biến a, b, c nên ta có thể dùng được
      cout << b << endl;
   }
 
   int main()
   {
-      User user1, user2;
+      User user1, user2;  // trong Class, user1, user2 gọi là đối tượng(biến cục bộ trong main)
   
       user1.a = 10;
       user1.b = 20.5;
