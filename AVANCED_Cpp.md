@@ -88,10 +88,224 @@
       return 0;
   }
   ```  
-## 3. Access_specifier - Phạm vi truy cập
+## 3. Constructor
+- **Constructor** trong C++ là một method (hàm) sẽ được tự động gọi khi khởi tạo object.
+- **Đặc điểm:** <br>
+&nbsp;+ Constructor sẽ có tên trùng với tên của class.<br>
+&nbsp;+ Constructor không có kiểu trả về.<br>
+&nbsp;+ Tự động gọi khi mình khởi tạo class. <br>
+&nbsp;+ Thường dùng để khởi tạo giá trị ban đầu cho các biến trong class.<br>
+- **Các dạng Constructor:** <br>
+&nbsp;+ Constructor không tham số.<br>
+&nbsp;+ Có tham số nhưng không có giá trị mặc định => khi khai báo object phải có kèm tham số.<br>
+&nbsp;+ Có tham số nhưng có giá trị mặc định => Khi khởi tạo object không cần thiết truyền tham số. <br>
+&nbsp;+ initialization list - danh sách khởi tạo.<br>
+- Ví dụ:
+```c
+  class User
+  {
+      public:
+          int a;     // trong C++ a, b, c là thuộc tính ( property)
+          double b;
+          char c;
 
+          // Constructor có tham số nhưng không có giá trị mặc định 
+          User(int _a,double _b,char _c) 
+          {
+            a = _a;
+            b = _b;
+            c = _c;
+          }
 
+          /* Constructor có tham số có giá trị mắc định
+          User(int _a = 2,double _b = 4,char _c = 'd') 
+          {
+            a = _a;
+            b = _b;
+            c = _c;
+          }
+          */
+
+           /* Constructor danh sách khởi tạo (initialization list)
+          User(int _a = 2,double _b = 4,char _c = 'd') 
+               : a(_a), b(_b), (_c){}   // dấu : báo sẽ dùng danh sách khởi tạo
+          */
+
+          void create()    // trong class, create() gọi là phương thức(method)
+          {
+              User user1(int 1, 2, 3); //user1 không bị trùng tên vì nó nằm ở phạm vị khác (biến cục bộ trong class)
+              
+              user1.a = 100;
+              user1.b = 200.5;
   
+              user1.display();
+          }
+
+           void display()        // định nghĩa hàm bên trong class
+          {
+              cout << a << endl;
+              cout << b << endl;
+          }
+          void display1();  // phạm vi bị giới hạn trong class
+  };
+
+    void display1()    //khác hàm display1() trong class do phạm vi là hàm toàn cục
+  {
+     cout << a << endl;
+     cout << b << endl;
+  }
+  
+  void User::display1()    //khi muốn khai báo 1 hàm ngoài class ta dùng toán tử ::
+  {
+     cout << a << endl;  // Hàm nằm cùng phạm vi class với biến a, b, c nên ta có thể dùng được
+     cout << b << endl;
+  }
+
+  int main()
+  {
+      User user1(int 1, 2, 4), user2(int 2, 3, 4);  // Với constructor có tham số nhưng không có giá trị mắc định thì khi khai báo phải có kèm tham số
+  
+      user1.a = 10;
+      user1.b = 20.5;
+  
+      user1.display();
+      user1.create();
+      return 0;
+  }
+```
+## 4. Destructor
+- Destructor trong C++ là một method sẽ được tự động gọi trước khi object được giải phóng.
+- Destructor sẽ có tên trùng với tên của class và thêm ký tự ~ ở phía trước tên.
+- Không được phép viết tham số
+- Thường dùng để xóa dữ liệu biến
+- Ví dụ:
+```c
+  class User
+  {
+      public:
+          int a;     // trong C++ a, b, c là thuộc tính ( property)
+          double b;
+          char c;
+
+           //Constructor danh sách khởi tạo (initialization list)
+          User(int _a = 2,double _b = 4,char _c = 'd') 
+               : a(_a), b(_b), (_c){}   // dấu : báo sẽ dùng danh sách khởi tạo
+
+          // Destructor
+          ~User() //Không có tham số
+          {
+            count << "This is destructor\n";
+          }
+
+          void create()    // trong class, create() gọi là phương thức(method)
+          {
+              User user1 //user1 không bị trùng tên vì nó nằm ở phạm vị khác (biến cục bộ trong class)
+              
+              user1.a = 100;
+              user1.b = 200.5;
+  
+              user1.display();
+          }
+
+           void display()        // định nghĩa hàm bên trong class
+          {
+              cout << a << endl;
+              cout << b << endl;
+          }
+          void display1();  // phạm vi bị giới hạn trong class
+  };
+
+    void display1()   
+  {
+     cout << a << endl;
+     cout << b << endl;
+  }
+  
+  void User::display1()    //khi muốn khai báo 1 hàm ngoài class ta dùng toán tử ::
+  {
+     cout << a << endl;  
+     cout << b << endl;
+  }
+
+  int main()
+  {
+      User user1, user2;  
+  
+      user1.a = 10;
+      user1.b = 20.5;
+  
+      user1.display();
+      user1.create();
+      return 0;
+  }
+```
+## 5. Static property
+- Khi một property trong class được khai báo với từ khóa static, thì tất cả các object sẽ dùng chung địa chỉ của property này
+```c
+  class User
+  {
+      public:
+          int a;     // trong C++ a, b, c là thuộc tính ( property)
+          double b;
+          char c;
+
+          static int x; 
+
+  };
+
+// Do x khai báo static nên vùng nhớ ban đầu sẽ chưa tạo ra cần phải khởi tạo cho nó và khởi tạo ngoài main và class
+int User::x = 0; // Khỏi tạo cho biến x
+
+int main()
+  {
+      User user1, user2;  
+  
+      // user1.x, user2.x  cùng chung địa chỉ vì x khai báo static
+      user1.x =100;
+      user2.x =200;
+      return 0;
+  }
+```
+## 6. Static method - Hàm static
+- Khi một method trong class được khai báo với từ khóa static:
+&nbsp;+ Method này độc lập với bất kỳ đối tượng nào của lớp.
+&nbsp;+ Method này có thể được gọi ngay cả khi không có đối tượng nào của class tồn tại.
+&nbsp;+ Method này có thể được truy cập bằng cách sử dụng tên class thông qua toán tử :: 
+&nbsp;+ Method này có thể truy cập các static property và các static method bên trong hoặc bên ngoài class.
+&nbsp;+ Method có phạm vi bên trong class và không thể truy cập con trỏ đối tượng hiện tại.
+- ví dụ:
+```c
+  class User
+  {
+      public:
+          int a;     // trong C++ a, b, c là thuộc tính ( property)
+          double b;
+          char c;
+
+          static int x; 
+
+          static void test()
+          {
+            cout << a << b << c; //báo lỗi vì Method có phạm vi bên trong class và không thể truy cập con trỏ đối tượng hiện tại
+            cout << x; // Method này có thể truy cập các static property và các static method bên trong hoặc bên ngoài class.
+          }
+  };
+
+int User::x = 0; // Khỏi tạo cho biến x
+
+int main()
+  {
+      User user1, user2;  
+  
+      // user1.x, user2.x  cùng chung địa chỉ vì x khai báo static
+      user1.x =100;
+      user2.x =200;
+
+      User :: test(); // Gọi trực tiếp bằng class không thông qua object
+      
+      return 0;
+  }
+```
  </details>
 
   
