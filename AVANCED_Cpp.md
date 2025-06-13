@@ -3,7 +3,7 @@
 
 <details>
 <summary><b>📖BÀI 1: CLASS</b></summary>
-
+  
 ## 1. Khái niệm
 - Trong C++, **"class"** được sử dụng để định nghĩa một lớp, là một cấu trúc dữ liệu tự định nghĩa có thể chứa biến và các hàm thành viên liên quan.
 - **class  - lớp** là nền tảng của lập trình hướng đối tượng (OOP) trong C++.
@@ -307,6 +307,10 @@ int main()
   }
 ```
  </details>
-
-  
 -----------------------------------------------------------------------------------------------------------------------------------------------
+<details>
+<summary><b>📖BÀI 1: CLASS</b></summary>
+
+## 1. Khái niệm
+
+ </details>
