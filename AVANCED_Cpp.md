@@ -24,8 +24,8 @@
 ## 2. Access_specifier - Phạm vi truy cập
 - **Access_specifier - Phạm vi truy cập tronmg class** là cách quy định mức độ truy cập của các thành viên (biến và phương thức) trong một lớp.
 - C++ cung cấp ba phạm vi truy cập chính:<br>
-&nbsp;+ Public.<br>
-&nbsp;+ Private.<br>
+&nbsp;+ Public: Có thể truy cập từ bên ngoài và bên trong.<br>
+&nbsp;+ Private: Không thể truy cập từ bên ngoài.<br>
 &nbsp;+ protected.<br>
 - Mỗi phạm vi truy cập sẽ có đặc điểm riêng biệt và liên quan đến các tính chất hướng đối tượng khác nhau.
 - Ví dụ:
@@ -307,10 +307,21 @@ int main()
   }
 ```
  </details>
+ 
 -----------------------------------------------------------------------------------------------------------------------------------------------
-<details>
-<summary><b>📖BÀI 1: CLASS</b></summary>
 
-## 1. Khái niệm
+<details>
+<summary><b>📖BÀI 2: OPP</b></summary>
+
+## 1. Tính đóng gói
+- **Tính đóng gói (Encapsulation)** là ẩn đi các property “mật” khỏi người dùng. Và để làm được điều này, ta sẽ khai báo các property ở quyền truy cập **private/protected** (tức là không thể truy cập trực tiếp tới các property này thông qua object bên ngoài).
+- **Tính đóng gói (Encapsulation)** là ẩn đi các biến (property).
+- Trong trường hợp ta muốn đọc hoặc ghi các property này, thì ta sẽ truy cập gián tiếp thông qua các method ở quyền truy cập public.
+- Ví dụ:
+```c
+```
+## 2. Tính trừu tượng
+- **Tính trừu tượng** đề cập đến việc ẩn đi các chi tiết cụ thể của một đối tượng và chỉ hiển thị những gì cần thiết để sử dụng đối tượng đó. Và để làm được điều này, ta sẽ khai báo các method ở quyền truy cập private/protected.
+- **Tính trừu tượng** là ẩn đi các hàm.
 
  </details>
