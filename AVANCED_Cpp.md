@@ -315,13 +315,133 @@ int main()
 
 ## 1. Tính đóng gói
 - **Tính đóng gói (Encapsulation)** là ẩn đi các property “mật” khỏi người dùng. Và để làm được điều này, ta sẽ khai báo các property ở quyền truy cập **private/protected** (tức là không thể truy cập trực tiếp tới các property này thông qua object bên ngoài).
-- **Tính đóng gói (Encapsulation)** là ẩn đi các biến (property).
 - Trong trường hợp ta muốn đọc hoặc ghi các property này, thì ta sẽ truy cập gián tiếp thông qua các method ở quyền truy cập public.
 - Ví dụ:
 ```c
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SinhVien{
+    private:
+        string name;    // tính đóng gói
+        int age;        // tính đóng gói
+        int id;         // tính đóng gói
+};
 ```
 ## 2. Tính trừu tượng
-- **Tính trừu tượng** đề cập đến việc ẩn đi các chi tiết cụ thể của một đối tượng và chỉ hiển thị những gì cần thiết để sử dụng đối tượng đó. Và để làm được điều này, ta sẽ khai báo các method ở quyền truy cập private/protected.
-- **Tính trừu tượng** là ẩn đi các hàm.
+- **Tính trừu tượng** đề cập đến việc ẩn đi các chi tiết cụ thể của một đối tượng và chỉ hiển thị những gì cần thiết để sử dụng đối tượng đó ( ẩn đi các hàm). Và để làm được điều này, ta sẽ khai báo các method ở quyền truy cập private/protected.
+- Ví dụ:
+```c
+#include <iostream>
+#include <string>
+using namespace std;
 
+class SinhVien{
+    private:
+        string name;    // tính đóng gói
+        int age;        // tính đóng gói
+        int id;         // tính đóng gói
+
+        // Hàm kiểm tra tên sinh viên có hợp lệ không
+        bool checkName(string str)        // Tính trừu tượng
+        {
+            for (int i = 0; i < str.length(); i++)
+            {
+                char c = str[i];
+                if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c == ' ')))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Hàm kiểm tra tuổi sinh viên có hợp lệ không
+        bool checkAge(int age)            // Tính trừu tượng
+        {
+            if (age <= 0) return false;
+            return true;
+        }
+
+    public:
+            SinhVien(){
+                static int ID = 1;
+                id = ID;
+                ID++;
+            }
+
+            // setter method: Hàm để cài đặt dữ liệu
+            void setName(string newName)
+            {
+                if (checkName(newName))
+                {
+                    cout << "Ten hop le!\n";
+                    name = newName;
+                }
+                else
+                {
+                    cout << "Ten khong hop le!\n";
+                    name = "";
+                }
+            }
+
+            // setter method: Hàm để cài đặt dữ liệu
+            void setAge(int newAge)
+            {
+                if (checkAge(newAge))
+                {
+                    cout << "Tuoi hop le!\n";
+                    age = newAge;
+                }
+                else
+                {
+                    cout << "Tuoi hop le!\n";
+                    age = 0;
+                }
+            }
+
+            // getter method: Hàm để lấy dữ liệu
+            string getName()
+            {   
+                return name;
+            }
+
+            // getter method: Hàm để lấy dữ liệu
+            int getAge()
+            {   
+                return age;
+            }
+
+            // getter method: Hàm để lấy dữ liệu
+            int getID()
+            {
+                return id;
+            }
+    
+           // Hàm hiển thị
+          void display()
+          {
+              cout << "Ten: " << getName() << endl;
+              cout << "Tuoi: " << getAge() << endl;
+              cout << "MSV: " << getID() << endl;
+          }
+};
+
+int main()
+{
+    SinhVien sv1, sv2;
+
+    sv1.setName("Trung");
+    sv1.setAge(18);
+    sv1.display();
+
+    sv2.setName("Anh");
+    sv2.setAge(20);
+    sv2.display();
+
+    return 0;
+}
+
+```
  </details>
