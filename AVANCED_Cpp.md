@@ -26,7 +26,7 @@
 - C++ cung cấp ba phạm vi truy cập chính:<br>
 &nbsp;+ Public: Có thể truy cập từ bên ngoài và bên trong.<br>
 &nbsp;+ Private: Không thể truy cập từ bên ngoài.<br>
-&nbsp;+ protected.<br>
+&nbsp;+ protected: Không thể truy cập từ bên ngoài nhưng class bên trong và class kế thừa được phép truy cập.<br>
 - Mỗi phạm vi truy cập sẽ có đặc điểm riêng biệt và liên quan đến các tính chất hướng đối tượng khác nhau.
 - Ví dụ:
   ```cpp                                      
@@ -365,6 +365,7 @@ class SinhVien{
         }
 
     public:
+            // Constructor
             SinhVien(){
                 static int ID = 1;
                 id = ID;
@@ -443,5 +444,209 @@ int main()
     return 0;
 }
 
+```
+## 2. Tính kế thừa
+- **Tính kế thừa ( Inheritance)** là khả năng sử dụng lại các property và method của một class trong một class khác và có thể mở rộng thêm tính năng.
+- Ta chia chúng làm 2 loại:<br>
+&nbsp;+ **class cha (base class)**: Chứa thông tin class khác muốn sử dụng lại.  
+&nbsp;+ **class con (derived class)**: Sử dụng lại thông tin class có sẵn.<br>
+- Để kế thừa từ class khác, ta dùng ký tự ":".
+- Có 3 kiểu kế thừa là public, private và protected. Những property và method được kế thừa từ class cha sẽ nằm ở quyền truy cập của class con tương ứng với kiểu kế thừa.
+- **protected**: Những biến và hàm nằm ở phạm vi này sẽ không thể truy cập từ đối tượng bên ngoài nhưng có thể truy cập trực tiếp từ các class bên trong và class kế thừa
+- Phạm vị:<br>
+&nbsp;+ Đối với kế thừa theo kiểu Public: Giữ nguyên toàn bộ những đặc tính ban đầu nó có thể kế thừa được gồm **protected** và **public** (**private** không thể kế thừa được vì nó không cho phép truy xuất từ bên ngoài).<br>
+&nbsp;+ Đối với kế thừa theo kiểu protected: Nó sẽ kế thừa được **protected** và **public** nhưng nó sẽ thay đổi tính chất nó kế thừa và chuyền về **protected**.<br>
+&nbsp;+ Đối với kế thừa theo kiểu private: Nó sẽ kế thừa được **protected** và **public** nhưng nó sẽ thay đổi tính chất nó kế thừa và chuyền về **private**.<br>
+- **Đa kế thừa** là 1 class kế thừa từ nhiều class khác
+- Ví dụ:
+```c
+#include <iostream>
+#include <string>
+using namespace std;
+
+class DoiTuong
+{
+    /* protected: 
+        - Những biến và hàm nằm ở phạm vi này sẽ không thể truy cập 
+        từ đối tượng bên ngoài nhưng có thể truy cập trực tiếp từ các class 
+        bên trong và class kế thừa
+     */
+    protected:
+        string name;
+        int age;
+        int id;
+
+        // Hàm kiểm tra tên sinh viên có hợp lệ không
+        bool checkName(string str)        // Tính trừu tượng
+        {
+            for (int i = 0; i < str.length(); i++)
+            {
+                char c = str[i];
+                if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c == ' ')))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Hàm kiểm tra tuổi sinh viên có hợp lệ không
+        bool checkAge(int age)            // Tính trừu tượng
+        {
+            if (age <= 0) return false;
+            return true;
+        }
+        
+    public:
+        DoiTuong()          // Constructor
+        {
+            static int ID = 1;
+            DoiTuong::id = ID;
+            ID++;
+        }
+        // setter method: Hàm để cài đặt dữ liệu
+        void setName(string newName)
+        {
+            if (checkName(newName))
+            {
+                cout << "Ten hop le!\n";
+                name = newName;
+            }
+            else
+            {
+                cout << "Ten khong hop le!\n";
+                name = "";
+            }
+        }
+
+        // setter method: Hàm để cài đặt dữ liệu
+        void setAge(int newAge)
+        {
+            if (checkAge(newAge))
+            {
+                cout << "Tuoi hop le!\n";
+                age = newAge;
+            }
+            else
+            {
+                cout << "Tuoi hop le!\n";
+                age = 0;
+            }
+        }
+
+        // getter method: Hàm để lấy dữ liệu
+        string getName()
+        {   
+            return name;
+        }
+
+        // getter method: Hàm để lấy dữ liệu
+        int getAge()
+        {   
+            return age;
+        }
+
+        // getter method: Hàm để lấy dữ liệu
+        int getID()
+        {
+            return id;
+        }
+
+        // Hàm hiển thị
+        void display()
+        {
+            cout << "Ten: " << getName() << endl;
+            cout << "Tuoi: " << getAge() << endl;
+            cout << "MSV: " << getID() << endl;
+        }
+    
+};
+
+class SinhVien : public DoiTuong  // 1 class sử dụng lại thông tin class khác => tính kế thừa
+{
+    private:
+        string chuyenNganh;
+
+    public:
+        void setchuyennganh(string newCN)
+        {
+            /*
+            SinhVien sv;
+            sv.setName("Hieu");
+            sv.name = "Hieu";  // protected chỉ được truy xuất từ bên trong không truy xuất 
+                                 từ bên ngoài
+            */
+            chuyenNganh = newCN;
+        }
+
+        string getCN()
+        {
+            return chuyenNganh;
+        }
+
+        void display(int x = 2)  // overload: những hàm trung tên với nhau - Dùng mở rộng tính năng của hàm không nhất thiết phải giống hàm cũ hoàn toàn
+        {
+            DoiTuong::display();
+            cout << "Chuyen nganh: " << getCN() << endl ;
+             cout << "x= " << x << endl << endl;  // Hàm khi định nghĩa lại có thể thêm tham số
+        }
+  
+};
+
+class HocSinh : protected DoiTuong  // khi 1 class đu
+{
+    private:
+        string lophoc;
+
+    public:
+        void setlophoc(string newLN)
+        {
+            /*
+            SinhVien sv;
+            sv.setName("Hieu");
+            sv.name = "Hieu";  // protected chỉ được truy xuất từ bên trong không truy xuất 
+                                 từ bên ngoài
+            */
+            lophoc = newLN;
+        }
+
+        string getLH()
+        {
+            return lophoc;
+        }
+
+        void display()  // overload: những hàm trung tên với nhau - Dùng mở rộng tính năng của hàm
+        {
+            DoiTuong::display();
+            cout << "Lop hoc: " << getLH() << endl << endl;
+        }
+  
+};
+
+// Đa kế thừa là 1 class kế thừa từ nhiều class khác
+class test : public HocSinh, protected SinhVien, private DoiTuong
+{};
+
+int main()
+{
+    DoiTuong dt;
+
+    SinhVien sv1, sv2;
+
+    sv1.setName("Hieu");
+    sv1.setAge(25);
+    sv1.setchuyennganh("DTD59DH");
+    sv1.display();
+
+    HocSinh hs1;
+    /* Do kế thừa kiểu protected lên không thể truy xuất từ bên ngoài như dưới
+    hs1.setName("Trung");
+    hs1.setAge(25);
+    */
+    hs1.setlophoc("12A9");
+    hs1.display();          // Hàm này truy xuất được vì nó được định nghĩa lại
+
+    return 0;
+}
 ```
  </details>
