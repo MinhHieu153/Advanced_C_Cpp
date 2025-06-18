@@ -445,7 +445,7 @@ int main()
 }
 
 ```
-## 2. Tính kế thừa
+## 3. Tính kế thừa
 - **Tính kế thừa ( Inheritance)** là khả năng sử dụng lại các property và method của một class trong một class khác và có thể mở rộng thêm tính năng.
 - Ta chia chúng làm 2 loại:<br>
 &nbsp;+ **class cha (base class)**: Chứa thông tin class khác muốn sử dụng lại.  
