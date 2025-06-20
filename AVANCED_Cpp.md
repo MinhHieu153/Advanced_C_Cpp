@@ -812,7 +812,7 @@ int main()
     return 0;
 }
 ```
-## 3. Override
+## 3. Override và Tính đa hình run-time
 - **Override** là việc ghi đè hàm ảo ở class con bằng cách định nghĩa lại nó. 
 - Khi một hàm ảo được ghi đè, hành vi của nó sẽ **phụ thuộc vào kiểu của đối tượng thực tế**, chứ không phải kiểu của con trỏ hay tham chiếu.
 - **Tính đa hình run-time** xảy ra khi quyết định gọi hàm nào (phiên bản của class cha hay class con) được đưa ra tại **thời điểm chạy**, không phải lúc biên dịch, giúp mở rộng chức năng. Điều này giúp chương trình linh hoạt hơn, giúp xác định đối tượng để gọi hàm cho hợp lý.
@@ -831,7 +831,8 @@ int main()
 #include <iostream>
 using namespace std;
 
-class cha{
+class cha    // class trừu tượng
+{
     public:
         virtual void display() = 0; // Hàm ảo thuần túy
 };
@@ -844,7 +845,7 @@ class con : public cha{
 };
 
 int main(){
-    // cha ptr; // wrong
+    // cha ptr; // wrong - không thể tạo đối tượng vì là class trìu tượng
     cha *ptr;
     con obj;
 
@@ -855,3 +856,74 @@ int main(){
 }
 ```
  </details>
+ 
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<details>
+<summary><b>📖BÀI 4: Compile-time Polymorphism</b></summary>
+  
+## 1. Khái niệm
+- **Compile-time Polymorphism**: là đa hình xảy ra ở quá trình biên dịch
+- Chia làm 2 dạng:<br>
+&nbsp;+ Nạp chồng hàm (Function Overloading).<br>
+&nbsp;+ Nạp chồng toán tử (Operator Overloading).
+## 2. Function Overloading
+- **Nạp chồng hàm (Function Overloading)** là việc định nghĩa **nhiều hàm cùng tên** nhưng **khác tham số** trong cùng một phạm vi. 
+- Trình biên dịch sẽ chọn hàm phù hợp dựa trên **kiểu** và **số lượng đối số** khi gọi hàm.
+- ví dụ:
+```c
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 1 method có thể có nhiều input parameter, return type khác nhau
+class TinhToan{
+    private:
+        int a;
+        int b;
+    public:
+        // Method cùng tên không bắt buộc khác kiểu trả về nhưng bắt buộc khác tham số
+        int tong(int a, int b)
+        {
+            return a+b;
+        }
+
+        // Method lỗi vì chỉ khác kiểu trả về
+        //double tong(int a, int b)  
+        //{                      
+         //    return a+b;
+        //}
+
+        // Method cùng tên nhưng khác số lượng tham số
+        double tong(int a, int b, int c, double d){
+            return (double)a+b+c+d;
+        }
+
+        // Method cùng tên nhưng khác tham số
+        double tong(int a, double b){
+            return (double)a+b;
+        }
+};
+
+int main(int argc, char const *argv[])
+{
+    TinhToan th, th1, th2;
+    cout << th.tong(2, 5) << endl;
+    cout << th1.tong(2, 5, 7, 6.7) << endl;
+    cout << th2.tong(2, 3.5) << endl;
+    return 0;
+}
+```
+## 3. Operator Overloading
+- **Nạp chồng toán tử (Operator Overloading)** là việc định nghĩa lại cách hoạt động của các toán tử (+, -, , =, ==, <<, >>,...) cho các kiểu dữ liệu do người dùng định nghĩa (class/struct).
+- Cú pháp:
+```c
+<return_type> operator symbol (parameter)
+{
+    // logic của toán tử
+}
+```
+</details>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
