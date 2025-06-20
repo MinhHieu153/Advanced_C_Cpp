@@ -101,7 +101,7 @@
 &nbsp;+ Có tham số nhưng có giá trị mặc định => Khi khởi tạo object không cần thiết truyền tham số. <br>
 &nbsp;+ initialization list - danh sách khởi tạo.<br>
 - Ví dụ:
-```c
+```cpp
   class User
   {
       public:
@@ -179,7 +179,7 @@
 - Không được phép viết tham số
 - Thường dùng để xóa dữ liệu biến
 - Ví dụ:
-```c
+```cpp
   class User
   {
       public:
@@ -241,7 +241,7 @@
 ```
 ## 5. Static property
 - Khi một property trong class được khai báo với từ khóa static, thì tất cả các object sẽ dùng chung địa chỉ của property này
-```c
+```cpp
   class User
   {
       public:
@@ -274,7 +274,7 @@ int main()
 &nbsp;+ Method này có thể truy cập các static property và các static method bên trong hoặc bên ngoài class.
 &nbsp;+ Method có phạm vi bên trong class và không thể truy cập con trỏ đối tượng hiện tại.
 - ví dụ:
-```c
+```cpp
   class User
   {
       public:
@@ -317,7 +317,7 @@ int main()
 - **Tính đóng gói (Encapsulation)** là ẩn đi các property “mật” khỏi người dùng. Và để làm được điều này, ta sẽ khai báo các property ở quyền truy cập **private/protected** (tức là không thể truy cập trực tiếp tới các property này thông qua object bên ngoài).
 - Trong trường hợp ta muốn đọc hoặc ghi các property này, thì ta sẽ truy cập gián tiếp thông qua các method ở quyền truy cập public.
 - Ví dụ:
-```c
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -332,7 +332,7 @@ class SinhVien{
 ## 2. Tính trừu tượng
 - **Tính trừu tượng** đề cập đến việc ẩn đi các chi tiết cụ thể của một đối tượng và chỉ hiển thị những gì cần thiết để sử dụng đối tượng đó ( ẩn đi các hàm). Và để làm được điều này, ta sẽ khai báo các method ở quyền truy cập private/protected.
 - Ví dụ:
-```c
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -459,7 +459,7 @@ int main()
 &nbsp;+ Đối với kế thừa theo kiểu private: Nó sẽ kế thừa được **protected** và **public** nhưng nó sẽ thay đổi tính chất nó kế thừa và chuyền về **private**.<br>
 - **Đa kế thừa** là 1 class kế thừa từ nhiều class khác
 - Ví dụ:
-```c
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -666,7 +666,7 @@ int main()
 - Khi một hàm là virtual, nó có thể được ghi đè (override) trong class con để cung cấp cách triển khai riêng.
 - Khi gọi một hàm ảo thông qua một con trỏ hoặc tham chiếu đến lớp con, hàm sẽ được quyết định dựa trên đối tượng thực tế mà con trỏ hoặc tham chiếu đang trỏ tới chứ không dựa vào kiểu của con trỏ.
 - Ví dụ:
-```c
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -827,7 +827,7 @@ int main()
 - Abstract Class: Có ít nhất một hàm thuần ảo và các hàm khác không phải thuần ảo.
 - Interface: Là class mà hàm bên trong là hàm thuần ảo.
 - Ví dụ:
-```c
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -871,7 +871,7 @@ int main(){
 - **Nạp chồng hàm (Function Overloading)** là việc định nghĩa **nhiều hàm cùng tên** nhưng **khác tham số** trong cùng một phạm vi. 
 - Trình biên dịch sẽ chọn hàm phù hợp dựa trên **kiểu** và **số lượng đối số** khi gọi hàm.
 - ví dụ:
-```c
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -915,14 +915,28 @@ int main(int argc, char const *argv[])
 }
 ```
 ## 3. Operator Overloading
+- Tất cả toán tử đều không mặc định dùng cho kiểu dữ liệu tự định nghĩa ra, nó chỉ mặc định cho toán tử nguyên thủy
+=> Muốn sử dụng kiểu dữ liệu tự định nghĩa phải định nghĩa lại toán tử cho class tham số
 - **Nạp chồng toán tử (Operator Overloading)** là việc định nghĩa lại cách hoạt động của các toán tử (+, -, , =, ==, <<, >>,...) cho các kiểu dữ liệu do người dùng định nghĩa (class/struct).
 - Cú pháp:
-```c
+```cpp
 <return_type> operator symbol (parameter)
 {
     // logic của toán tử
 }
 ```
+- Các toán tử có thể dịnh nghĩa:
+```cpp
++	–	*	/	%	^	&	|	~	!	=	<	>	+=	-=	*=
+/=	%=	^=	&=	|=	<<	>>	>>=		<<=	==	!=	<=	>=	&&	||	++
+—	->*	,	->	[]	()	new	delete	new[]	delete[]
+```
+- Các toán tử không thể định nghĩa lại:<br>
+&nbsp;+ Toán tử . (chấm) <br>
+&nbsp;+ Toán tử phạm vi :: <br> 
+&nbsp;+ Toán tử điều kiện ?: <br>
+&nbsp;+ Toán tử sizeof <br>
+
 </details>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
