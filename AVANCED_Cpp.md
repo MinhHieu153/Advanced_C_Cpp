@@ -127,13 +127,12 @@
           */
 
            /* Constructor danh sách khởi tạo (initialization list)
-          User(int _a = 2,double _b = 4,char _c = 'd') 
-               : a(_a), b(_b), (_c){}   // dấu : báo sẽ dùng danh sách khởi tạo
+          User(int _a = 2,double _b = 4,char _c = 'd') : a(_a), b(_b), (_c){}   // dấu : báo sẽ dùng danh sách khởi tạo
           */
 
           void create()    // trong class, create() gọi là phương thức(method)
           {
-              User user1(int 1, 2, 3); //user1 không bị trùng tên vì nó nằm ở phạm vị khác (biến cục bộ trong class)
+              User user1(1, 2, 3); //user1 không bị trùng tên vì nó nằm ở phạm vị khác (biến cục bộ trong class)
               
               user1.a = 100;
               user1.b = 200.5;
@@ -163,7 +162,7 @@
 
   int main()
   {
-      User user1(int 1, 2, 4), user2(int 2, 3, 4);  // Với constructor có tham số nhưng không có giá trị mắc định thì khi khai báo phải có kèm tham số
+      User user1(1, 2, 4), user2(2, 3, 4);  // Với constructor có tham số nhưng không có giá trị mắc định thì khi khai báo phải có kèm tham số
   
       user1.a = 10;
       user1.b = 20.5;
