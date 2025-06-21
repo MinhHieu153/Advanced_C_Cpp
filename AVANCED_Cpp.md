@@ -935,7 +935,134 @@ int main(int argc, char const *argv[])
 &nbsp;+ Toán tử phạm vi :: <br> 
 &nbsp;+ Toán tử điều kiện ?: <br>
 &nbsp;+ Toán tử sizeof <br>
+- Ví dụ:
+```cpp
+#include <iostream>
+using namespace std;
 
+class Complex
+{
+    private:
+        double realPart;    // phần thực
+        double imagPart;    // phần ảo
+   
+    public:
+        // Khởi tạo 1 số phức gồm phần thực ( realPart = real = 0 ) và phần ảo ( imagPart = imag = 0 )
+        Complex(double real = 0, double imag = 0): realPart(real), imagPart(imag){}     
+
+        // nạp chồng toán tử +
+        Complex operator + (const Complex other) const
+        {
+            Complex result;
+            // cộng phần thực và phần ảo của đối tượng hiện tại với phần thực và phần ảo của đối tượng truyền vào
+            result.realPart = Complex::realPart + other.realPart;
+            result.imagPart = Complex::imagPart + other.imagPart;
+            return result;
+        }
+
+        // nạp chồng toán tử so sánh bằng (==)
+        bool operator == (const Complex other) const
+        {
+            // Trả về true nếu phần thực và phần ảo của đối tượng hiện tại bằng với phần thực và phần ảo của đối tượng truyền vào
+            return (Complex::realPart == other.realPart && Complex::imagPart == other.imagPart);
+        }
+
+        // hàm hiển thị
+        void display() const
+        {
+            cout << realPart << " + " << imagPart << "i" << endl;
+        }
+};
+
+int main()
+{
+    Complex c1(3,4);
+    Complex c2(5,6);
+    Complex c3 = c1 + c2;
+    c1.display();
+    c2.display();
+    c3.display();
+
+    if (c1 == c2){
+        cout << "Hai số phức bằng nhau" << endl;
+    } else {
+        cout << "Hai số phức không bằng nhau" << endl;
+    }
+    return 0;
+}
+```
+## 4. This Pointer - Con trỏ this
+- Khi khai báo 1 class thì compiler ngầm định tạo sẵn 1 con trỏ trỏ tới đối tượng gọi hàm thành viên ra
+- **this** là một **con trỏ ẩn (ẩn danh)** có sẵn trong mọi hàm thành viên (method) của class. Nó trỏ đến đối tượng hiện tại mà hàm đang được gọi trên.
+
+|Đặc điểm|Chi tiết|
+|:------------------------|:------------------------|
+|1️⃣ Chỉ xuất hiện trong hàm thành viên|**this** chỉ tồn tại trong hàm thành viên của class, không có trong các **hàm static** hoặc **hàm global**|
+|2️⃣ Trỏ đến đối tượng hiện tại|**this** là con trỏ trỏ đến đối tượng gọi hàm hiện tại.|
+|3️⃣ Có kiểu là con trỏ đến class|Trong class **Person**, thì this có kiểu là **Person***|
+|4️⃣Là constant pointer - hằng con trỏ|Không thể thay đổi giá trị của con trỏ **Person const*this**|
+|5️⃣Phân biệt biến thành viên và tham số cùng tên|this→ giúp truy cập chính xác biến trong class.
+|6️⃣Không dùng được trong static function	|Vì static function không gắn với bất kỳ object nào ⇒ không có this.
+- Ví dụ:
+```cpp
+class Student
+{
+    private:
+        std::string name;
+
+    public:
+        void setName(std::string name)
+        {
+            this->name = name; // this giúp phân biệt rõ ràng giữa biến thành viên và tham số truyền vào
+        }
+};
+```
+## 5. Tham trị (Pass by Value)
+- **Tham trị** là cách truyền một bản sao của biến vào hàm. Mọi thay đổi trong hàm không ảnh hưởng đến biến gốc bên ngoài.
+- Ví dụ:
+```cpp
+void modify(int x){ x = x + 10;}
+
+int main()
+{
+    int a = 5;
+    modify(a);
+    cout << a << endl; // Output: 5
+}
+```
+## 6.Tham chiếu (Pass by Reference)
+- **Tham chiếu** là cách tạo ra một tên khác để truy cập cùng một vùng nhớ của một biến đã tồn tại.
+- Cú pháp:
+```cpp
+type& referenceName = variable;
+```
+&nbsp;+ **type:** kiểu dữ liệu.<br>
+&nbsp;+ **&:** ký hiệu cho tham chiếu (khác với con trỏ).<br>
+&nbsp;+ **referenceName:** tên tham chiếu.<br>
+&nbsp;+ **variable:** biến đã khai báo.<br>
+- Ví dụ:
+```cpp
+void swap(int &x, int &y)
+{
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+int main() {
+    int a = 5, b = 10;
+    swap(a, b);  
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+}
+```
+- Khác nhau giữa tham chiếu và con trỏ
+|Con trỏ|Tham chiếu|
+|:------------------------|:------------------------|
+|Dùng dấu *|Dùng dấu &|
+|Con trỏ là biến|Tham chiếu là tên|
+|Truyền địa chỉ|Truyền tên|
+|Có thể chưa tồn tại = NULL|Bắt buộc phải tồn tại # NULL|
+|Làm tốn bộ nhớ RAM|không phải biến không tốn bộ nhớ RAM|
 </details>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
