@@ -266,12 +266,12 @@ int main()
   }
 ```
 ## 6. Static method - Hàm static
-- Khi một method trong class được khai báo với từ khóa static:
-&nbsp;+ Method này độc lập với bất kỳ đối tượng nào của lớp.
-&nbsp;+ Method này có thể được gọi ngay cả khi không có đối tượng nào của class tồn tại.
-&nbsp;+ Method này có thể được truy cập bằng cách sử dụng tên class thông qua toán tử :: 
-&nbsp;+ Method này có thể truy cập các static property và các static method bên trong hoặc bên ngoài class.
-&nbsp;+ Method có phạm vi bên trong class và không thể truy cập con trỏ đối tượng hiện tại.
+- Khi một method trong class được khai báo với từ khóa static:<br>
+&nbsp;+ Method này độc lập với bất kỳ đối tượng nào của lớp.<br>
+&nbsp;+ Method này có thể được gọi ngay cả khi không có đối tượng nào của class tồn tại.<br>
+&nbsp;+ Method này có thể được truy cập bằng cách sử dụng tên class thông qua toán tử :: <br>
+&nbsp;+ Method này có thể truy cập các static property và các static method bên trong hoặc bên ngoài class.<br>
+&nbsp;+ Method có phạm vi bên trong class và không thể truy cập con trỏ đối tượng hiện tại.<br>
 - ví dụ:
 ```cpp
   class User
