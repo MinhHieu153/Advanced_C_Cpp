@@ -1056,6 +1056,7 @@ int main() {
 }
 ```
 - Khác nhau giữa tham chiếu và con trỏ
+
 |Con trỏ|Tham chiếu|
 |:------------------------|:------------------------|
 |Dùng dấu *|Dùng dấu &|
