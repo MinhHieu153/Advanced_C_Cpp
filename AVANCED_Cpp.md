@@ -1036,10 +1036,10 @@ int main()
 ```cpp
 type& referenceName = variable;
 ```
-&nbsp;+ **type:** kiểu dữ liệu.<br>
-&nbsp;+ **&:** ký hiệu cho tham chiếu (khác với con trỏ).<br>
-&nbsp;+ **referenceName:** tên tham chiếu.<br>
-&nbsp;+ **variable:** biến đã khai báo.<br>
+&nbsp;&nbsp;+ **type:** kiểu dữ liệu.<br>
+&nbsp;&nbsp;+ **&:** ký hiệu cho tham chiếu (khác với con trỏ).<br>
+&nbsp;&nbsp;+ **referenceName:** tên tham chiếu.<br>
+&nbsp;&nbsp;+ **variable:** biến đã khai báo.<br>
 - Ví dụ:
 ```cpp
 void swap(int &x, int &y)
