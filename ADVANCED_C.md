@@ -31,7 +31,7 @@
 &nbsp;**d. Linker (Liên kết):**<br>
 &nbsp;&nbsp;- &nbsp;**Tác dụng:** Chuyển _file.o_ sang _file.exe_.<br>
 &nbsp;&nbsp;- &nbsp;**Đặc điểm:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Dịch chương trình sang mã máy 0 và 1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ &nbsp;Liên kết các file.o lại với nhau.<br>
 &nbsp;&nbsp;- &nbsp;**Cú pháp:** `gcc main.o test.o -o main`.<br>
 ## 2. Marco
 - **Marco:** Là từ chỉ những thông tin sẽ được xử lý ở quá trình tiền xử lý 
