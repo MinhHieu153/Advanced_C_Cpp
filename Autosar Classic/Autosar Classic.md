@@ -13,7 +13,10 @@
 - Có hai phiên bản AUTOSAR:<br>
 &nbsp;+  Classic Platform: Dành cho các hệ thống thời gian thực, ECU truyền thống (C, embedded).<br>
 &nbsp;+ Adaptive Platform: Dành cho các hệ thống hiệu suất cao (Linux, POSIX), như xe tự lái
-</details> 
+ </details>
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------
 
-<details> 
+<details>
+
 <summary><b>📖2. Classic AUTOSAR</b></summary>
