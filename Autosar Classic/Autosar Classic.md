@@ -82,3 +82,4 @@
 &nbsp;&nbsp;&nbsp;+ **Wireless Communication Drivers:** Giao tiếp với các thiết bị truyền thông không dây như: Wifi, Bluetooth,...<br>
 &nbsp;&nbsp;&nbsp;+ **Communication Drivers:** Giao tiếp trực tiếp với phần cứng truyền thông: CAN, Ethernet,...<br>
 &nbsp;&nbsp;&nbsp;+ **I/O Drivers:** Truy cập trực tiếp các chân I/O của vi điều khiển, giúp hệ thống điều khiển các thiết bị ngoại vi.<br>
+&nbsp;- **Complex Drivers:** Dùng cho các ngoại lệ/phần cứng phức tạp không chuẩn AUTOSAR
