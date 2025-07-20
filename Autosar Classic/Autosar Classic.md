@@ -38,7 +38,7 @@
 ### 2.3. BSW - Basic Software
 - **BSW (Basic Software)** là lớp phần mềm nền tảng để hỗ trợ phần mềm ứng dụng(SWC) hoạt động dựa trên phần cứng.
 - BSW cung cấp các dịch vụ cơ bản như quản lý phần cứng, giao tiếp, chuẩn đoán và các dịch vụ hệ thống:<br>
-&nbsp;- **Service:** Cung cấp các dịch vụ hệ thống, tiện ích và quản lý cần thiết để hỗ trợ các lớp phần mềm ứng dụng và BSW khác:<br>
+&nbsp;a. **Service:** Cung cấp các dịch vụ hệ thống, tiện ích và quản lý cần thiết để hỗ trợ các lớp phần mềm ứng dụng và BSW khác:<br>
 &nbsp;&nbsp;&nbsp;+ **System Service:** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Chức năng: Là nơi chứa hệ điều hành và nó cung cấp dịch vụ hệ thống cơ bản để ECU hoạt động ổn định và đồng bộ.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Gồm các module:<br>
@@ -68,18 +68,18 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Gồm các module:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Com	:** Quản lý giao tiếp tín hiệu giữa Application và PDU.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**PduR	(PDU Router):** Định tuyến PDU (Protocol Data Unit) giữa các module như Com, DCM, CanTp, SoAd...<br>
-&nbsp;- **EAL (ECU Abstraction Layer):** Cung cấp giao diện trừu tượng cho tất cả các thiết bị ngoại vi và phần cứng cụ thể của ECU như các cảm biến mà ECU sử dụng.<br>
+&nbsp;b. **EAL (ECU Abstraction Layer):** Cung cấp giao diện trừu tượng cho tất cả các thiết bị ngoại vi và phần cứng cụ thể của ECU như các cảm biến mà ECU sử dụng.<br>
 &nbsp;&nbsp;&nbsp;+ **Onboard Device Abstraction:** Trừu tượng hóa các thiết bị phần cứng tích hợp trên ECU.<br>
 &nbsp;&nbsp;&nbsp;+ **Memory Hardware Abstraction:** Cung cấp lớp trừu tượng để giao tiếp với phần cứng bộ nhớ như EEPROM, Flash, RAM, giúp phần mềm cấp cao (như NvM, Fee, Ea…) không cần biết chi tiết phần cứng.<br>
 &nbsp;&nbsp;&nbsp;+ **Crypto Hardware Abstraction:** Cung cấp lớp trừu tượng hóa phần cứng cho các chức năng mã hóa, giải mã, ký số, xác minh, băm (hash),...<br>
 &nbsp;&nbsp;&nbsp;+ **Wireless Communication Hardware Abstraction:** Trừu tượng hóa phần cứng truyền thông không dây như Bluetooth, Wi-Fi,... giúp các tầng cao hơn (Protocol stacks, Diagnostic, Telematics) không cần quan tâm đến phần cứng cụ thể..<br>
 &nbsp;&nbsp;&nbsp;+ **Communication Hardware Abstraction:** Trừu tượng phần cứng cho các giao thức truyền thông như CAN, LIN, FlexRay, Ethernet, để các tầng phần mềm bên trên (như Com, PduR, SoAd...) không cần quan tâm đến chi tiết phần cứng hoặc driver..<br>
 &nbsp;&nbsp;&nbsp;+ **I/O Hardware Abstraction:**  trừu tượng hóa việc truy cập các chân I/O phần cứng (digital & analog) như cảm biến, công tắc,... Giúp phần mềm ứng dụng không phụ thuộc trực tiếp vào phần cứng MCU.<br>
-&nbsp;- **MCAL (Microcontroller abstraction Layer):** Cung cấp giao diện trừu tượng để tương tác trực tiếp với các thành phần phần cứng của vi điều khiển như GPIO, ADC, PWM, ...<br>
+&nbsp;c. **MCAL (Microcontroller abstraction Layer):** Cung cấp giao diện trừu tượng để tương tác trực tiếp với các thành phần phần cứng của vi điều khiển như GPIO, ADC, PWM, ...<br>
 &nbsp;&nbsp;&nbsp;+ **Microcontroller Drivers:**  Cung cấp các driver trực tiếp cho phần cứng mà không cần thao tác trực tiếp với thanh ghi như: GPIO, ADC, PWM, SPI,...<br>
 &nbsp;&nbsp;&nbsp;+ **Memory Drivers:** Dùng để giao tiếp trực tiếp với bộ nhớ vật lý: Flash, RAM, EEPROM.<br>
 &nbsp;&nbsp;&nbsp;+ **Crypto Drivers:** Giao tiếp trực tiếp với phần cứng mã hóa.<br>
 &nbsp;&nbsp;&nbsp;+ **Wireless Communication Drivers:** Giao tiếp với các thiết bị truyền thông không dây như: Wifi, Bluetooth,...<br>
 &nbsp;&nbsp;&nbsp;+ **Communication Drivers:** Giao tiếp trực tiếp với phần cứng truyền thông: CAN, Ethernet,...<br>
 &nbsp;&nbsp;&nbsp;+ **I/O Drivers:** Truy cập trực tiếp các chân I/O của vi điều khiển, giúp hệ thống điều khiển các thiết bị ngoại vi.<br>
-&nbsp;- **Complex Drivers:** Dùng cho các ngoại lệ/phần cứng phức tạp không chuẩn AUTOSAR
+&nbsp;d. **Complex Drivers:** Dùng cho các ngoại lệ/phần cứng phức tạp không chuẩn AUTOSAR
